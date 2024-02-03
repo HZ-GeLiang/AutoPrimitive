@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>
+			netstandard1.0;
+			net6.0;
+			net7.0;
+			net8.0;
+		</TargetFrameworks>
+		<RootNamespace>AutoPrimitive</RootNamespace>
+		<!--<NoWarn>CS1591</NoWarn>
+		<WarningLevel>4</WarningLevel>-->
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<ImplicitUsings>True</ImplicitUsings>
+		<!--<DocumentationFile>$(SolutionDir)$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>-->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Authors>GeLiang</Authors>
+		<Company>GeLiang</Company>
+		<Copyright>Copyright (c) GeLiang</Copyright>
+		<PackageId>AutoPrimitive</PackageId>
+		<Description>Linq 2 Object extension</Description>
+		<PackageProjectUrl>https://github.com/HZ-GeLiang/AutoPrimitive</PackageProjectUrl>
+		<PackageTags>AutoPrimitive, Primitive, TypeConvert, Convert</PackageTags>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<RepositoryType>github</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Version>0.0.1</Version>
+		<LangVersion>10</LangVersion>
+		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Remove="System.Net.Http" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+	</ItemGroup>
+</Project>
