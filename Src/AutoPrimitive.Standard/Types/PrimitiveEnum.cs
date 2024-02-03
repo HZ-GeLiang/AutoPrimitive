@@ -71,48 +71,5 @@
         {
             return Value.GetHashCode();
         }
-
-
     }
-
-    /*
-if (mod.ResetState == (int)ResetStateEnum.正常)
-对比
-if (mod.ResetState == (PrimitiveEnum)ResetStateEnum.申请重开)
-
-// if (ticket2.ResetState == 0)
-IL_020d: ldloc.s 6
-IL_020f: callvirt instance int32 HR.CRM.Application.CRM_Ticket.Dto.v_CRM_TicketDto::get_ResetState()
-IL_0214: ldc.i4.0
-IL_0215: ceq
-IL_0217: stloc.s 21
-IL_0219: ldloc.s 21
-IL_021b: brfalse.s IL_028c
-
-
-// else if (ticket2.ResetState == (int)(PrimitiveEnum)ResetStateEnum.申请重开)
-IL_0287: br IL_04ae
-IL_028c: ldloc.s 6
-IL_028e: callvirt instance int32 HR.CRM.Application.CRM_Ticket.Dto.v_CRM_TicketDto::get_ResetState()
-IL_0293: ldc.i4.1
-会多一步骤:先装箱,然后通过方法表调用隐式转换来进行比较
-IL_0294: box [HR.CRM.Core]HR.CRM.Core.Enums.ResetStateEnum
-IL_0299: call valuetype HR.CRM.Application.PrimitiveEnum HR.CRM.Application.PrimitiveEnum::op_Implicit(class [System.Runtime]System.Enum)
-IL_029e: call int32 HR.CRM.Application.PrimitiveEnum::op_Implicit(valuetype HR.CRM.Application.PrimitiveEnum)
-IL_02a3: ceq
-IL_02a5: stloc.s 26
-IL_02a7: ldloc.s 26
-IL_02a9: brfalse.s IL_0314
-
-
-
-compareEnum2是  (int)(PrimitiveEnum)ResetStateEnum.申请重开) 这种
-
-
-Method	        Mean	    Error	    StdDev  	Median  	Rank	Gen 0	Gen 1	Gen 2	Allocated
-FilterByString	39.63 μs	0.767 μs	0.970 μs	39.20 μs	1	    0.2441	-	    -	    1,384 B
-compareEnum2	119.99 μs	2.386 μs	4.422 μs	119.35 μs	2   	-	    -	    -	    24 B
-compareEnum 	122.20 μs	2.424 μs	5.472 μs	121.33 μs	2	    -	    -	    -	    -
-
-*/
 }

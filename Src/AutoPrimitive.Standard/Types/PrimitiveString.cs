@@ -117,7 +117,6 @@
             return Value.GetHashCode();
         }
 
-
         public static PrimitiveString operator +(PrimitiveString a, PrimitiveString b)
             => a.Value == null && b.Value == null ? null : a.Value ?? "" + b.Value ?? "";
     }
