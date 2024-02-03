@@ -1,7 +1,6 @@
-﻿using AutoPrimitive;
-using AutoPrimitive.Types;
+﻿using AutoPrimitive.Types;
 
-namespace LinqExtend.Test
+namespace AutoPrimitive.Test
 {
     [TestClass]
     public class PrimitiveTest
@@ -29,7 +28,8 @@ namespace LinqExtend.Test
             Assert.AreEqual(123.456M.ToPrimitive(), 123.456f); //放前面不需要
             Assert.AreEqual(123.456M.ToPrimitive(), "123.456");
 
-            Assert.AreEqual(123.456M.ToPrimitive(), 123);
+            //Assert.AreEqual(123.456M.ToPrimitive(), 123);
+            Assert.AreEqual((object.Equals(123.456M.ToPrimitive(), 123)) == true, true);
             Assert.AreEqual(true, object.Equals(123.456M.ToPrimitive(), 123));
         }
 
@@ -56,7 +56,8 @@ namespace LinqExtend.Test
             Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), 123.456f); //放前面不需要
             Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), "123.456");
 
-            Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), 123);
+            //Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), 123);
+            Assert.AreEqual((object.Equals(((decimal?)123.456M).ToPrimitive(), 123)) == true, true);
             Assert.AreEqual(true, object.Equals(((decimal?)123.456M).ToPrimitive(), 123));
         }
 
@@ -242,7 +243,8 @@ namespace LinqExtend.Test
                 var a = 12.1;
                 string b = "0.456";
                 var c = a.ToPrimitive() + b.ToPrimitive();
-                Assert.AreEqual(c, 12.556);
+                //Assert.AreEqual(c, 12.556);
+                Assert.AreEqual((object.Equals(c, 12.556)) == true, true);
             }
         }
 
@@ -254,27 +256,31 @@ namespace LinqExtend.Test
                 double a = 12.1;
                 long b = 10L;
                 var c = a.ToPrimitive() + b.ToPrimitive();
-                Assert.AreEqual(c, 22.1);
+                //Assert.AreEqual(c, 22.1);
+                Assert.AreEqual(object.Equals(c, 22.1d) == true, true);
             }
             {
                 long a = 10L;
                 double b = 12.1;
                 var c = a.ToPrimitive() + b.ToPrimitive();
-                Assert.AreEqual(c, 22);
+                //Assert.AreEqual(c, 22);
+                Assert.AreEqual(object.Equals(c, 22) == true, true);
             }
 
             {
                 var a = 12.1;
                 var b = 0.456;
                 var c = a.ToPrimitive() + b.ToPrimitive();
-                Assert.AreEqual(c, 12.556);
+                //Assert.AreEqual(c, 12.556);
+                Assert.AreEqual(object.Equals(c, 12.556) == true, true);
             }
 
             {
                 var a = 12.1;
                 string b = "0.456";
                 var c = a.ToPrimitive() + b.ToPrimitive();
-                Assert.AreEqual(c, 12.556);
+                //Assert.AreEqual(c, 12.556);
+                Assert.AreEqual(object.Equals(c, 12.556) == true, true);
             }
 
         }
