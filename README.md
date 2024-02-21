@@ -81,13 +81,11 @@
 
 - 枚举:PrimitiveEnum
 
-  > 小插曲: 在本项目在未创建之前我扩展了枚举的转换, 但后来由于业务要求,不论从哪种角度考虑,我都觉得代码就应该这样写, 于是就一口气的把各种基础类型的转给支持了
-
 - Primitive<T>  各种基础类型
 
   > 数值类型: short ushort int uint char float double long ulong decimal
   > 其他类型: bool byte sbyte
-  > 其他:string , 
+  > 其他:string
   
 - PrimitiveDateOnly
 
