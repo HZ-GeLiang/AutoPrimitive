@@ -2,6 +2,8 @@
 {
     using AutoPrimitive.Types;
     using System;
+    using System.ComponentModel;
+    using System.Reflection;
 
     /*
      https://learn.microsoft.com/zh-tw/dotnet/api/system.data.metadata.edm.primitivetypekind?view=netframework-4.8.1
@@ -60,11 +62,82 @@
         public static dynamic ToPrimitive(this string obj) => new PrimitiveString(obj);
 
 
+        #region 枚举
         //Enum
-        public static dynamic ToPrimitive<T>(this T obj) where T : Enum
+
+        public static dynamic ToPrimitive(this Enum enumItem)
         {
-            return new PrimitiveEnum(obj);
+            return new PrimitiveEnum(enumItem);
         }
+
+        //byte、sbyte、short、ushort、int、uint、long 或 ulong
+
+        public static dynamic ToPrimitive<T>(this byte value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString()); 
+        }
+        public static dynamic ToPrimitive<T>(this sbyte value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString());
+        }
+        public static dynamic ToPrimitive<T>(this short value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString());
+        }
+        public static dynamic ToPrimitive<T>(this ushort value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString());
+        }
+        public static dynamic ToPrimitive<T>(this int value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString()); ;
+        }
+        public static dynamic ToPrimitive<T>(this uint value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString());
+        }
+        public static dynamic ToPrimitive<T>(this long value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString());
+        }
+        public static dynamic ToPrimitive<T>(this ulong value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value.ToString()); 
+        }
+        public static dynamic ToPrimitive<T>(this string value) where T : Enum
+        {
+            return Enum.Parse(typeof(T), value);
+        }
+
+        public static dynamic ToPrimitive<TOtherEnum>(this Enum primitive) where TOtherEnum : Enum
+        {
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+            //DescriptionAttribute 的 优先级 > 值对应
+            var key = Enum.GetName(primitive.GetType(), primitive);
+
+            var fields = typeof(TOtherEnum).GetFields();
+
+            foreach (var field in fields)
+            {
+                var attribute = field.GetCustomAttribute<DescriptionAttribute>();
+
+                if (attribute is null) continue;
+
+                if (key == attribute.Description)
+                {
+                    var obj = (TOtherEnum)field.GetValue(typeof(TOtherEnum));
+                    return obj;
+                }
+            }
+
+            return Enum.Parse(typeof(TOtherEnum), Convert.ToInt32(primitive).ToString());//按枚举值转换
+#endif
+
+            return Enum.Parse(typeof(TOtherEnum), Convert.ToInt32(primitive).ToString());//按枚举值转换
+        }
+
+        #endregion
 
 
         #region 日期

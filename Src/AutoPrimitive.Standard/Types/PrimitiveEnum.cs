@@ -1,4 +1,7 @@
-﻿namespace AutoPrimitive.Types
+﻿using System.ComponentModel;
+using System.Reflection;
+
+namespace AutoPrimitive.Types
 {
     /// <summary>
     /// enum的implicit conversions
@@ -36,7 +39,6 @@
         public static implicit operator uint?(PrimitiveEnum primitive) => new uint?(Convert.ToUInt32(primitive.Value));
         public static implicit operator long?(PrimitiveEnum primitive) => new long?(Convert.ToInt64(primitive.Value));
         public static implicit operator ulong?(PrimitiveEnum primitive) => new ulong?(Convert.ToUInt64(primitive.Value));
-
 
         //操作符/方法的重写
         public static bool operator ==(PrimitiveEnum a, PrimitiveEnum b) => a.Value.Equals(b.Value);
