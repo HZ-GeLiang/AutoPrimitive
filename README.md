@@ -123,17 +123,13 @@
 
 - 隐式/显示类型转换
 
-- 转换操作符:implicity/explicit 
-
-- 操作符的重写: operator
+- 操作符和转换操作符:operator implicity
 
 - 运算符的重载
 
   > 扩展阅读: https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/operator-overloading
 
 - 方法重写: override
-
-- TargetFrameworks
 
 - 其他可增强扩展(因为用不到,所以源码未实现)
 
@@ -148,3 +144,6 @@
     - IEqualityComparer<T>
 
       >  扩展阅读:http://www.cnblogs.com/ldp615/archive/2011/08/01/distinct-entension.html
+
+- 其他
+  - TargetFrameworks
