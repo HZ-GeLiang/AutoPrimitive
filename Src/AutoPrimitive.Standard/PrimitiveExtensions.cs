@@ -39,6 +39,10 @@
 
         #endregion
 
+        public static dynamic ToPrimitive(this Guid obj) => new PrimitiveGuid(obj, null);
+        public static dynamic ToPrimitive(this Guid obj, string format) => new PrimitiveGuid(obj, format);
+
+
         #region 值类型:Nullable
 
         //数值类型:
@@ -58,9 +62,11 @@
         public static dynamic ToPrimitive(this sbyte? obj) => new PrimitiveNullable<sbyte?>(obj);
         #endregion
 
+        public static dynamic ToPrimitive(this Guid? obj) => new PrimitiveGuidNullable(obj, null);
+        public static dynamic ToPrimitive(this Guid? obj, string format) => new PrimitiveGuidNullable(obj, format);
+
         //string
         public static dynamic ToPrimitive(this string obj) => new PrimitiveString(obj);
-
 
         #region 枚举
         //Enum
@@ -74,7 +80,7 @@
 
         public static dynamic ToPrimitive<T>(this byte value) where T : Enum
         {
-            return Enum.Parse(typeof(T), value.ToString()); 
+            return Enum.Parse(typeof(T), value.ToString());
         }
         public static dynamic ToPrimitive<T>(this sbyte value) where T : Enum
         {
@@ -102,7 +108,7 @@
         }
         public static dynamic ToPrimitive<T>(this ulong value) where T : Enum
         {
-            return Enum.Parse(typeof(T), value.ToString()); 
+            return Enum.Parse(typeof(T), value.ToString());
         }
         public static dynamic ToPrimitive<T>(this string value) where T : Enum
         {
@@ -138,7 +144,6 @@
         }
 
         #endregion
-
 
         #region 日期
 

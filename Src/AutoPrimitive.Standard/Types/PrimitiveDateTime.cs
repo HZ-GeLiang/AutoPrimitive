@@ -1,14 +1,11 @@
 ﻿namespace AutoPrimitive.Types
 {
     /// <summary>
-    /// DateTime 的implicit conversions
+    /// DateTime 的 implicit conversions
     /// </summary>
     public readonly struct PrimitiveDateTime
     {
-        public PrimitiveDateTime(DateTime val) : this(val, "yyyy-MM-dd HH:mm:ss")
-        {
-
-        }
+        public PrimitiveDateTime(DateTime val) : this(val, PrimitiveDateTimeConfig.DefaultFormat) { }
 
         public PrimitiveDateTime(DateTime val, string format)
         {

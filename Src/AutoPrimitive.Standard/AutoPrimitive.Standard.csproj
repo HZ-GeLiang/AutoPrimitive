@@ -27,7 +27,7 @@
 		<Company>GeLiang</Company>
 		<Copyright>Copyright (c) GeLiang</Copyright>
 		<PackageId>AutoPrimitive</PackageId>
-		<Description>Type conversion of Primitive Data Types</Description>
+		<Description>Type Conversion Of Primitive Data Types</Description>
 		<PackageProjectUrl>https://github.com/HZ-GeLiang/AutoPrimitive</PackageProjectUrl>
 		<PackageTags>AutoPrimitive, Primitive, PrimitiveTypeConvert</PackageTags>
 		<PackageReleaseNotes></PackageReleaseNotes>

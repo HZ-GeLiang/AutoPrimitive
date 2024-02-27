@@ -42,10 +42,8 @@ namespace AutoPrimitive.Types
             int.TryParse(primitive.Value.ToString(), out var result2) && result2 != 0; //非零即真
 
 
-
         public static implicit operator byte(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : Convert.ToByte(primitive.Value);
         public static implicit operator sbyte(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : Convert.ToSByte(primitive.Value);
-
 
         //可空(这边的 default 关键字必须是 default(xxx), 否则编译器是不会返回可空的
         //数值类型:

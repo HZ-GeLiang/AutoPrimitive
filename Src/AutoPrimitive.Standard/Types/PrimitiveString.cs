@@ -32,7 +32,7 @@
 
         public static implicit operator byte(PrimitiveString primitive) => byte.TryParse(primitive.Value, out var result) ? result : default;
         public static implicit operator sbyte(PrimitiveString primitive) => sbyte.TryParse(primitive.Value, out var result) ? result : default;
-
+        public static implicit operator Guid(PrimitiveString primitive) => Guid.TryParse(primitive.Value, out var result) ? result : default;
 
         //可空
         public static implicit operator short?(PrimitiveString primitive) => short.TryParse(primitive.Value, out var result) ? result : default(short?);
@@ -58,6 +58,8 @@
 
         public static implicit operator byte?(PrimitiveString primitive) => byte.TryParse(primitive.Value, out var result) ? result : default(byte?);
         public static implicit operator sbyte?(PrimitiveString primitive) => sbyte.TryParse(primitive.Value, out var result) ? result : default(sbyte?);
+
+        public static implicit operator Guid?(PrimitiveString primitive) => Guid.TryParse(primitive.Value, out var result) ? result : default(Guid?);
 
         //日期
         public static implicit operator DateTime(PrimitiveString primitive) => DateTime.TryParse(primitive.Value, out var result) ? result : default;
