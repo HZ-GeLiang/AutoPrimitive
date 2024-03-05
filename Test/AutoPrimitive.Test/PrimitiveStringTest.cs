@@ -10,12 +10,24 @@ namespace AutoPrimitive.Test
     public class PrimitiveStringTest
     {
         [TestMethod]
-        public void Test_字符串转换类型()
+        public void Test转Bool()
         {
             {
                 string s = "true";
                 bool d = s.ToPrimitive();
                 Assert.AreEqual(d, true);
+            }
+
+            {
+                string s = "true";
+                if (s.ToPrimitive())
+                {
+                    Assert.AreEqual(true, true);
+                }
+                else
+                {
+                    Assert.AreEqual(false, true);
+                }
             }
 
             {
@@ -35,18 +47,14 @@ namespace AutoPrimitive.Test
                 bool d = s.ToPrimitive();
                 Assert.AreEqual(d, false);
             }
+        }
 
-            {
-                string s = "true";
-                if (s.ToPrimitive())
-                {
-                    Assert.AreEqual(true, true);
-                }
-                else
-                {
-                    Assert.AreEqual(false, true);
-                }
-            }
+        [TestMethod]
+        public void Test转日期()
+        {
+            var str = "2024年1月";
+            DateTime d = str.ToPrimitive();
+            Assert.AreEqual(d, new DateTime(2024, 1, 1));
         }
     }
 }

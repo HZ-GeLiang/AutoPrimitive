@@ -1,26 +1,6 @@
 # AutoPrimitive
 
-当前Nuget包的作用: Type conversion of Primitive Data Types
-
-# 包名的由来
-
-- 在一次无意的源码查看中发现了PrimitiveTypeKind,这个类内部定义了好多类型
-
-- 在问了GPT后了解到
-
-- > `PrimitiveTypeKind` 枚举是实体数据模型（EDM）的一部分，用于表示 Entity Framework 支持的各种基本数据类型。基本类型是诸如整数、字符串、日期等的基本数据类型，可用于定义数据模型中实体的属性。
-  >
-  > `PrimitiveTypeKind` 枚举包括诸如 `Int32`、`String`、`DateTime` 等值，每个值代表不同的基本数据类型。在定义实体数据模型的属性时，通常会使用这个枚举来指定特定属性可以保存的数据类型。
-  >
-  > 例如，在 C# 中，您可能会使用 `PrimitiveTypeKind.Int32` 来表示实体数据模型中可以保存 32 位整数值的属性。
-
-- 然后我又想实现类型的自动转换,于是本Nuget就叫AutoPrimitive
-
-- PrimitiveTypeKind的参考地址
-
-- > https://learn.microsoft.com/zh-tw/dotnet/api/system.data.metadata.edm.primitivetypekind?view=netframework-4.8.1
-  >
-  > https://referencesource.microsoft.com/#System.Data.Entity/System/Data/Metadata/Edm/PrimitiveTypeKind.cs,23c66f1dff45ec22
+当前Nuget包的作用: Type Conversion of Primitive Data Types
 
 # 项目背景
 
