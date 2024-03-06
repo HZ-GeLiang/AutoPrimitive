@@ -147,10 +147,10 @@
 
         #region 日期
 
-#if NET6_0_OR_GREATER
-        public static dynamic ToPrimitive(this DateTime obj) => new PrimitiveDateTime(obj);
+        public static dynamic ToPrimitive(this DateTime obj) => new PrimitiveDateTime(obj, PrimitiveDateTimeConfig.DefaultFormat);
         public static dynamic ToPrimitive(this DateTime obj, string format) => new PrimitiveDateTime(obj, format);
 
+#if NET6_0_OR_GREATER
         public static dynamic ToPrimitive(this DateOnly obj) => new PrimitiveDateOnly(obj);
         public static dynamic ToPrimitive(this DateOnly obj, string format) => new PrimitiveDateOnly(obj, format);
 #endif

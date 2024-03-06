@@ -14,7 +14,7 @@ namespace AutoPrimitive.Test
         {
             var d1 = new DateTime(2024, 1, 1, 1, 1, 1, 111);
 
-            Assert.AreEqual("2024-01-01 01:01:01", d1.ToPrimitive());
+            Assert.AreEqual("2024-01-01 01:01:01.111", d1.ToPrimitive());
             Assert.AreEqual("2024-01-01", d1.ToPrimitive("yyyy-MM-dd"));
 
             Assert.AreEqual(new DateOnly(2024, 1, 1), d1.ToPrimitive());

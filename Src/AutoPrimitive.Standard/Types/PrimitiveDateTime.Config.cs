@@ -2,7 +2,7 @@
 {
     public static class PrimitiveDateTimeConfig
     {
-        public static string DefaultFormat = "yyyy-MM-dd HH:mm:ss";
+        public static string DefaultFormat = "yyyy-MM-dd HH:mm:ss.fff";
     }
-   
+
 }

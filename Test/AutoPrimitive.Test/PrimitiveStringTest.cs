@@ -52,9 +52,16 @@ namespace AutoPrimitive.Test
         [TestMethod]
         public void Test转日期()
         {
-            var str = "2024年1月";
-            DateTime d = str.ToPrimitive();
-            Assert.AreEqual(d, new DateTime(2024, 1, 1));
+            {
+                var str = "2024年1月";
+                DateTime d = str.ToPrimitive();
+                Assert.AreEqual(d, new DateTime(2024, 1, 1));
+            }
+
+            {
+                DateTime d = "2024-04-06 23:59:59.999".ToPrimitive();
+                Assert.AreEqual(d, Convert.ToDateTime("2024-04-06 23:59:59.999"));
+            }
         }
     }
 }
