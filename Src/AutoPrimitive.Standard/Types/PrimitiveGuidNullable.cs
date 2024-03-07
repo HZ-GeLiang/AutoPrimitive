@@ -17,12 +17,11 @@
         public string Format { get; }
 
         public static implicit operator string(PrimitiveGuidNullable primitive) =>
-            primitive.Value == null
-            ? null
-            : primitive.Format == null
+            primitive.Value.HasValue
+            ? primitive.Format == null
                 ? primitive.Value.ToString()
-                : primitive.Value.Value.ToString(primitive.Format);
-
+                : primitive.Value.Value.ToString(primitive.Format)
+            : null;
 
         //操作符/方法的重写
         public static bool operator ==(PrimitiveGuidNullable a, PrimitiveGuidNullable b) => a.Value.Equals(b.Value);
@@ -54,12 +53,12 @@
 
         public override int GetHashCode()
         {
-            return Value.GetHashCode();
+            return Value == null ? this.GetHashCode() : Value.GetHashCode();
         }
 
         public override string ToString()
         {
-            return Value.ToString();
+            return Value == null ? this.ToString() : Value.ToString();
         }
     }
 }
