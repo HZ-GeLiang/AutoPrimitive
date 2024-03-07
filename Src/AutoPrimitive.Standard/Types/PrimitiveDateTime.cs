@@ -61,6 +61,11 @@
             return Value.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return this.Value.ToString(this.Format);
+        }
+
         #region 运算符重载
 
         public static TimeSpan operator -(PrimitiveDateTime a, PrimitiveDateTime b) => a.Value - b.Value;
