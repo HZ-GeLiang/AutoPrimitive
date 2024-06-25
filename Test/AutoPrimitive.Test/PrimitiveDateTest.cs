@@ -12,7 +12,7 @@ namespace AutoPrimitive.Test
         [TestMethod]
         public void Test_DateTime()
         {
-            var  time = new DateTime(2024, 1, 1, 1, 1, 1, 111);
+            var time = new DateTime(2024, 1, 1, 1, 1, 1, 111);
 
             {
                 DateTime d1 = time;

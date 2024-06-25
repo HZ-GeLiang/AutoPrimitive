@@ -37,7 +37,7 @@
                 Assert.AreEqual(object.Equals(c, 12.556) == true, true);
             }
 
-       
+
             {
                 int tax = 6;
                 string dis = (0.01M * tax).ToPrimitive();
