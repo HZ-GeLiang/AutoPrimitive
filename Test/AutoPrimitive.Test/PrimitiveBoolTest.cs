@@ -3,7 +3,6 @@
     [TestClass]
     public class PrimitiveBoolTest
     {
-
         [TestMethod]
         public void Bool类型_转其他类型()
         {

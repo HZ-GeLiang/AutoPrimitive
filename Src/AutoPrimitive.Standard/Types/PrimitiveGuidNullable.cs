@@ -5,7 +5,9 @@
     /// </summary>
     public readonly struct PrimitiveGuidNullable
     {
-        public PrimitiveGuidNullable(Guid? val) : this(val, "") { }
+        public PrimitiveGuidNullable(Guid? val) : this(val, "")
+        {
+        }
 
         public PrimitiveGuidNullable(Guid? val, string format)
         {
@@ -25,6 +27,7 @@
 
         //操作符/方法的重写
         public static bool operator ==(PrimitiveGuidNullable a, PrimitiveGuidNullable b) => a.Value.Equals(b.Value);
+
         public static bool operator !=(PrimitiveGuidNullable a, PrimitiveGuidNullable b) => !a.Value.Equals(b.Value);
 
         public override bool Equals(object obj)

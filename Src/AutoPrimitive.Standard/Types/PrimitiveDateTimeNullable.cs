@@ -5,7 +5,9 @@
     /// </summary>
     public readonly struct PrimitiveDateTimeNullable
     {
-        public PrimitiveDateTimeNullable(DateTime? val) : this(val, PrimitiveDateTimeConfig.DefaultFormat) { }
+        public PrimitiveDateTimeNullable(DateTime? val) : this(val, PrimitiveDateTimeConfig.DefaultFormat)
+        {
+        }
 
         public PrimitiveDateTimeNullable(DateTime? val, string format)
         {
@@ -38,10 +40,11 @@
         public static implicit operator TimeOnly?(PrimitiveDateTimeNullable primitive) => primitive.Value.HasValue
             ? new TimeOnly(primitive.Value.Value.Hour, primitive.Value.Value.Minute, primitive.Value.Value.Second, primitive.Value.Value.Millisecond)
             : null;
-#endif 
+#endif
 
         //操作符/方法的重写
         public static bool operator ==(PrimitiveDateTimeNullable a, PrimitiveDateTimeNullable b) => a.Value.Equals(b.Value);
+
         public static bool operator !=(PrimitiveDateTimeNullable a, PrimitiveDateTimeNullable b) => !a.Value.Equals(b.Value);
 
         public override bool Equals(object obj)
@@ -95,7 +98,5 @@
         }
 
         #endregion
-
     }
-
 }

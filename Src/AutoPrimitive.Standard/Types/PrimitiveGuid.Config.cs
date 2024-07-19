@@ -4,5 +4,4 @@
     {
         public static string DefaultFormat = null;
     }
-
 }

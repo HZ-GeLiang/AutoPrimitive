@@ -3,7 +3,6 @@
     [TestClass]
     public class PrimitiveOtherTest
     {
-
         [TestMethod]
         public void Test_转换类型为自己()
         {
@@ -14,13 +13,10 @@
             }
 
             {
-
                 int s = 123;
                 int d = s.ToPrimitive();
                 Assert.AreEqual(d, s);
             }
         }
     }
-
-
 }

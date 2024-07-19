@@ -36,7 +36,6 @@ namespace AutoPrimitive.Test
         [TestMethod]
         public void 基础类型自动转_可空_不为空()
         {
-
             Assert.AreEqual("123.456", ((decimal?)123.456M).ToPrimitive());
 
             {
@@ -70,7 +69,6 @@ namespace AutoPrimitive.Test
             int? a4 = null;
             bool? a5 = null;
 
-
             decimal? val = null;
             var test = (string?)((val).ToPrimitive());
 
@@ -93,7 +91,6 @@ namespace AutoPrimitive.Test
                 //写法2:
                 decimal? v2_2 = new PrimitiveNullable<decimal?>(val);
                 Assert.AreEqual(true, object.Equals(v2_2, v1));
-
             }
 
             Assert.AreEqual(a1, (decimal?)((val).ToPrimitive())); //需要类型转换
@@ -115,6 +112,5 @@ namespace AutoPrimitive.Test
             bool? a5_1 = val.ToPrimitive();
             Assert.AreEqual(true, object.Equals(a5_1, a5));
         }
-
     }
 }

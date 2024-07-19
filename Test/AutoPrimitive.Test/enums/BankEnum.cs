@@ -11,5 +11,4 @@
         [System.ComponentModel.Description(nameof(ChinaBankEnum.中国招商银行))]
         CMBC = 3
     }
-
 }

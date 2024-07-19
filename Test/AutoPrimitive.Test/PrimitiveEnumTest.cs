@@ -61,9 +61,7 @@ namespace AutoPrimitive.Test
 
                 Assert.AreEqual(false, DayOfWeek.Friday != (PrimitiveEnum)DayOfWeek.Friday);
                 Assert.AreEqual(false, ((PrimitiveEnum)DayOfWeek.Friday) != ((PrimitiveEnum)DayOfWeek.Friday));
-
             }
-
 
             Assert.AreEqual(true, new Nullable<int>(5) == DayOfWeek.Friday.ToPrimitive());
             Assert.AreEqual(true, 5 == DayOfWeek.Friday.ToPrimitive());

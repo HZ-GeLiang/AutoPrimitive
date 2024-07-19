@@ -26,7 +26,6 @@ namespace AutoPrimitive.Test
                 Assert.AreEqual(txt1, txt2);
             }
 
-
             {
                 DateTime? d1 = time;
 

@@ -4,5 +4,4 @@
     {
         public static string DefaultFormat = "yyyy-MM-dd HH:mm:ss.fff";
     }
-
 }

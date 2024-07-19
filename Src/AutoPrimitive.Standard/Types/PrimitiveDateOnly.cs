@@ -9,7 +9,6 @@
     {
         public PrimitiveDateOnly(DateOnly val) : this(val, "yyyy-MM-dd")
         {
-
         }
 
         public PrimitiveDateOnly(DateOnly val, string format)
@@ -29,7 +28,6 @@
 
         public static implicit operator DateTime?(PrimitiveDateOnly primitive) =>
            new DateTime(primitive.Value.Year, primitive.Value.Month, primitive.Value.Day);
-
 
         //操作符/方法的重写
 
@@ -56,7 +54,7 @@
             //if (this.Value == null)
             //{
             //    return obj == null;
-            //} 
+            //}
 
             return false;
         }
@@ -71,7 +69,6 @@
         public static TimeSpan operator -(PrimitiveDateOnly a, PrimitiveDateOnly b) => (DateTime)a - (DateTime)b;
 
         #endregion
-
     }
 
 #endif

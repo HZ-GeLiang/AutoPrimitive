@@ -5,7 +5,9 @@
     /// </summary>
     public readonly struct PrimitiveGuid
     {
-        public PrimitiveGuid(Guid val) : this(val, PrimitiveGuidConfig.DefaultFormat) { }
+        public PrimitiveGuid(Guid val) : this(val, PrimitiveGuidConfig.DefaultFormat)
+        {
+        }
 
         public PrimitiveGuid(Guid val, string format)
         {
@@ -21,9 +23,9 @@
             ? primitive.Value.ToString()
             : primitive.Value.ToString(primitive.Format);
 
-
         //操作符/方法的重写
         public static bool operator ==(PrimitiveGuid a, PrimitiveGuid b) => a.Value.Equals(b.Value);
+
         public static bool operator !=(PrimitiveGuid a, PrimitiveGuid b) => !a.Value.Equals(b.Value);
 
         public override bool Equals(object obj)
@@ -59,7 +61,5 @@
         {
             return Value.ToString();
         }
-
     }
-
 }
