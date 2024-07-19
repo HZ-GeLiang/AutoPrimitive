@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Reflection;
-
-namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive.Types
 {
     /// <summary>
     /// enum的implicit conversions
