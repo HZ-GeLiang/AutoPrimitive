@@ -1,0 +1,15 @@
+<Project>
+	<!--要配置在单独的项目里, 写在这里没有什么用 start-->
+	<PropertyGroup>
+		<!--注释原因: 在Directory.Build.props 用GenerateDocumentationFile 代替了 -->
+		<!--<DocumentationFile>$(SolutionDir)$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!--在项目中移除.xml文件的显示-->
+		<!--注释原因:GenerateDocumentationFile会在编译目录中生成,所以也不需要了-->
+		<!--<None Remove="$(AssemblyName).xml" />-->
+
+	</ItemGroup>
+	<!--要配置在单独的项目里, 写在这里没有什么用 end-->
+</Project>

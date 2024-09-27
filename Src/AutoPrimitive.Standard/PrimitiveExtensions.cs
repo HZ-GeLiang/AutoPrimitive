@@ -127,7 +127,7 @@
 
         public static dynamic ToPrimitive<T>(this int value) where T : Enum
         {
-            return Enum.Parse(typeof(T), value.ToString()); ;
+            return Enum.Parse(typeof(T), value.ToString());
         }
 
         public static dynamic ToPrimitive<T>(this uint value) where T : Enum
@@ -162,7 +162,10 @@
             {
                 var attribute = field.GetCustomAttribute<DescriptionAttribute>();
 
-                if (attribute is null) continue;
+                if (attribute is null)
+                {
+                    continue;
+                }
 
                 if (key == attribute.Description)
                 {
