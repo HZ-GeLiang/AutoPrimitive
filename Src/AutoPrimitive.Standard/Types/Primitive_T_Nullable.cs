@@ -2,6 +2,10 @@
 
 namespace AutoPrimitive.Types
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public readonly struct PrimitiveNullable<T>
     {
         public PrimitiveNullable(T val)
