@@ -1,6 +1,4 @@
-﻿
-
-namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test
 {
     [TestClass]
     public class PrimitiveTryCatchTest

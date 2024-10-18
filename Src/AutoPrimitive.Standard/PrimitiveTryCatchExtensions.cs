@@ -28,32 +28,32 @@ public static class PrimitiveTryCatchExtensions
     #region 值类型
 
     //数值类型:
-    public static dynamic ToPrimitive(this short obj, short defaultValue) => h(() => new PrimitiveDefault<short>(obj), defaultValue);
+    public static dynamic ToPrimitive(this short obj, short defaultValue) => h(() => new PrimitiveDefault<short>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this ushort obj, ushort defaultValue) => h(() => new PrimitiveDefault<ushort>(obj), defaultValue);
+    public static dynamic ToPrimitive(this ushort obj, ushort defaultValue) => h(() => new PrimitiveDefault<ushort>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this int obj, int defaultValue) => h(() => new PrimitiveDefault<int>(obj), defaultValue);
+    public static dynamic ToPrimitive(this int obj, int defaultValue) => h(() => new PrimitiveDefault<int>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this uint obj, uint defaultValue) => h(() => new PrimitiveDefault<uint>(obj), defaultValue);
+    public static dynamic ToPrimitive(this uint obj, uint defaultValue) => h(() => new PrimitiveDefault<uint>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this char obj, char defaultValue) => h(() => new PrimitiveDefault<char>(obj), defaultValue);
+    public static dynamic ToPrimitive(this char obj, char defaultValue) => h(() => new PrimitiveDefault<char>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this float obj, float defaultValue) => h(() => new PrimitiveDefault<float>(obj), defaultValue);
+    public static dynamic ToPrimitive(this float obj, float defaultValue) => h(() => new PrimitiveDefault<float>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this double obj, double defaultValue) => h(() => new PrimitiveDefault<double>(obj), defaultValue);
+    public static dynamic ToPrimitive(this double obj, double defaultValue) => h(() => new PrimitiveDefault<double>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this long obj, long defaultValue) => h(() => new PrimitiveDefault<long>(obj), defaultValue);
+    public static dynamic ToPrimitive(this long obj, long defaultValue) => h(() => new PrimitiveDefault<long>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this ulong obj, ulong defaultValue) => h(() => new PrimitiveDefault<ulong>(obj), defaultValue);
+    public static dynamic ToPrimitive(this ulong obj, ulong defaultValue) => h(() => new PrimitiveDefault<ulong>(obj, defaultValue), defaultValue);
 
-    public static dynamic ToPrimitive(this decimal obj, decimal defaultValue) => h(() => new PrimitiveDefault<decimal>(obj), defaultValue);
+    public static dynamic ToPrimitive(this decimal obj, decimal defaultValue) => h(() => new PrimitiveDefault<decimal>(obj, defaultValue), defaultValue);
 
     //其他类型:
-    public static dynamic ToPrimitive(this bool obj, bool defaultValue) => new PrimitiveDefault<bool>(obj);
+    public static dynamic ToPrimitive(this bool obj, bool defaultValue) => new PrimitiveDefault<bool>(obj, defaultValue);
 
-    public static dynamic ToPrimitive(this byte obj, byte defaultValue) => new PrimitiveDefault<byte>(obj);
+    public static dynamic ToPrimitive(this byte obj, byte defaultValue) => new PrimitiveDefault<byte>(obj, defaultValue);
 
-    public static dynamic ToPrimitive(this sbyte obj, sbyte defaultValue) => new PrimitiveDefault<sbyte>(obj);
+    public static dynamic ToPrimitive(this sbyte obj, sbyte defaultValue) => new PrimitiveDefault<sbyte>(obj, defaultValue);
 
     #endregion
 
