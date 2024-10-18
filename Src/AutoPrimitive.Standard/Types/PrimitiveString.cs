@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive
 {
     /*
      注:字符串转枚举没法实现
-     */
+    */
 
     public readonly struct PrimitiveString
     {

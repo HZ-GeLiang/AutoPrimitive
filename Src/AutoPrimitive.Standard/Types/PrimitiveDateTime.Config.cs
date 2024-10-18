@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive
 {
     public static class PrimitiveDateTimeConfig
     {

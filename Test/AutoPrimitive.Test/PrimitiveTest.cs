@@ -1,6 +1,4 @@
-﻿using AutoPrimitive.Types;
-
-namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test
 {
     [TestClass]
     public class PrimitiveTest

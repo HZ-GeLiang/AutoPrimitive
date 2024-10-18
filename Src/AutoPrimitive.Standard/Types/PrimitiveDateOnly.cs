@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive
 {
 #if NET6_0_OR_GREATER
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive
 {
     public readonly struct Primitive<T> where T : struct
     {

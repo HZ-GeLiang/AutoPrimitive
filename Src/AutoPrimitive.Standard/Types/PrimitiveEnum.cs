@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive
 {
     /// <summary>
     /// enum的implicit conversions

@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Types
+﻿namespace AutoPrimitive
 {
     /// <summary>
     /// DateTime 的 implicit conversions

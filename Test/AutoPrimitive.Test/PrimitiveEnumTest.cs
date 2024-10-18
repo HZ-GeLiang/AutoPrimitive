@@ -1,5 +1,4 @@
 ﻿using AutoPrimitive.Test.enums;
-using AutoPrimitive.Types;
 
 namespace AutoPrimitive.Test
 {
