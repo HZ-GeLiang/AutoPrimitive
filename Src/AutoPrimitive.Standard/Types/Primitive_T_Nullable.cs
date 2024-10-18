@@ -100,9 +100,90 @@ namespace AutoPrimitive.Types
         public static implicit operator string(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : primitive.Value.ToString();
 
         //日期
-        public static implicit operator DateTime(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : Convert.ToDateTime(primitive.Value);
+        public static implicit operator DateTime(PrimitiveNullable<T> primitive)
+        {
+            if (primitive.Value != null)
+            {
+                //尝试进行js时间戳的转换
+                if (Convert_JS_timestamp(primitive, out var dt))
+                {
+                    return dt;
+                }
 
-        public static implicit operator DateTime?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(DateTime?) : Convert.ToDateTime(primitive.Value);
+                return Convert.ToDateTime(primitive.Value);
+            }
+
+            return default;
+        }
+
+        public static implicit operator DateTime?(PrimitiveNullable<T> primitive)
+        {
+            if (primitive.Value != null)
+            {
+                //尝试进行js时间戳的转换
+                if (Convert_JS_timestamp(primitive, out var dt))
+                {
+                    return dt;
+                }
+                return Convert.ToDateTime(primitive.Value);
+            }
+            return default(DateTime?);
+        }
+
+        private static bool Convert_JS_timestamp(PrimitiveNullable<T> primitive, out DateTime dateTime)
+        {
+#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_3_OR_GREATER
+            try
+            {
+                var t_type = typeof(T);
+                if (t_type == typeof(long))
+                {
+                    var len = primitive.Value.ToString().Length;
+
+                    if (len == 13 || len == 14)
+                    {
+                        long timestamp = (dynamic)primitive.Value;
+                        var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
+                        dateTime = dateTimeOffset.LocalDateTime;
+                        return true;
+                    }
+                    else if (len == 10 || len == 11)
+                    {
+                        long timestamp = (dynamic)primitive.Value;
+                        var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
+                        dateTime = dateTimeOffset.LocalDateTime;
+                        return true;
+                    }
+                }
+                else if (t_type == typeof(int))
+                {
+                    var len = primitive.Value.ToString().Length;
+                    if (len == 10 || len == 11)
+                    {
+                        long timestamp = (dynamic)primitive.Value;
+                        var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
+                        dateTime = dateTimeOffset.LocalDateTime;
+                        return true;
+                    }
+                }
+                else if (t_type == typeof(string))
+                {
+                    string timestamp = (dynamic)primitive.Value;
+
+                    if (PrimitiveString.Convert_JS_timestamp(timestamp, out dateTime))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+#endif
+            dateTime = default;
+            return false;
+        }
 
         //操作符/方法的重写
         public static bool operator ==(PrimitiveNullable<T> a, PrimitiveNullable<T> b) => a.Value.Equals(b.Value);

@@ -1,4 +1,6 @@
-﻿namespace AutoPrimitive.Types
+﻿using System;
+
+namespace AutoPrimitive.Types
 {
     /*
      注:字符串转枚举没法实现
@@ -84,9 +86,83 @@
         public static implicit operator Guid?(PrimitiveString primitive) => Guid.TryParse(primitive.Value, out var result) ? result : default(Guid?);
 
         //日期
-        public static implicit operator DateTime(PrimitiveString primitive) => DateTime.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator DateTime(PrimitiveString primitive)
+        {
+            {
+                if (Convert_JS_timestamp(primitive.Value, out var dt))
+                {
+                    return dt;
+                }
+            }
 
-        public static implicit operator DateTime?(PrimitiveString primitive) => DateTime.TryParse(primitive.Value, out var result) ? result : default(DateTime?);
+            {
+                if (DateTime.TryParse(primitive.Value, out var dt))
+                {
+                    return dt;
+                }
+            }
+
+            return default;
+        }
+
+        public static implicit operator DateTime?(PrimitiveString primitive)
+        {
+            {
+                if (Convert_JS_timestamp(primitive.Value, out var dt))
+                {
+                    return dt;
+                }
+            }
+            {
+                if (DateTime.TryParse(primitive.Value, out var dt))
+                {
+                    return dt;
+                }
+            }
+
+            return default(DateTime?);
+        }
+
+        /// <summary>
+        /// JavaScript时间戳
+        /// </summary>
+        /// <param name="js_timestamp"></param>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        internal static bool Convert_JS_timestamp(string js_timestamp, out DateTime dateTime)
+        {
+#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_3_OR_GREATER
+
+            try
+            {
+                if (js_timestamp.Length == 13 || js_timestamp.Length == 14) //负数时, 长度要+1
+                {
+                    // 毫秒级时间戳：毫秒级时间戳是指自 1970 年 1 月 1 日 00:00:00 UTC 起的毫秒数。毫秒级时间戳通常是 13 位长度的数字
+                    if (long.TryParse(js_timestamp, out var timestamp))
+                    {
+                        var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
+                        dateTime = dateTimeOffset.LocalDateTime;
+                        return true;
+                    }
+                }
+                else if (js_timestamp.Length == 10 || js_timestamp.Length == 11)  //负数时, 长度要+1
+                {
+                    // 秒级时间戳是指自 1970 年 1 月 1 日 00:00:00 UTC 起的秒数。秒级时间戳通常是 10 位长度的数字
+                    if (long.TryParse(js_timestamp, out var timestamp))
+                    {
+                        var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
+                        dateTime = dateTimeOffset.LocalDateTime;
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+#endif
+            dateTime = default;
+            return false;
+        }
 
 #if NET6_0_OR_GREATER
         public static implicit operator DateOnly(PrimitiveString primitive) => DateOnly.TryParse(primitive.Value, out var result) ? result : default;
