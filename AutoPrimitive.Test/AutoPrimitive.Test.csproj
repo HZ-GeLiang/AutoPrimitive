@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\AutoPrimitive.Standard\AutoPrimitive.Standard.csproj" />
+    <ProjectReference Include="..\AutoPrimitive.Standard\AutoPrimitive.Standard.csproj" />
   </ItemGroup>
 
 </Project>
