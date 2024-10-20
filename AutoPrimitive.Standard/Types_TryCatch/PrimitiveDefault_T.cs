@@ -71,7 +71,7 @@
                 {
                     return true;
                 }
-                return false;
+                return Convert.ToBoolean(PrimitiveDefault.Default);
             }, PrimitiveDefault.Default);
         }
 

@@ -100,7 +100,7 @@ public static class PrimitiveTryCatchExtensions
     //public static dynamic ToPrimitive(this Guid? obj, string format, Guid? defaultValue) => new PrimitiveDefaultGuid(obj, format);
 
     //string
-    public static dynamic ToPrimitive(this string obj, string defaultValue) => new PrimitiveDefaultString(obj, defaultValue);
+    public static dynamic ToPrimitive(this string obj, object defaultValue) => new PrimitiveDefaultString(obj, defaultValue);
 
     #region 枚举 Enum
 
@@ -111,47 +111,47 @@ public static class PrimitiveTryCatchExtensions
 
     //    //byte、sbyte、short、ushort、int、uint、long 或 ulong
 
-    //    public static dynamic ToPrimitive<T>(this byte value, byte defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this byte value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this sbyte value, sbyte defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this sbyte value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this short value, short defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this short value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this ushort value, ushort defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this ushort value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this int value, int defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this int value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this uint value, uint defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this uint value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this long value, long defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this long value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this ulong value, ulong defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this ulong value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value.ToString());
     //    }
 
-    //    public static dynamic ToPrimitive<T>(this string value, string defaultValue) where T : Enum
+    //    public static dynamic ToPrimitive<T>(this string value, object defaultValue) where T : Enum
     //    {
     //        return Enum.Parse(typeof(T), value);
     //    }
@@ -189,17 +189,17 @@ public static class PrimitiveTryCatchExtensions
 
     #region 日期
 
-    //public static dynamic ToPrimitive(this DateTime obj, DateTime defaultValue) => new PrimitiveDateTime(obj, PrimitiveDateTimeConfig.DefaultFormat);
+    //public static dynamic ToPrimitive(this DateTime obj, object defaultValue) => new PrimitiveDateTime(obj, PrimitiveDateTimeConfig.DefaultFormat);
 
-    //public static dynamic ToPrimitive(this DateTime obj, string format, DateTime defaultValue) => new PrimitiveDateTime(obj, format);
+    //public static dynamic ToPrimitive(this DateTime obj, string format, object defaultValue) => new PrimitiveDateTime(obj, format);
 
-    //public static dynamic ToPrimitive(this DateTime? obj, DateTime? defaultValue) => new PrimitiveDateTimeNullable(obj, PrimitiveDateTimeConfig.DefaultFormat);
+    //public static dynamic ToPrimitive(this DateTime? obj, object defaultValue) => new PrimitiveDateTimeNullable(obj, PrimitiveDateTimeConfig.DefaultFormat);
 
-    //public static dynamic ToPrimitive(this DateTime? obj, string format, DateTime? defaultValue) => new PrimitiveDateTimeNullable(obj, format);
+    //public static dynamic ToPrimitive(this DateTime? obj, string format, object defaultValue) => new PrimitiveDateTimeNullable(obj, format);
 
 #if NET6_0_OR_GREATER
-    //public static dynamic ToPrimitive(this DateOnly obj, DateOnly defaultValue) => new PrimitiveDateOnly(obj);
-    //public static dynamic ToPrimitive(this DateOnly obj, string format, DateOnly defaultValue) => new PrimitiveDateOnly(obj, format);
+    //public static dynamic ToPrimitive(this DateOnly obj, object defaultValue) => new PrimitiveDateOnly(obj);
+    //public static dynamic ToPrimitive(this DateOnly obj, string format, object defaultValue) => new PrimitiveDateOnly(obj, format);
 #endif
 
     #endregion

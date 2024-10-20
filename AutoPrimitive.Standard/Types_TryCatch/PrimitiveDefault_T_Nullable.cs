@@ -76,10 +76,6 @@ namespace AutoPrimitive
             return h<bool>(() =>
             {
                 //非零即真
-                if (PrimitiveDefault.Value == null)
-                {
-                    return false;
-                }
                 if (bool.TryParse(PrimitiveDefault.Value.ToString(), out var result1) && result1 == true)
                 {
                     return true;
@@ -89,7 +85,7 @@ namespace AutoPrimitive
                 {
                     return true;
                 }
-                return false;
+                return Convert.ToBoolean(PrimitiveDefault.Default);
             }, PrimitiveDefault.Default);
         }
 
@@ -122,7 +118,7 @@ namespace AutoPrimitive
         //其他类型
         public static implicit operator bool?(PrimitiveDefaultNullable<T> PrimitiveDefault)
         {
-            return h<DateTime>(() =>
+            return h<bool?>(() =>
             {
                 if (PrimitiveDefault.Value == null)
                 {
@@ -137,7 +133,7 @@ namespace AutoPrimitive
                 {
                     return true;
                 }
-                return false;
+                return Convert.ToBoolean(PrimitiveDefault.Default);
             }, PrimitiveDefault.Default);
         }
 
@@ -155,33 +151,31 @@ namespace AutoPrimitive
             {
                 if (PrimitiveDefault.Value != null)
                 {
-                    //尝试进行js时间戳的转换
-                    if (Convert_JS_timestamp(PrimitiveDefault, out var dt))
-                    {
-                        return dt;
-                    }
-
-                    return Convert.ToDateTime(PrimitiveDefault.Value);
+                    return PrimitiveDefault.Default;
                 }
-
-                return default;
+                //尝试进行js时间戳的转换
+                if (Convert_JS_timestamp(PrimitiveDefault, out var dt))
+                {
+                    return dt;
+                }
+                return Convert.ToDateTime(PrimitiveDefault.Value);
             }, PrimitiveDefault.Default);
         }
 
         public static implicit operator DateTime?(PrimitiveDefaultNullable<T> PrimitiveDefault)
         {
-            return h<DateTime>(() =>
+            return h<DateTime?>(() =>
             {
                 if (PrimitiveDefault.Value != null)
                 {
-                    //尝试进行js时间戳的转换
-                    if (Convert_JS_timestamp(PrimitiveDefault, out var dt))
-                    {
-                        return dt;
-                    }
-                    return Convert.ToDateTime(PrimitiveDefault.Value);
+                    return null;
                 }
-                return default(DateTime?);
+                //尝试进行js时间戳的转换
+                if (Convert_JS_timestamp(PrimitiveDefault, out var dt))
+                {
+                    return dt;
+                }
+                return Convert.ToDateTime(PrimitiveDefault.Value);
             }, PrimitiveDefault.Default);
         }
 

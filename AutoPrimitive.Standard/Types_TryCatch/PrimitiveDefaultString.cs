@@ -37,117 +37,151 @@
         public static implicit operator PrimitiveDefaultString(string val) => new PrimitiveDefaultString(val, default(string));
 
         //数值类型: short ushort int uint char float double long ulong decimal
-        public static implicit operator short(PrimitiveDefaultString PrimitiveDefault) => short.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator short(PrimitiveDefaultString PrimitiveDefault) => h<short>(() => short.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator ushort(PrimitiveDefaultString PrimitiveDefault) => ushort.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator ushort(PrimitiveDefaultString PrimitiveDefault) => h<ushort>(() => ushort.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator int(PrimitiveDefaultString PrimitiveDefault) => int.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator int(PrimitiveDefaultString PrimitiveDefault) => h<int>(() => int.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator uint(PrimitiveDefaultString PrimitiveDefault) => uint.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator uint(PrimitiveDefaultString PrimitiveDefault) => h<uint>(() => uint.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator char(PrimitiveDefaultString PrimitiveDefault) => char.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator char(PrimitiveDefaultString PrimitiveDefault)
+        {
+            return h<char>(() =>
+            {
+                //非零即真
+                if (char.TryParse(PrimitiveDefault.Value, out var result))
+                {
+                    return result;
+                }
+                return PrimitiveDefault.Default;
+            }, PrimitiveDefault.Default);
+        }
 
-        public static implicit operator float(PrimitiveDefaultString PrimitiveDefault) => float.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator float(PrimitiveDefaultString PrimitiveDefault) => h<float>(() => float.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator double(PrimitiveDefaultString PrimitiveDefault) => double.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator double(PrimitiveDefaultString PrimitiveDefault) => h<double>(() => double.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator long(PrimitiveDefaultString PrimitiveDefault) => long.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator long(PrimitiveDefaultString PrimitiveDefault) => h<long>(() => long.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator ulong(PrimitiveDefaultString PrimitiveDefault) => ulong.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator ulong(PrimitiveDefaultString PrimitiveDefault) => h<ulong>(() => ulong.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator decimal(PrimitiveDefaultString PrimitiveDefault) => decimal.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator decimal(PrimitiveDefaultString PrimitiveDefault) => h<decimal>(() => decimal.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator bool(PrimitiveDefaultString PrimitiveDefault) =>
-            bool.TryParse(PrimitiveDefault.Value, out var result1) && result1 == true ||
-            int.TryParse(PrimitiveDefault.Value, out var result2) && result2 != 0;
+        public static implicit operator bool(PrimitiveDefaultString PrimitiveDefault)
+        {
+            return h<bool>(() =>
+            {
+                //非零即真
+                if (bool.TryParse(PrimitiveDefault.Value, out var result1) && result1 == true)
+                {
+                    return true;
+                }
+                if (int.TryParse(PrimitiveDefault.Value, out var result2) && result2 != 0)
+                {
+                    return true;
+                }
+                return PrimitiveDefault.Default;
+            }, PrimitiveDefault.Default);
+        }
 
-        public static implicit operator byte(PrimitiveDefaultString PrimitiveDefault) => byte.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator byte(PrimitiveDefaultString PrimitiveDefault) => h<byte>(() => byte.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator sbyte(PrimitiveDefaultString PrimitiveDefault) => sbyte.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator sbyte(PrimitiveDefaultString PrimitiveDefault) => h<sbyte>(() => sbyte.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator Guid(PrimitiveDefaultString PrimitiveDefault) => Guid.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator Guid(PrimitiveDefaultString PrimitiveDefault) => h<Guid>(() => Guid.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         //可空
-        public static implicit operator short?(PrimitiveDefaultString PrimitiveDefault) => short.TryParse(PrimitiveDefault.Value, out var result) ? result : default(short?);
+        public static implicit operator short?(PrimitiveDefaultString PrimitiveDefault) => h<short?>(() => short.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator ushort?(PrimitiveDefaultString PrimitiveDefault) => ushort.TryParse(PrimitiveDefault.Value, out var result) ? result : default(ushort?);
+        public static implicit operator ushort?(PrimitiveDefaultString PrimitiveDefault) => h<ushort?>(() => ushort.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator int?(PrimitiveDefaultString PrimitiveDefault) => int.TryParse(PrimitiveDefault.Value, out var result) ? result : default(int?);
+        public static implicit operator int?(PrimitiveDefaultString PrimitiveDefault) => h<int?>(() => int.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator uint?(PrimitiveDefaultString PrimitiveDefault) => uint.TryParse(PrimitiveDefault.Value, out var result) ? result : default(uint?);
+        public static implicit operator uint?(PrimitiveDefaultString PrimitiveDefault) => h<uint?>(() => uint.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator char?(PrimitiveDefaultString PrimitiveDefault) => char.TryParse(PrimitiveDefault.Value, out var result) ? result : default(char?);
+        public static implicit operator char?(PrimitiveDefaultString PrimitiveDefault)
+        {
+            return h<char?>(() =>
+            {
+                //非零即真
+                if (PrimitiveDefault == null)
+                {
+                    return null;
+                }
+                if (char.TryParse(PrimitiveDefault.Value, out var result))
+                {
+                    return result;
+                }
+                return PrimitiveDefault.Default;
+            }, PrimitiveDefault.Default);
+        }
 
-        public static implicit operator float?(PrimitiveDefaultString PrimitiveDefault) => float.TryParse(PrimitiveDefault.Value, out var result) ? result : default(float?);
+        public static implicit operator float?(PrimitiveDefaultString PrimitiveDefault) => h<float?>(() => float.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator double?(PrimitiveDefaultString PrimitiveDefault) => double.TryParse(PrimitiveDefault.Value, out var result) ? result : default(double?);
+        public static implicit operator double?(PrimitiveDefaultString PrimitiveDefault) => h<double?>(() => double.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator long?(PrimitiveDefaultString PrimitiveDefault) => long.TryParse(PrimitiveDefault.Value, out var result) ? result : default(long?);
+        public static implicit operator long?(PrimitiveDefaultString PrimitiveDefault) => h<long?>(() => long.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator ulong?(PrimitiveDefaultString PrimitiveDefault) => ulong.TryParse(PrimitiveDefault.Value, out var result) ? result : default(ulong?);
+        public static implicit operator ulong?(PrimitiveDefaultString PrimitiveDefault) => h<ulong?>(() => ulong.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator decimal?(PrimitiveDefaultString PrimitiveDefault) => decimal.TryParse(PrimitiveDefault.Value, out var result) ? result : default(decimal?);
+        public static implicit operator decimal?(PrimitiveDefaultString PrimitiveDefault) => h<decimal?>(() => decimal.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         public static implicit operator bool?(PrimitiveDefaultString PrimitiveDefault)
         {
-            if (PrimitiveDefault == null)
+            return h<bool?>(() =>
             {
-                return null;
-            }
-            //非零即真
-            if (bool.TryParse(PrimitiveDefault.Value, out var result1) && result1 == true)
-            {
-                return true;
-            }
-            if (int.TryParse(PrimitiveDefault.Value, out var result2) && result2 != 0)
-            {
-                return true;
-            }
-            return false;
+                //非零即真
+                if (PrimitiveDefault == null)
+                {
+                    return null;
+                }
+                if (bool.TryParse(PrimitiveDefault.Value, out var result1) && result1 == true)
+                {
+                    return true;
+                }
+                if (int.TryParse(PrimitiveDefault.Value, out var result2) && result2 != 0)
+                {
+                    return true;
+                }
+                return PrimitiveDefault.Default;
+            }, PrimitiveDefault.Default);
         }
 
-        public static implicit operator byte?(PrimitiveDefaultString PrimitiveDefault) => byte.TryParse(PrimitiveDefault.Value, out var result) ? result : default(byte?);
+        public static implicit operator byte?(PrimitiveDefaultString PrimitiveDefault) => h<byte?>(() => byte.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator sbyte?(PrimitiveDefaultString PrimitiveDefault) => sbyte.TryParse(PrimitiveDefault.Value, out var result) ? result : default(sbyte?);
+        public static implicit operator sbyte?(PrimitiveDefaultString PrimitiveDefault) => h<sbyte?>(() => sbyte.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator Guid?(PrimitiveDefaultString PrimitiveDefault) => Guid.TryParse(PrimitiveDefault.Value, out var result) ? result : default(Guid?);
+        public static implicit operator Guid?(PrimitiveDefaultString PrimitiveDefault) => h<Guid?>(() => Guid.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         //日期
         public static implicit operator DateTime(PrimitiveDefaultString PrimitiveDefault)
         {
+            return h<DateTime>(() =>
             {
                 if (Convert_JS_timestamp(PrimitiveDefault.Value, out var dt))
                 {
                     return dt;
                 }
-            }
 
-            {
-                if (DateTime.TryParse(PrimitiveDefault.Value, out var dt))
-                {
-                    return dt;
-                }
-            }
-
-            return default;
+                return DateTime.Parse(PrimitiveDefault.Value);
+            }, PrimitiveDefault.Default);
         }
 
         public static implicit operator DateTime?(PrimitiveDefaultString PrimitiveDefault)
         {
+            return h<DateTime?>(() =>
             {
+                if (PrimitiveDefault == null)
+                {
+                    return null;
+                }
                 if (Convert_JS_timestamp(PrimitiveDefault.Value, out var dt))
                 {
                     return dt;
                 }
-            }
-            {
-                if (DateTime.TryParse(PrimitiveDefault.Value, out var dt))
-                {
-                    return dt;
-                }
-            }
-
-            return default(DateTime?);
+                return DateTime.Parse(PrimitiveDefault.Value);
+            }, PrimitiveDefault.Default);
         }
 
         /// <summary>
@@ -192,11 +226,11 @@
         }
 
 #if NET6_0_OR_GREATER
-        public static implicit operator DateOnly(PrimitiveDefaultString PrimitiveDefault) => DateOnly.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
-        public static implicit operator TimeOnly(PrimitiveDefaultString PrimitiveDefault) => TimeOnly.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
+        public static implicit operator DateOnly(PrimitiveDefaultString PrimitiveDefault) => h<DateOnly>(() => DateOnly.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+        public static implicit operator TimeOnly(PrimitiveDefaultString PrimitiveDefault) => h<TimeOnly>(() => TimeOnly.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator DateOnly?(PrimitiveDefaultString PrimitiveDefault) => DateOnly.TryParse(PrimitiveDefault.Value, out var result) ? result : default(DateOnly?);
-        public static implicit operator TimeOnly?(PrimitiveDefaultString PrimitiveDefault) => TimeOnly.TryParse(PrimitiveDefault.Value, out var result) ? result : default(TimeOnly?);
+        public static implicit operator DateOnly?(PrimitiveDefaultString PrimitiveDefault) => h<DateOnly?>(() => DateOnly.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+        public static implicit operator TimeOnly?(PrimitiveDefaultString PrimitiveDefault) => h<TimeOnly?>(() => TimeOnly.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
 #endif
 
         //string
