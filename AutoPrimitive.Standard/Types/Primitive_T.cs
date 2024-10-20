@@ -37,9 +37,18 @@
         public static implicit operator decimal(Primitive<T> primitive) => Convert.ToDecimal(primitive.Value);
 
         //其他类型
-        public static implicit operator bool(Primitive<T> primitive) =>
-            bool.TryParse(primitive.Value.ToString(), out var result1) && result1 == true ||
-            int.TryParse(primitive.Value.ToString(), out var result2) && result2 != 0; //非零即真
+        public static implicit operator bool(Primitive<T> primitive)
+        {//非零即真
+            if (bool.TryParse(primitive.Value.ToString(), out var result1) && result1 == true)
+            {
+                return true;
+            }
+            if (int.TryParse(primitive.Value.ToString(), out var result2) && result2 != 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public static implicit operator byte(Primitive<T> primitive) => Convert.ToByte(primitive.Value);
 

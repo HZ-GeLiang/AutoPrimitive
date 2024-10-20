@@ -83,13 +83,21 @@ namespace AutoPrimitive
         //其他类型
         public static implicit operator bool?(PrimitiveNullable<T> primitive)
         {
+            //非零即真
             if (primitive.Value == null)
             {
                 return null;
             }
+            if (bool.TryParse(primitive.Value.ToString(), out var result1) && result1 == true)
+            {
+                return true;
+            }
+            if (int.TryParse(primitive.Value.ToString(), out var result2) && result2 != 0)
+            {
+                return true;
+            }
 
-            return bool.TryParse(primitive.Value.ToString(), out var result1) && result1 == true ||
-                   int.TryParse(primitive.Value.ToString(), out var result2) && result2 != 0; //非零即真
+            return false;
         }
 
         public static implicit operator byte?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(byte?) : Convert.ToByte(primitive.Value);
