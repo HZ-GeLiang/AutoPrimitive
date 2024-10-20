@@ -6,14 +6,35 @@
 
     public readonly struct PrimitiveDefaultString
     {
-        public PrimitiveDefaultString(string val)
+        public PrimitiveDefaultString(string val, object @default)
         {
             Value = val;
+            Default = @default;
+        }
+
+        public static dynamic h<T_Target>(Func<dynamic> func, object @default)
+        {
+            try
+            {
+                return func();
+            }
+            catch (Exception ex)
+            {
+                if (typeof(string) == typeof(T_Target))
+                {
+                    return @default;
+                }
+                else
+                {
+                    return Convert.ChangeType(@default, typeof(T_Target));
+                }
+            }
         }
 
         public string Value { get; }
+        public object Default { get; }
 
-        public static implicit operator PrimitiveDefaultString(string val) => new PrimitiveDefaultString(val);
+        public static implicit operator PrimitiveDefaultString(string val) => new PrimitiveDefaultString(val, default(string));
 
         //数值类型: short ushort int uint char float double long ulong decimal
         public static implicit operator short(PrimitiveDefaultString PrimitiveDefault) => short.TryParse(PrimitiveDefault.Value, out var result) ? result : default;
@@ -73,8 +94,16 @@
             {
                 return null;
             }
-            return bool.TryParse(PrimitiveDefault.Value, out var result1) && result1 == true ||
-                   int.TryParse(PrimitiveDefault.Value, out var result2) && result2 != 0;
+            //非零即真
+            if (bool.TryParse(PrimitiveDefault.Value, out var result1) && result1 == true)
+            {
+                return true;
+            }
+            if (int.TryParse(PrimitiveDefault.Value, out var result2) && result2 != 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static implicit operator byte?(PrimitiveDefaultString PrimitiveDefault) => byte.TryParse(PrimitiveDefault.Value, out var result) ? result : default(byte?);

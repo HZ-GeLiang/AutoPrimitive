@@ -2,13 +2,13 @@
 {
     public readonly struct PrimitiveDefault<T> where T : struct
     {
-        public PrimitiveDefault(T val, T @default)
+        public PrimitiveDefault(T val, object @default)
         {
             Value = val;
             Default = @default;
         }
 
-        public static dynamic h<T_Target>(Func<dynamic> func, T defaultValue)
+        public static dynamic h<T_Target>(Func<dynamic> func, object @default)
         {
             try
             {
@@ -18,17 +18,17 @@
             {
                 if (typeof(T) == typeof(T_Target))
                 {
-                    return defaultValue;
+                    return @default;
                 }
                 else
                 {
-                    return Convert.ChangeType(defaultValue, typeof(T_Target));
+                    return Convert.ChangeType(@default, typeof(T_Target));
                 }
             }
         }
 
         public T Value { get; }
-        public T Default { get; }
+        public object Default { get; }
 
         public static implicit operator PrimitiveDefault<T>(T val) => new(val, default(T));
 
@@ -58,26 +58,42 @@
         public static implicit operator decimal(PrimitiveDefault<T> PrimitiveDefault) => h<decimal>(() => Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         //其他类型
-        public static implicit operator bool(PrimitiveDefault<T> PrimitiveDefault) =>
-            bool.TryParse(PrimitiveDefault.Value.ToString(), out var result1) && result1 == true ||
-            int.TryParse(PrimitiveDefault.Value.ToString(), out var result2) && result2 != 0; //非零即真
+        public static implicit operator bool(PrimitiveDefault<T> PrimitiveDefault)
+        {
+            return h<bool>(() =>
+            {
+                //非零即真
+                if (bool.TryParse(PrimitiveDefault.Value.ToString(), out var result1) && result1 == true)
+                {
+                    return true;
+                }
+                if (int.TryParse(PrimitiveDefault.Value.ToString(), out var result2) && result2 != 0)
+                {
+                    return true;
+                }
+                return false;
+            }, PrimitiveDefault.Default);
+        }
 
-        public static implicit operator byte(PrimitiveDefault<T> PrimitiveDefault) => Convert.ToByte(PrimitiveDefault.Value);
+        public static implicit operator byte(PrimitiveDefault<T> PrimitiveDefault) => h<byte>(() => Convert.ToByte(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
-        public static implicit operator sbyte(PrimitiveDefault<T> PrimitiveDefault) => Convert.ToSByte(PrimitiveDefault.Value);
+        public static implicit operator sbyte(PrimitiveDefault<T> PrimitiveDefault) => h<sbyte>(() => Convert.ToSByte(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         //string
-        public static implicit operator string(PrimitiveDefault<T> PrimitiveDefault) => PrimitiveDefault.Value.ToString();
+        public static implicit operator string(PrimitiveDefault<T> PrimitiveDefault) => h<string>(() => PrimitiveDefault.Value.ToString(), PrimitiveDefault.Default);
 
         //日期
         public static implicit operator DateTime(PrimitiveDefault<T> PrimitiveDefault)
         {
-            //尝试进行js时间戳的转换
-            if (Convert_JS_timestamp(PrimitiveDefault, out var dt))
+            return h<DateTime>(() =>
             {
-                return dt;
-            }
-            return Convert.ToDateTime(PrimitiveDefault.Value);
+                //尝试进行js时间戳的转换
+                if (Convert_JS_timestamp(PrimitiveDefault, out var dt))
+                {
+                    return dt;
+                }
+                return Convert.ToDateTime(PrimitiveDefault.Value);
+            }, PrimitiveDefault.Default);
         }
 
         private static bool Convert_JS_timestamp(PrimitiveDefault<T> PrimitiveDefault, out DateTime dateTime)
@@ -168,152 +184,5 @@
         {
             return Value.GetHashCode();
         }
-
-        #region 运算符重载
-
-        //https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/operator-overloading
-
-        #region Add
-
-        //public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<T> b) => new PrimitiveDefault<T>((dynamic)a.Value + b.Value);//优先级太低.测试发现,不会进来
-
-        //short ushort int uint char float double long ulong decimal string
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<short> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<ushort> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<int> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<uint> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<char> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<float> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<double> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<long> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<ulong> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefault<decimal> b) => Add(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator +(PrimitiveDefault<T> a, PrimitiveDefaultString b) => Add(a.Value, b.Value);
-
-        private static PrimitiveDefault<T> Add(dynamic aValue, dynamic bValue)
-        {
-            dynamic v1 = Convert.ChangeType(aValue, typeof(T));
-            dynamic v2 = Convert.ChangeType(bValue, typeof(T));
-            return new PrimitiveDefault<T>(v1 + v2, default(T));
-        }
-
-        #endregion
-
-        #region Subtract
-
-        //short ushort int uint char float double long ulong decimal string
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<short> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<ushort> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<int> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<uint> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<char> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<float> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<double> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<long> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<ulong> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefault<decimal> b) => Subtract(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator -(PrimitiveDefault<T> a, PrimitiveDefaultString b) => Subtract(a.Value, b.Value);
-
-        private static PrimitiveDefault<T> Subtract(dynamic aValue, dynamic bValue)
-        {
-            dynamic v1 = Convert.ChangeType(aValue, typeof(T));
-            dynamic v2 = Convert.ChangeType(bValue, typeof(T));
-            return new PrimitiveDefault<T>(v1 - v2, default(T));
-        }
-
-        #endregion
-
-        #region Multiply
-
-        //short ushort int uint char float double long ulong decimal string
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<short> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<ushort> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<int> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<uint> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<char> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<float> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<double> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<long> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<ulong> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefault<decimal> b) => Multiply(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator *(PrimitiveDefault<T> a, PrimitiveDefaultString b) => Multiply(a.Value, b.Value);
-
-        private static PrimitiveDefault<T> Multiply(dynamic aValue, dynamic bValue)
-        {
-            dynamic v1 = Convert.ChangeType(aValue, typeof(T));
-            dynamic v2 = Convert.ChangeType(bValue, typeof(T));
-            return new PrimitiveDefault<T>(v1 * v2, default(T));
-        }
-
-        #endregion
-
-        #region Divide
-
-        //short ushort int uint char float double long ulong decimal string
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<short> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<ushort> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<int> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<uint> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<char> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<float> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<double> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<long> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<ulong> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefault<decimal> b) => Divide(a.Value, b.Value);
-
-        public static PrimitiveDefault<T> operator /(PrimitiveDefault<T> a, PrimitiveDefaultString b) => Divide(a.Value, b.Value);
-
-        private static PrimitiveDefault<T> Divide(dynamic aValue, dynamic bValue)
-        {
-            dynamic v1 = Convert.ChangeType(aValue, typeof(T));
-            dynamic v2 = Convert.ChangeType(bValue, typeof(T));
-            return new PrimitiveDefault<T>(v1 / v2, default(T));
-        }
-
-        #endregion
-
-        #endregion
     }
 }
