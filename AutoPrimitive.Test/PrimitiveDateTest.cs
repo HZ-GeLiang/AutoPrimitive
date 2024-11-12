@@ -2,9 +2,23 @@
 
 namespace AutoPrimitive.Test
 {
+    public class Test_Date
+    {
+        public DateTime Now { get; set; }
+    }
+
     [TestClass]
     public class PrimitiveDateTest
     {
+        [TestMethod]
+        public void Test_对象类型()
+        {
+            var obj = new Test_Date();
+            obj.Now = new DateTime(2024, 11, 11, 11, 11, 11, 111);
+            DateTime dt = obj.Now.ToPrimitive("yyyy-MM-dd");
+            Assert.AreEqual(new DateTime(2024, 11, 11), dt);
+        }
+
         [TestMethod]
         public void Test_DateTime_JS时间戳_DateTime()
         {

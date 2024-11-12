@@ -18,6 +18,10 @@
         public DateTime Value { get; }
         public string Format { get; }
 
+        public static implicit operator DateTime(PrimitiveDateTime primitive) => Convert.ToDateTime(primitive.Value.ToString(primitive.Format));
+
+        public static implicit operator DateTime?(PrimitiveDateTime primitive) => Convert.ToDateTime(primitive.Value.ToString(primitive.Format));
+
         public static implicit operator string(PrimitiveDateTime primitive) => primitive.Value.ToString(primitive.Format);
 
 #if NET6_0_OR_GREATER
