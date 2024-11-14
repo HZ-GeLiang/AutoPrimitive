@@ -18,8 +18,20 @@
         public DateTime? Value { get; }
         public string Format { get; }
 
+        public static implicit operator DateTime(PrimitiveDateTimeNullable primitive) => primitive.Value.HasValue
+            ? string.IsNullOrEmpty(primitive.Format)
+                ? primitive.Value.Value
+                : Convert.ToDateTime(primitive.Value.Value.ToString(primitive.Format))
+            : Convert.ToDateTime(primitive.Value);
+
+        public static implicit operator DateTime?(PrimitiveDateTimeNullable primitive) => primitive.Value.HasValue
+            ? string.IsNullOrEmpty(primitive.Format)
+                ? primitive.Value.Value
+                : Convert.ToDateTime(primitive.Value.Value.ToString(primitive.Format))
+            : null;
+
         public static implicit operator string(PrimitiveDateTimeNullable primitive) => primitive.Value.HasValue
-            ? primitive.Format == null
+            ? string.IsNullOrEmpty(primitive.Format)
                 ? primitive.Value.ToString()
                 : primitive.Value.Value.ToString(primitive.Format)
             : null;
