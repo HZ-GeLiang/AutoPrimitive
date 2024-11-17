@@ -32,6 +32,11 @@
 
         public override bool Equals(object obj)
         {
+            // 这里的类型判断有问题,应该先判断 null
+            if (obj == null)
+            {
+                return Value == null;
+            }
             if (obj is PrimitiveGuid other)
             {
                 if (ReferenceEquals(this, obj))
@@ -56,12 +61,28 @@
 
         public override int GetHashCode()
         {
-            return Value == null ? this.GetHashCode() : Value.GetHashCode();
+            return Value?.GetHashCode() ?? 0;
         }
 
         public override string ToString()
         {
-            return Value == null ? this.ToString() : Value.ToString();
+            if (Value != null)
+            {
+                if (PrimitiveDefaultGuidConfig.DefaultFormat == null)
+                {
+                    return Value.Value.ToString();
+                }
+                else
+                {
+                    return Value.Value.ToString(PrimitiveDefaultGuidConfig.DefaultFormat);
+                }
+            }
+            return null;
+        }
+
+        public string ToString(string format)
+        {
+            return Value == null ? null : Value.Value.ToString(format);
         }
     }
 }
