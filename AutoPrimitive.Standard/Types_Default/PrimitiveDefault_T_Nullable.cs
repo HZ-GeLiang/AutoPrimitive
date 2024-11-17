@@ -256,6 +256,11 @@ namespace AutoPrimitive
             //    return object.Equals(obj, this.Value);
             //}
 
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveDefaultNullable<T> other)
             {
                 if (ReferenceEquals(this, obj))

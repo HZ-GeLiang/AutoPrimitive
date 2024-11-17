@@ -54,6 +54,11 @@
             //    return object.Equals(obj, this.Value);
             //}
 
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveDefaultDateTimeNullable other)
             {
                 if (ReferenceEquals(this, obj))

@@ -5,7 +5,7 @@
     /// </summary>
     public readonly struct PrimitiveGuidNullable
     {
-        public PrimitiveGuidNullable(Guid? val) : this(val, "")
+        public PrimitiveGuidNullable(Guid? val) : this(val, PrimitiveGuidConfig.DefaultFormat)
         {
         }
 
@@ -32,7 +32,6 @@
 
         public override bool Equals(object obj)
         {
-            // 这里的类型判断有问题,应该先判断 null
             if (obj == null)
             {
                 return Value == null;
@@ -68,13 +67,13 @@
         {
             if (Value != null)
             {
-                if (PrimitiveDefaultGuidConfig.DefaultFormat == null)
+                if (this.Format != null)
                 {
-                    return Value.Value.ToString();
+                    return Value.Value.ToString(this.Format);
                 }
                 else
                 {
-                    return Value.Value.ToString(PrimitiveDefaultGuidConfig.DefaultFormat);
+                    return Value.Value.ToString();
                 }
             }
             return null;

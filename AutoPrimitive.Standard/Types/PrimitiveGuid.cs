@@ -59,13 +59,13 @@
 
         public override string ToString()
         {
-            if (PrimitiveGuidConfig.DefaultFormat != null)
+            if (this.Format != null)
             {
-                return Value.ToString();
+                return Value.ToString(this.Format);
             }
             else
             {
-                return Value.ToString(PrimitiveGuidConfig.DefaultFormat);
+                return Value.ToString();
             }
         }
 

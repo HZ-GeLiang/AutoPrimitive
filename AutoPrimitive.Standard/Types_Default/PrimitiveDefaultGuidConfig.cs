@@ -1,7 +1,8 @@
 ﻿namespace AutoPrimitive
 {
-    public static class PrimitiveDefaultGuidConfig
-    {
-        public static string DefaultFormat { get; set; } = null;
-    }
+    //共用  PrimitiveGuidConfig
+    //public static class PrimitiveDefaultGuidConfig
+    //{
+    //    public static string DefaultFormat { get; set; } = null;
+    //}
 }

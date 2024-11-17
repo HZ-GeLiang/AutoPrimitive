@@ -66,6 +66,11 @@
             //    return object.Equals(obj, this.Value);
             //}
 
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveDateTimeNullable other)
             {
                 if (ReferenceEquals(this, obj))
@@ -75,11 +80,6 @@
 
                 return Equals(Value, other.Value);
             }
-
-            //if (this.Value == null)
-            //{
-            //    return obj == null;
-            //}
 
             return false;
         }

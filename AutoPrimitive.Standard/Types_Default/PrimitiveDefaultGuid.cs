@@ -59,7 +59,19 @@
 
         public override string ToString()
         {
-            return Value.ToString();
+            if (this.Format != null)
+            {
+                return Value.ToString(this.Format);
+            }
+            else
+            {
+                return Value.ToString();
+            }
+        }
+
+        public string ToString(string format)
+        {
+            return Value.ToString(format);
         }
     }
 }
