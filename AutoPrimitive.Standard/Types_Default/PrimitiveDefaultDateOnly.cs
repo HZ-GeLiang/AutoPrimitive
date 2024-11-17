@@ -5,7 +5,7 @@
     /// <summary>
     /// DateTime 的implicit conversions
     /// </summary>
-    public readonly struct PrimitiveDefaultDateOnly
+    public readonly struct PrimitiveDefaultDateOnly : IEquatable<PrimitiveDefaultDateOnly>
     {
         public PrimitiveDefaultDateOnly(DateOnly val) : this(val, "yyyy-MM-dd")
         {
@@ -48,7 +48,7 @@
 
             if (obj is PrimitiveDefaultDateOnly other)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other))
                 {
                     return true;
                 }
@@ -67,6 +67,16 @@
         public override int GetHashCode()
         {
             return Value.GetHashCode();
+        }
+
+        public bool Equals(PrimitiveDefaultDateOnly other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return object.Equals(Value, other.Value);
         }
 
         #region 运算符重载

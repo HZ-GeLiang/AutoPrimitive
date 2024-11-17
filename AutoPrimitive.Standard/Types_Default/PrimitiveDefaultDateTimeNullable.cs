@@ -3,7 +3,7 @@
     /// <summary>
     /// DateTime 的 implicit conversions
     /// </summary>
-    public readonly struct PrimitiveDefaultDateTimeNullable
+    public readonly struct PrimitiveDefaultDateTimeNullable : IEquatable<PrimitiveDefaultDateTimeNullable>
     {
         public PrimitiveDefaultDateTimeNullable(DateTime? val) : this(val, PrimitiveDateTimeConfig.DefaultFormat)
         {
@@ -61,7 +61,7 @@
 
             if (obj is PrimitiveDefaultDateTimeNullable other)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other))
                 {
                     return true;
                 }
@@ -85,6 +85,16 @@
         public override string ToString()
         {
             return Value == null ? this.ToString() : this.Value.Value.ToString(this.Format);
+        }
+
+        public bool Equals(PrimitiveDefaultDateTimeNullable other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Equals(Value, other.Value);
         }
 
         #region 运算符重载

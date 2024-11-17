@@ -263,7 +263,7 @@ namespace AutoPrimitive
 
             if (obj is PrimitiveDefaultNullable<T> other)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other))
                 {
                     return true;
                 }

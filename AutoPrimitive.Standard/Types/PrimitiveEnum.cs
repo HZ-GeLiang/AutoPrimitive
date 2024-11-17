@@ -3,7 +3,7 @@
     /// <summary>
     /// enum的implicit conversions
     /// </summary>
-    public readonly struct PrimitiveEnum
+    public readonly struct PrimitiveEnum : IEquatable<PrimitiveEnum>
     {
         //参考: https://stackoverflow.com/q/261663/3563013
 
@@ -72,7 +72,7 @@
 
             if (obj is PrimitiveEnum other)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other))
                 {
                     return true;
                 }
@@ -91,6 +91,16 @@
         public override int GetHashCode()
         {
             return Value.GetHashCode();
+        }
+
+        public bool Equals(PrimitiveEnum other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Equals(Value, other.Value);
         }
     }
 }

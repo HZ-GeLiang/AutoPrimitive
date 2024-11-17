@@ -4,7 +4,7 @@
      注:字符串转枚举没法实现
     */
 
-    public readonly struct PrimitiveString
+    public readonly struct PrimitiveString : IEquatable<PrimitiveString>
     {
         public PrimitiveString(string val)
         {
@@ -202,7 +202,7 @@
 
             if (obj is PrimitiveString other)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other))
                 {
                     return true;
                 }
@@ -221,6 +221,16 @@
         public override int GetHashCode()
         {
             return Value.GetHashCode();
+        }
+
+        public bool Equals(PrimitiveString other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Equals(other.Value, Value);
         }
 
         public static PrimitiveString operator +(PrimitiveString a, PrimitiveString b)

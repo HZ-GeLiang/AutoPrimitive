@@ -3,7 +3,7 @@
     /// <summary>
     /// Guid 的 implicit conversions
     /// </summary>
-    public readonly struct PrimitiveGuid
+    public readonly struct PrimitiveGuid : IEquatable<PrimitiveGuid>
     {
         public PrimitiveGuid(Guid val) : this(val, PrimitiveGuidConfig.DefaultFormat)
         {
@@ -37,7 +37,7 @@
 
             if (obj is PrimitiveGuid other)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other))
                 {
                     return true;
                 }
@@ -46,7 +46,7 @@
             }
             else if (obj is PrimitiveGuidNullable other2)
             {
-                if (ReferenceEquals(this, obj))
+                if (ReferenceEquals(this, other2))
                 {
                     return true;
                 }
@@ -81,6 +81,16 @@
                 return Value.ToString(format);
             }
             return Value.ToString();
+        }
+
+        public bool Equals(PrimitiveGuid other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Equals(Value, other.Value);
         }
     }
 }
