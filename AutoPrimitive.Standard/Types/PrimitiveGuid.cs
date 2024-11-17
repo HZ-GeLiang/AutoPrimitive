@@ -30,6 +30,11 @@
 
         public override bool Equals(object obj)
         {
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveGuid other)
             {
                 if (ReferenceEquals(this, obj))
@@ -71,7 +76,11 @@
 
         public string ToString(string format)
         {
-            return Value.ToString(format);
+            if (format != null)
+            {
+                return Value.ToString(format);
+            }
+            return Value.ToString();
         }
     }
 }

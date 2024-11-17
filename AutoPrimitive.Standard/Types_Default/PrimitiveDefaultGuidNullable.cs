@@ -81,7 +81,11 @@
 
         public string ToString(string format)
         {
-            return Value == null ? null : Value.Value.ToString(format);
+            if (Value != null && format != null)
+            {
+                return Value.Value.ToString(format);
+            }
+            return null;
         }
     }
 }

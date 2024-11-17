@@ -65,6 +65,11 @@
 
         public override bool Equals(object obj)
         {
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveDefaultEnum other)
             {
                 if (ReferenceEquals(this, obj))

@@ -39,6 +39,10 @@
             //{
             //    return object.Equals(obj, this.Value);
             //}
+            if (obj == null)
+            {
+                return Value == null;
+            }
 
             if (obj is PrimitiveDefaultDateTime other)
             {

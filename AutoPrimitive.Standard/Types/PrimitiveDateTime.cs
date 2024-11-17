@@ -44,6 +44,11 @@
             //    return object.Equals(obj, this.Value);
             //}
 
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveDateTime other)
             {
                 if (ReferenceEquals(this, obj))

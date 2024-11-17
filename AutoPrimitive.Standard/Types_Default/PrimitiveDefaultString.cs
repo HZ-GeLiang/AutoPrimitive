@@ -257,6 +257,12 @@
             //{
             //    return object.Equals(obj, this.Value);
             //}
+
+            if (obj == null)
+            {
+                return Value == null;
+            }
+
             if (obj is PrimitiveDefaultString other)
             {
                 if (ReferenceEquals(this, obj))

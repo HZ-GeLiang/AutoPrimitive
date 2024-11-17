@@ -135,6 +135,11 @@
         /// <returns></returns>
         public override bool Equals(object obj)
         {
+            if (obj == null)
+            {
+                return false; //因为T是Struct
+            }
+
             if (obj is Primitive<T>)
             {
                 return Equals(((Primitive<T>)obj).Value, Value);
