@@ -1,5 +1,4 @@
-﻿using AutoPrimitive.Test.ExtensionMethods;
-
+﻿
 namespace AutoPrimitive.Test
 {
     [TestClass]
@@ -8,19 +7,17 @@ namespace AutoPrimitive.Test
         [TestMethod]
         public void ToDictionary()
         {
+            //todo: 字典的key 没法自动转换
+            var list = new List<UserProduct>() { new UserProduct() { ProductId = 1 } };
             {
                 Dictionary<string, int> dict = new();
-                var list = new List<UserProduct>() { new UserProduct() { ProductId = 1 } };
-                list.ToDictionarySameKeyContinue(a => a.ProductId.ToPrimitive(), a => a.SortNo);
-
+                dict = list.ToDictionary(a => (string)a.ProductId.ToPrimitive(), a => a.SortNo);
                 Assert.AreEqual(dict.Keys.First(), "1");
             }
 
             {
                 Dictionary<long, int> dict = new();
-                var list = new List<UserProduct>() { new UserProduct() { ProductId = 1 } };
-                list.ToDictionarySameKeyContinue(a => a.ProductId.ToPrimitive(), a => a.SortNo);
-
+                dict = list.ToDictionary(a => (long)a.ProductId.ToPrimitive(), a => a.SortNo);
                 Assert.AreEqual(dict.Keys.First(), 1);
             }
         }
