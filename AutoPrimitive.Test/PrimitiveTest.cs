@@ -3,6 +3,7 @@
     [TestClass]
     public class PrimitiveTest
     {
+
         [TestMethod]
         public void 基础类型自动转()
         {
@@ -109,6 +110,15 @@
 
             bool? a5_1 = val.ToPrimitive();
             Assert.AreEqual(true, object.Equals(a5_1, a5));
+        }
+
+        [TestMethod]
+        public void 方法参数()
+        {
+            int a = 3;
+            Assert.AreEqual("3", MethodClass.GetList_2(a.ToPrimitive()));
+            Assert.AreEqual("3", new MethodClass().GetList_1(a.ToPrimitive()));
+
         }
     }
 }
