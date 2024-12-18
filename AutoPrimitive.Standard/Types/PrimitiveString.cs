@@ -1,4 +1,6 @@
-﻿namespace AutoPrimitive
+﻿using System;
+
+namespace AutoPrimitive
 {
     /*
      注:字符串转枚举没法实现

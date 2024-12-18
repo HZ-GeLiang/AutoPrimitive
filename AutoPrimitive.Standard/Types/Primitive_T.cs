@@ -36,7 +36,7 @@
 
         public static implicit operator decimal(Primitive<T> primitive) => Convert.ToDecimal(primitive.Value);
 
-        //其他类型
+        //其他类型: bool、byte、sbyte
         public static implicit operator bool(Primitive<T> primitive)
         {//非零即真
             if (bool.TryParse(primitive.Value.ToString(), out var result1) && result1 == true)
@@ -57,17 +57,23 @@
         //string
         public static implicit operator string(Primitive<T> primitive) => primitive.Value.ToString();
 
-        //日期
+        //日期：DateTime
         public static implicit operator DateTime(Primitive<T> primitive)
         {
-            //尝试进行js时间戳的转换
-            if (Convert_JS_timestamp(primitive, out var dt))
+            var t_type = typeof(T);
+            if (_JS_timestamp.Contains(t_type))
             {
-                return dt;
+                //尝试进行js时间戳的转换
+                if (Convert_JS_timestamp(primitive, out var dt))
+                {
+                    return dt;
+                }
             }
+
             return Convert.ToDateTime(primitive.Value);
         }
 
+        private static Type[] _JS_timestamp = new Type[] { typeof(int), typeof(long), typeof(string) };
         private static bool Convert_JS_timestamp(Primitive<T> primitive, out DateTime dateTime)
         {
 #if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_3_OR_GREATER
@@ -122,6 +128,7 @@
             dateTime = default;
             return false;
         }
+
 
         public override string ToString()
         {

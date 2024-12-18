@@ -5,10 +5,19 @@ namespace AutoPrimitive.Test
     [TestClass]
     public class PrimitiveEnumTest
     {
+
         [TestMethod]
         public void Test_枚举值的转换()
         {
             //DayOfWeek item = "Friday".ToPrimitive();//无法通过 implicit 来实现
+
+            {
+
+                int value = (int)DayOfWeek.Monday;
+                var week = value.ToPrimitive<DayOfWeek>();
+                Assert.AreEqual(DayOfWeek.Monday, week);
+            }
+
 
             {
                 MyDayOfWeek item = (MyDayOfWeek)(int)DayOfWeek.Friday.ToPrimitive();//太麻烦了

@@ -94,6 +94,15 @@ public static class PrimitiveExtensions
 
     #region 枚举
 
+    ////byte、sbyte、short、ushort、int、uint、long、 ulong
+    //private static Type[] _enumValue = new Type[] {
+    //        typeof(byte), typeof(sbyte),
+    //        typeof(short), typeof(ushort) ,
+    //        typeof(int) , typeof(uint) ,
+    //        typeof(long) , typeof(ulong)
+    //    };
+
+
     //Enum
 
     public static dynamic ToPrimitive(this Enum enumItem)
@@ -103,47 +112,47 @@ public static class PrimitiveExtensions
 
     //byte、sbyte、short、ushort、int、uint、long 或 ulong
 
-    public static dynamic ToPrimitive<T>(this byte value) where T : Enum
+    public static dynamic ToPrimitive<T>(this byte value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this sbyte value) where T : Enum
+    public static dynamic ToPrimitive<T>(this sbyte value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this short value) where T : Enum
+    public static dynamic ToPrimitive<T>(this short value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this ushort value) where T : Enum
+    public static dynamic ToPrimitive<T>(this ushort value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this int value) where T : Enum
+    public static dynamic ToPrimitive<T>(this int value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this uint value) where T : Enum
+    public static dynamic ToPrimitive<T>(this uint value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this long value) where T : Enum
+    public static dynamic ToPrimitive<T>(this long value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this ulong value) where T : Enum
+    public static dynamic ToPrimitive<T>(this ulong value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value.ToString());
     }
 
-    public static dynamic ToPrimitive<T>(this string value) where T : Enum
+    public static dynamic ToPrimitive<T>(this string value) where T : struct, Enum
     {
         return Enum.Parse(typeof(T), value);
     }
