@@ -1,9 +1,22 @@
-﻿
+﻿using AutoPrimitive.Utils;
+
 namespace AutoPrimitive.Test
 {
     [TestClass]
     public class OtherTest
     {
+
+        [TestMethod]
+        public void test()
+        {
+            var strNumber = "4E-06";
+            var d1 = 0.000004d;
+            double d2 = strNumber.ToPrimitive();
+            Assert.AreEqual(d1, d2);
+            //var aa = MathUtil.ToInt32("aa");
+        }
+
+
         [TestMethod]
         public void ToDictionary()
         {
@@ -28,14 +41,10 @@ namespace AutoPrimitive.Test
 
     public class UserProduct
     {
-
         public int ID { get; set; }
-
         public int UserID { get; set; }
         public int ProductId { get; set; }
         public int SortNo { get; set; }
-
-
     }
 
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoPrimitive.Utils;
+using System;
 
 namespace AutoPrimitive
 {
@@ -22,7 +23,22 @@ namespace AutoPrimitive
 
         public static implicit operator ushort(PrimitiveString primitive) => ushort.TryParse(primitive.Value, out var result) ? result : default;
 
-        public static implicit operator int(PrimitiveString primitive) => int.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator int(PrimitiveString primitive)
+        {
+            if (int.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToInt32(primitive.Value);
+            }
+            catch (Exception)
+            {
+
+            }
+            return default;
+        }
 
         public static implicit operator uint(PrimitiveString primitive) => uint.TryParse(primitive.Value, out var result) ? result : default;
 
@@ -30,13 +46,59 @@ namespace AutoPrimitive
 
         public static implicit operator float(PrimitiveString primitive) => float.TryParse(primitive.Value, out var result) ? result : default;
 
-        public static implicit operator double(PrimitiveString primitive) => double.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator double(PrimitiveString primitive)
+        {
+            if (double.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToDouble(primitive.Value);
+            }
+            catch (Exception)
+            {
 
-        public static implicit operator long(PrimitiveString primitive) => long.TryParse(primitive.Value, out var result) ? result : default;
+            }
+            return default;
+
+        }
+
+        public static implicit operator long(PrimitiveString primitive)
+        {
+            if (long.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToInt64(primitive.Value);
+            }
+            catch (Exception)
+            {
+
+            }
+            return default;
+        }
 
         public static implicit operator ulong(PrimitiveString primitive) => ulong.TryParse(primitive.Value, out var result) ? result : default;
 
-        public static implicit operator decimal(PrimitiveString primitive) => decimal.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator decimal(PrimitiveString primitive)
+        {
+            if (decimal.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToDecimal(primitive.Value);
+            }
+            catch (Exception)
+            {
+
+            }
+            return default;
+        }
 
         public static implicit operator bool(PrimitiveString primitive) =>
             bool.TryParse(primitive.Value, out var result1) && result1 == true ||
@@ -53,7 +115,22 @@ namespace AutoPrimitive
 
         public static implicit operator ushort?(PrimitiveString primitive) => ushort.TryParse(primitive.Value, out var result) ? result : default(ushort?);
 
-        public static implicit operator int?(PrimitiveString primitive) => int.TryParse(primitive.Value, out var result) ? result : default(int?);
+        public static implicit operator int?(PrimitiveString primitive)
+        {
+            if (int.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToInt32(primitive.Value);
+            }
+            catch (Exception)
+            {
+
+            }
+            return default(int?);
+        }
 
         public static implicit operator uint?(PrimitiveString primitive) => uint.TryParse(primitive.Value, out var result) ? result : default(uint?);
 
@@ -61,13 +138,61 @@ namespace AutoPrimitive
 
         public static implicit operator float?(PrimitiveString primitive) => float.TryParse(primitive.Value, out var result) ? result : default(float?);
 
-        public static implicit operator double?(PrimitiveString primitive) => double.TryParse(primitive.Value, out var result) ? result : default(double?);
+        public static implicit operator double?(PrimitiveString primitive)
+        {
+            if (double.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToDouble(primitive.Value);
+            }
+            catch (Exception)
+            {
 
-        public static implicit operator long?(PrimitiveString primitive) => long.TryParse(primitive.Value, out var result) ? result : default(long?);
+            }
+
+            return default(double?);
+        }
+
+        public static implicit operator long?(PrimitiveString primitive)
+        {
+            if (long.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToInt64(primitive.Value);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return default(long?);
+        }
 
         public static implicit operator ulong?(PrimitiveString primitive) => ulong.TryParse(primitive.Value, out var result) ? result : default(ulong?);
 
-        public static implicit operator decimal?(PrimitiveString primitive) => decimal.TryParse(primitive.Value, out var result) ? result : default(decimal?);
+        public static implicit operator decimal?(PrimitiveString primitive)
+        {
+            if (decimal.TryParse(primitive.Value, out var result))
+            {
+                return result;
+            }
+            try
+            {
+                return MathUtil.ToDecimal(primitive.Value);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return default(decimal?);
+        }
 
         public static implicit operator bool?(PrimitiveString primitive)
         {
