@@ -1,13 +1,28 @@
-﻿using AutoPrimitive.Utils;
-
-namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test
 {
+    /// <summary>
+    /// 个人调试
+    /// </summary>
     [TestClass]
-    public class OtherTest
+    public class DebuggerTest
     {
 
         [TestMethod]
-        public void test()
+        public void test_类实体赋值()
+        {
+            var list = new List<UserProduct>()
+            {
+                 new UserProduct(){ ID=1}
+            };
+            var list_Select = list.Select(a => new UserProduct2()
+            {
+                ID = a.ID.ToPrimitive()
+            });
+            Assert.AreEqual(list_Select.First().ID, "1");
+        }
+
+        [TestMethod]
+        public void test_科学计数法()
         {
             var strNumber = "4E-06";
             var d1 = 0.000004d;
@@ -46,5 +61,11 @@ namespace AutoPrimitive.Test
         public int ProductId { get; set; }
         public int SortNo { get; set; }
     }
+
+    public class UserProduct2
+    {
+        public string ID { get; set; }
+    }
+
 
 }
