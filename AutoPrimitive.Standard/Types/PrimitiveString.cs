@@ -300,6 +300,13 @@ namespace AutoPrimitive
         //string
         public static implicit operator string(PrimitiveString primitive) => primitive.Value;
 
+#if NETSTANDARD1_3_OR_GREATER || NET6_0_OR_GREATER
+        //FormattableString
+
+        public static implicit operator FormattableString(PrimitiveString primitive)
+            => primitive.Value == null ? default(FormattableString) : primitive.Value.ToFormattableString();
+#endif
+
         //操作符/方法的重写
         public static bool operator ==(PrimitiveString a, PrimitiveString b) => a.Value.Equals(b.Value);
 
