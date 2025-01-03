@@ -16,10 +16,11 @@
 			netcoreapp3.1;
 			net5.0;-->
 
-			<!--下面3个是为了 DateOnly 而存在的-->
+			<!--下面是为了 DateOnly 而存在的-->
 			net6.0;
 			net7.0;
 			net8.0;
+			net9.0;
 		</TargetFrameworks>
 		<RootNamespace>AutoPrimitive</RootNamespace>
 		<!--<NoWarn>CS1591</NoWarn>
