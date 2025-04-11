@@ -5,6 +5,7 @@ namespace AutoPrimitive
 {
     /*
      注:字符串转枚举没法实现
+    字符串转其他类型时, 如果转失败, 返回 default 值
     */
 
     public readonly struct PrimitiveString : IEquatable<PrimitiveString>

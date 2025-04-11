@@ -8,6 +8,14 @@
     {
 
         [TestMethod]
+        public void test_转换异常()
+        {
+            var numStr = ((long)int.MaxValue + 1).ToString();
+            int num = numStr.ToPrimitive(); //异常返回 default
+        }
+
+
+        [TestMethod]
         public void test_类实体赋值()
         {
             var list = new List<UserProduct>()

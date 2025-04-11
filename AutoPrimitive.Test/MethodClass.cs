@@ -12,6 +12,7 @@ namespace AutoPrimitive.Test
         {
             return id.ToPrimitive();
         }
+
         public static string GetList_2(int id)
         {
             return id.ToPrimitive();
