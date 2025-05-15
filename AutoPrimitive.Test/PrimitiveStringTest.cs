@@ -4,6 +4,37 @@
     public class PrimitiveStringTest
     {
         [TestMethod]
+        public void Test转可空int()
+        {
+
+            {
+                string s = null;
+                int? d = s.ToPrimitive();
+                Assert.AreEqual(d, null);
+            }
+
+            {
+                string s = "1";
+                int? d = s.ToPrimitive();
+                Assert.AreEqual(d, 1);
+            }
+
+            {
+                string s = "";
+                int? d = s.ToPrimitive();
+                Assert.AreEqual(d, null);
+            }
+
+            {
+                string s = "a";
+                int? d = s.ToPrimitive();
+                Assert.AreEqual(d, null);
+            }
+
+
+        }
+
+        [TestMethod]
         public void Test转Bool()
         {
             {

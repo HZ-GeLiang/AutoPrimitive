@@ -20,138 +20,343 @@ namespace AutoPrimitive
         public static implicit operator PrimitiveString(string val) => new PrimitiveString(val);
 
         //数值类型: short ushort int uint char float double long ulong decimal
-        public static implicit operator short(PrimitiveString primitive) => short.TryParse(primitive.Value, out var result) ? result : default;
-
-        public static implicit operator ushort(PrimitiveString primitive) => ushort.TryParse(primitive.Value, out var result) ? result : default;
-
-        public static implicit operator int(PrimitiveString primitive)
+        public static implicit operator short(PrimitiveString primitive)
         {
-            if (int.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToInt32(primitive.Value);
-            }
-            catch (Exception)
-            {
-
+                if (short.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
             }
             return default;
         }
 
-        public static implicit operator uint(PrimitiveString primitive) => uint.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator ushort(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (ushort.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
 
-        public static implicit operator char(PrimitiveString primitive) => char.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator int(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                {
+                    if (int.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToInt32(primitive.Value, out var ex);
+                    if (ex == null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
-        public static implicit operator float(PrimitiveString primitive) => float.TryParse(primitive.Value, out var result) ? result : default;
+                }
+            }
+
+            return default;
+        }
+
+        public static implicit operator uint(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (uint.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator char(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (char.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator float(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (float.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
 
         public static implicit operator double(PrimitiveString primitive)
         {
-            if (double.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToDouble(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (double.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToDouble(primitive.Value, out var ex);
+                    if (ex == null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
             }
+
             return default;
 
         }
 
         public static implicit operator long(PrimitiveString primitive)
         {
-            if (long.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToInt64(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (long.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToInt64(primitive.Value, out var ex);
+                    if (ex != null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
             }
+
             return default;
         }
 
-        public static implicit operator ulong(PrimitiveString primitive) => ulong.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator ulong(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (ulong.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
 
         public static implicit operator decimal(PrimitiveString primitive)
         {
-            if (decimal.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToDecimal(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (decimal.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToDecimal(primitive.Value, out var ex);
+                    if (ex != null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
             }
             return default;
         }
 
-        public static implicit operator bool(PrimitiveString primitive) =>
-            bool.TryParse(primitive.Value, out var result1) && result1 == true ||
-            int.TryParse(primitive.Value, out var result2) && result2 != 0;
 
-        public static implicit operator byte(PrimitiveString primitive) => byte.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator bool(PrimitiveString primitive)
+        {
+            return
+                bool.TryParse(primitive.Value, out var result1) && result1 == true ||
+                int.TryParse(primitive.Value, out var result2) && result2 != 0;
+        }
 
-        public static implicit operator sbyte(PrimitiveString primitive) => sbyte.TryParse(primitive.Value, out var result) ? result : default;
 
-        public static implicit operator Guid(PrimitiveString primitive) => Guid.TryParse(primitive.Value, out var result) ? result : default;
+        public static implicit operator byte(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (byte.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator sbyte(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (sbyte.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator Guid(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (Guid.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
 
         //可空
-        public static implicit operator short?(PrimitiveString primitive) => short.TryParse(primitive.Value, out var result) ? result : default(short?);
+        public static implicit operator short?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (short.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(short?);
+        }
 
-        public static implicit operator ushort?(PrimitiveString primitive) => ushort.TryParse(primitive.Value, out var result) ? result : default(ushort?);
+        public static implicit operator ushort?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (ushort.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(ushort?);
+        }
 
         public static implicit operator int?(PrimitiveString primitive)
         {
-            if (int.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToInt32(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (int.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToInt32(primitive.Value, out var ex);
+                    if (ex != null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
             }
+
             return default(int?);
         }
 
-        public static implicit operator uint?(PrimitiveString primitive) => uint.TryParse(primitive.Value, out var result) ? result : default(uint?);
+        public static implicit operator uint?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (uint.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(uint?);
+        }
 
-        public static implicit operator char?(PrimitiveString primitive) => char.TryParse(primitive.Value, out var result) ? result : default(char?);
+        public static implicit operator char?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (char.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(char?);
+        }
 
-        public static implicit operator float?(PrimitiveString primitive) => float.TryParse(primitive.Value, out var result) ? result : default(float?);
+        public static implicit operator float?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (float.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(float?);
+        }
 
         public static implicit operator double?(PrimitiveString primitive)
         {
-            if (double.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToDouble(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (double.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
 
+                try
+                {
+                    var result = MathUtil.ToDouble(primitive.Value, out var ex);
+                    if (ex != null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
             }
 
             return default(double?);
@@ -159,38 +364,68 @@ namespace AutoPrimitive
 
         public static implicit operator long?(PrimitiveString primitive)
         {
-            if (long.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToInt64(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (long.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToInt64(primitive.Value, out var ex);
+                    if (ex != null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
             }
 
             return default(long?);
         }
 
-        public static implicit operator ulong?(PrimitiveString primitive) => ulong.TryParse(primitive.Value, out var result) ? result : default(ulong?);
+        public static implicit operator ulong?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (ulong.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(ulong?);
+        }
 
         public static implicit operator decimal?(PrimitiveString primitive)
         {
-            if (decimal.TryParse(primitive.Value, out var result))
+            if (primitive.Value != null)
             {
-                return result;
-            }
-            try
-            {
-                return MathUtil.ToDecimal(primitive.Value);
-            }
-            catch (Exception)
-            {
+                {
+                    if (decimal.TryParse(primitive.Value, out var result))
+                    {
+                        return result;
+                    }
+                }
+                try
+                {
+                    var result = MathUtil.ToDecimal(primitive.Value, out var ex);
+                    if (ex != null)
+                    {
+                        return result;
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
             }
+
+
 
             return default(decimal?);
         }
@@ -205,47 +440,82 @@ namespace AutoPrimitive
                    int.TryParse(primitive.Value, out var result2) && result2 != 0;
         }
 
-        public static implicit operator byte?(PrimitiveString primitive) => byte.TryParse(primitive.Value, out var result) ? result : default(byte?);
+        public static implicit operator byte?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (byte.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(byte?);
+        }
 
-        public static implicit operator sbyte?(PrimitiveString primitive) => sbyte.TryParse(primitive.Value, out var result) ? result : default(sbyte?);
+        public static implicit operator sbyte?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (sbyte.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(sbyte?);
+        }
 
-        public static implicit operator Guid?(PrimitiveString primitive) => Guid.TryParse(primitive.Value, out var result) ? result : default(Guid?);
+        public static implicit operator Guid?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (Guid.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(Guid?);
+        }
 
         //日期
         public static implicit operator DateTime(PrimitiveString primitive)
         {
+            if (primitive.Value != null)
             {
-                if (Convert_JS_timestamp(primitive.Value, out var dt))
                 {
-                    return dt;
+                    if (Convert_JS_timestamp(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    if (DateTime.TryParse(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
                 }
             }
-
-            {
-                if (DateTime.TryParse(primitive.Value, out var dt))
-                {
-                    return dt;
-                }
-            }
-
             return default;
         }
 
         public static implicit operator DateTime?(PrimitiveString primitive)
         {
+            if (primitive.Value != null)
             {
-                if (Convert_JS_timestamp(primitive.Value, out var dt))
                 {
-                    return dt;
+                    if (Convert_JS_timestamp(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
                 }
-            }
-            {
-                if (DateTime.TryParse(primitive.Value, out var dt))
-                {
-                    return dt;
-                }
-            }
 
+                {
+                    if (DateTime.TryParse(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+            }
             return default(DateTime?);
         }
 

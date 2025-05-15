@@ -90,6 +90,11 @@ public static class PrimitiveExtensions
     public static dynamic ToPrimitive(this Guid? obj, string format) => new PrimitiveGuidNullable(obj, format);
 
     //string
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns>转化失败时, 返回 default, 即:可空类型是null值, 非可控类型是default值 </returns>
     public static dynamic ToPrimitive(this string obj) => new PrimitiveString(obj);
 
     #region 枚举

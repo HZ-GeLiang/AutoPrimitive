@@ -7,13 +7,15 @@ namespace AutoPrimitive.Utils
     internal sealed class MathUtil
     {
         #region  Newtonsoft.dll 的实现
+
         /// <summary>
         /// 支持科学计数法
         /// </summary>
         /// <param name="strNumber"></param>
         /// <returns></returns>
-        public static decimal ToDecimal(string strNumber)
+        public static decimal ToDecimal(string strNumber, out Exception ex)
         {
+            ex = null;
             //public static ParseResult DecimalTryParse(char[] chars, int start, int length, out decimal value))
             char[] chars = strNumber.ToCharArray();
             int start = 0;
@@ -27,7 +29,9 @@ namespace AutoPrimitive.Utils
 
             if (length <= 0)
             {
-                throw new ArgumentException("无效的数字", nameof(strNumber));
+                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                return default;
             }
 
             bool isNegative = chars[start] == '-';
@@ -36,7 +40,9 @@ namespace AutoPrimitive.Utils
                 // text just a negative sign
                 if (length == 1)
                 {
-                    throw new ArgumentException("无效的数字", nameof(strNumber));
+                    //throw new ArgumentException("无效的数字", nameof(strNumber));
+                    ex = new ArgumentException("无效的数字", nameof(strNumber));
+                    return default;
                 }
 
                 start++;
@@ -62,17 +68,23 @@ namespace AutoPrimitive.Utils
                     case '.':
                         if (i == start)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                         if (i + 1 == end)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         if (numDecimalStart != end)
                         {
                             // multiple decimal points
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         numDecimalStart = i + 1;
@@ -82,17 +94,23 @@ namespace AutoPrimitive.Utils
                     case 'E':
                         if (i == start)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                         if (i == numDecimalStart)
                         {
                             // E follows decimal point
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                         i++;
                         if (i == end)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         if (numDecimalStart < end)
@@ -120,7 +138,9 @@ namespace AutoPrimitive.Utils
                             c = chars[i];
                             if (c < '0' || c > '9')
                             {
-                                throw new ArgumentException("无效的数字", nameof(strNumber));
+                                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                                return default;
                             }
 
                             int newExponent = 10 * exponent + (c - '0');
@@ -140,7 +160,9 @@ namespace AutoPrimitive.Utils
                     default:
                         if (c < '0' || c > '9')
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         if (i == start && c == '0')
@@ -158,7 +180,9 @@ namespace AutoPrimitive.Utils
                                     goto case 'E';
                                 }
 
-                                throw new ArgumentException("无效的数字", nameof(strNumber));
+                                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                                return default;
                             }
                         }
 
@@ -205,7 +229,9 @@ namespace AutoPrimitive.Utils
                 mantissaDigits += exponent;
                 if (mantissaDigits > 29)
                 {
-                    throw new OverflowException("数字溢出Overflow" + strNumber);
+                    //throw new OverflowException("数字溢出Overflow" + strNumber);
+                    ex = new OverflowException("数字溢出Overflow" + strNumber);
+                    return default;
                 }
                 if (mantissaDigits == 29)
                 {
@@ -214,12 +240,16 @@ namespace AutoPrimitive.Utils
                         value /= new decimal(1, 0, 0, false, (byte)(exponent - 1));
                         if (value > decimalMaxValueHi28)
                         {
-                            throw new OverflowException("数字溢出Overflow" + strNumber);
+                            //throw new OverflowException("数字溢出Overflow" + strNumber);
+                            ex = new OverflowException("数字溢出Overflow" + strNumber);
+                            return default;
                         }
                     }
                     else if (value == decimalMaxValueHi28 && digit29 > decimalMaxValueLo1)
                     {
-                        throw new OverflowException("数字溢出Overflow" + strNumber);
+                        //throw new OverflowException("数字溢出Overflow" + strNumber);
+                        ex = new OverflowException("数字溢出Overflow" + strNumber);
+                        return default;
                     }
                     value *= 10M;
                 }
@@ -266,7 +296,7 @@ namespace AutoPrimitive.Utils
         /// </summary>
         /// <param name="strNumber"></param>
         /// <returns></returns>
-        public static double ToDouble(string strNumber)
+        public static double ToDouble(string strNumber, out Exception ex)
         {
             #region 之前自己写的
 
@@ -283,6 +313,7 @@ namespace AutoPrimitive.Utils
             //return double.Parse(strNumber);
             #endregion
 
+            ex = null;
             // public static ParseResult DoubleTryParse(char[] chars, int start, int length, out double value)
             char[] chars = strNumber.ToCharArray();
             int start = 0;
@@ -292,7 +323,9 @@ namespace AutoPrimitive.Utils
 
             if (length <= 0)
             {
-                throw new ArgumentException("无效的数字", nameof(strNumber));
+                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                return default;
             }
 
             bool isNegative = chars[start] == '-';
@@ -301,7 +334,9 @@ namespace AutoPrimitive.Utils
                 // text just a negative sign
                 if (length == 1)
                 {
-                    throw new ArgumentException("无效的数字", nameof(strNumber));
+                    //throw new ArgumentException("无效的数字", nameof(strNumber));
+                    ex = new ArgumentException("无效的数字", nameof(strNumber));
+                    return default;
                 }
 
                 start++;
@@ -324,17 +359,23 @@ namespace AutoPrimitive.Utils
                     case '.':
                         if (i == start)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                         if (i + 1 == end)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         if (numDecimalStart != end)
                         {
                             // multiple decimal points
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         numDecimalStart = i + 1;
@@ -344,17 +385,23 @@ namespace AutoPrimitive.Utils
                     case 'E':
                         if (i == start)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                         if (i == numDecimalStart)
                         {
                             // E follows decimal point
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                         i++;
                         if (i == end)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         if (numDecimalStart < end)
@@ -382,7 +429,9 @@ namespace AutoPrimitive.Utils
                             c = chars[i];
                             if (c < '0' || c > '9')
                             {
-                                throw new ArgumentException("无效的数字", nameof(strNumber));
+                                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                                return default;
                             }
 
                             int newExponent = 10 * exponent + (c - '0');
@@ -402,7 +451,9 @@ namespace AutoPrimitive.Utils
                     default:
                         if (c < '0' || c > '9')
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
 
                         if (i == start && c == '0')
@@ -420,7 +471,9 @@ namespace AutoPrimitive.Utils
                                     goto case 'E';
                                 }
 
-                                throw new ArgumentException("无效的数字", nameof(strNumber));
+                                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                                return default;
                             }
                         }
 
@@ -448,13 +501,16 @@ namespace AutoPrimitive.Utils
             value = IEEE754.PackDouble(isNegative, mantissa, exponent);
             if (double.IsInfinity(value))
             {
-                throw new OverflowException("数字溢出Overflow" + strNumber);
+                //throw new OverflowException("数字溢出Overflow" + strNumber);
+                ex = new OverflowException("数字溢出Overflow" + strNumber);
+                return default;
             }
             return value;
         }
 
-        public static int ToInt32(string strNumber)
+        public static int ToInt32(string strNumber, out Exception ex)
         {
+            ex = null;
             //public static ParseResult Int32TryParse(char[] chars, int start, int length, out int value)
             char[] chars = strNumber.ToCharArray();
             int start = 0;
@@ -464,7 +520,9 @@ namespace AutoPrimitive.Utils
 
             if (length <= 0)
             {
-                throw new ArgumentException("无效的数字", nameof(strNumber));
+                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                return default;
             }
 
             bool isNegative = chars[start] == '-';
@@ -474,7 +532,9 @@ namespace AutoPrimitive.Utils
                 // text just a negative sign
                 if (length == 1)
                 {
-                    throw new ArgumentException("无效的数字", nameof(strNumber));
+                    //throw new ArgumentException("无效的数字", nameof(strNumber));
+                    ex = new ArgumentException("无效的数字", nameof(strNumber));
+                    return default;
                 }
 
                 start++;
@@ -495,11 +555,15 @@ namespace AutoPrimitive.Utils
 
                     if (c < 0 || c > 9)
                     {
-                        throw new ArgumentException("无效的数字", nameof(strNumber));
+                        //throw new ArgumentException("无效的数字", nameof(strNumber));
+                        ex = new ArgumentException("无效的数字", nameof(strNumber));
+                        return default;
                     }
                 }
 
-                throw new OverflowException("数字溢出Overflow" + strNumber);
+                //throw new OverflowException("数字溢出Overflow" + strNumber);
+                ex = new OverflowException("数字溢出Overflow" + strNumber);
+                return default;
             }
 
             for (int i = start; i < end; i++)
@@ -508,7 +572,9 @@ namespace AutoPrimitive.Utils
 
                 if (c < 0 || c > 9)
                 {
-                    throw new ArgumentException("无效的数字", nameof(strNumber));
+                    //throw new ArgumentException("无效的数字", nameof(strNumber));
+                    ex = new ArgumentException("无效的数字", nameof(strNumber));
+                    return default;
                 }
 
                 int newValue = 10 * value - c;
@@ -526,11 +592,15 @@ namespace AutoPrimitive.Utils
 
                         if (c < 0 || c > 9)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                     }
 
-                    throw new OverflowException("数字溢出Overflow" + strNumber);
+                    //throw new OverflowException("数字溢出Overflow" + strNumber);
+                    ex = new OverflowException("数字溢出Overflow" + strNumber);
+                    return default;
                 }
 
                 value = newValue;
@@ -543,7 +613,9 @@ namespace AutoPrimitive.Utils
                 // negative integer can be one bigger than positive
                 if (value == int.MinValue)
                 {
-                    throw new OverflowException("数字溢出Overflow" + strNumber);
+                    //throw new OverflowException("数字溢出Overflow" + strNumber);
+                    ex = new OverflowException("数字溢出Overflow" + strNumber);
+                    return default;
                 }
 
                 value = -value;
@@ -552,8 +624,9 @@ namespace AutoPrimitive.Utils
             return value;
         }
 
-        public static long ToInt64(string strNumber)
+        public static long ToInt64(string strNumber, out Exception ex)
         {
+            ex = null;
             //public static ParseResult Int64TryParse(char[] chars, int start, int length, out long value)
             char[] chars = strNumber.ToCharArray();
             int start = 0;
@@ -563,7 +636,9 @@ namespace AutoPrimitive.Utils
 
             if (length == 0)
             {
-                throw new ArgumentException("无效的数字", nameof(strNumber));
+                //throw new ArgumentException("无效的数字", nameof(strNumber));
+                ex = new ArgumentException("无效的数字", nameof(strNumber));
+                return default;
             }
 
             bool isNegative = chars[start] == '-';
@@ -573,7 +648,9 @@ namespace AutoPrimitive.Utils
                 // text just a negative sign
                 if (length == 1)
                 {
-                    throw new ArgumentException("无效的数字", nameof(strNumber));
+                    //throw new ArgumentException("无效的数字", nameof(strNumber));
+                    ex = new ArgumentException("无效的数字", nameof(strNumber));
+                    return default;
                 }
 
                 start++;
@@ -592,11 +669,15 @@ namespace AutoPrimitive.Utils
 
                     if (c < 0 || c > 9)
                     {
-                        throw new ArgumentException("无效的数字", nameof(strNumber));
+                        //throw new ArgumentException("无效的数字", nameof(strNumber));
+                        ex = new ArgumentException("无效的数字", nameof(strNumber));
+                        return default;
                     }
                 }
 
-                throw new OverflowException("数字溢出Overflow" + strNumber);
+                //throw new OverflowException("数字溢出Overflow" + strNumber);
+                ex = new OverflowException("数字溢出Overflow" + strNumber);
+                return default;
             }
 
             for (int i = start; i < end; i++)
@@ -605,7 +686,9 @@ namespace AutoPrimitive.Utils
 
                 if (c < 0 || c > 9)
                 {
-                    throw new ArgumentException("无效的数字", nameof(strNumber));
+                    //throw new ArgumentException("无效的数字", nameof(strNumber));
+                    ex = new ArgumentException("无效的数字", nameof(strNumber));
+                    return default;
                 }
 
                 long newValue = 10 * value - c;
@@ -623,11 +706,15 @@ namespace AutoPrimitive.Utils
 
                         if (c < 0 || c > 9)
                         {
-                            throw new ArgumentException("无效的数字", nameof(strNumber));
+                            //throw new ArgumentException("无效的数字", nameof(strNumber));
+                            ex = new ArgumentException("无效的数字", nameof(strNumber));
+                            return default;
                         }
                     }
 
-                    throw new OverflowException("数字溢出Overflow" + strNumber);
+                    //throw new OverflowException("数字溢出Overflow" + strNumber);
+                    ex = new OverflowException("数字溢出Overflow" + strNumber);
+                    return default;
                 }
 
                 value = newValue;
@@ -640,7 +727,9 @@ namespace AutoPrimitive.Utils
                 // negative integer can be one bigger than positive
                 if (value == long.MinValue)
                 {
-                    throw new OverflowException("数字溢出Overflow" + strNumber);
+                    //throw new OverflowException("数字溢出Overflow" + strNumber);
+                    ex = new OverflowException("数字溢出Overflow" + strNumber);
+                    return default;
                 }
 
                 value = -value;
