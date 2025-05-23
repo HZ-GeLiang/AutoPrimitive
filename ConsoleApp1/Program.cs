@@ -7,12 +7,30 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            //var numStr = ((long)int.MaxValue + 1).ToString();
-            //int num = numStr.ToPrimitive();
+            {
+                string s = null;
+                int? d = s.ToPrimitive();
 
+            }
 
-            int num3 = int.MaxValue;
-            short num4 = num3.ToPrimitive();
+            {
+                string s = "1";
+                int? d = s.ToPrimitive();
+
+            }
+
+            {
+                string s = "";
+                int? d = s.ToPrimitive();
+
+            }
+
+            {
+                string s = "a";
+                int? d = s.ToPrimitive();
+
+            }
+
 
         }
     }
