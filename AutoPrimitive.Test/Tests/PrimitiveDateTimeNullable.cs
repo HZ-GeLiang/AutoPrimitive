@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AutoPrimitive.Test
+namespace AutoPrimitive.Test.Tests
 {
     [TestClass]
     public class PrimitiveDateTimeNullableTest
@@ -46,8 +46,8 @@ namespace AutoPrimitive.Test
                     DateOnly DateOnly = d1.ToPrimitive();
                     TimeOnly TimeOnly = d1.ToPrimitive();
 
-                    Assert.AreEqual(DateOnly, default(DateOnly));
-                    Assert.AreEqual(TimeOnly, default(TimeOnly));
+                    Assert.AreEqual(DateOnly, default);
+                    Assert.AreEqual(TimeOnly, default);
                 }
             }
         }

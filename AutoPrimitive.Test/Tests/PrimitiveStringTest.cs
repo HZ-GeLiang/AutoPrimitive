@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test.Tests
 {
     public class Test01
     {
@@ -9,13 +9,20 @@
     public class PrimitiveStringTest
     {
         [TestMethod]
-        public void 日期比较()
+        public void 代码运行时不报错_日期比较()
         {
-            var item = new Test01();
 
-            var result3 = "2025-01-01".ToPrimitive() == item.Start;
-            var result = item.Start == "2025-01-01".ToPrimitive();
-            var result2 = item.Start.Value == "2025-01-01".ToPrimitive();
+            {
+                var item = new Test01() { Start = DateTime.Now };
+                bool result2 = item.Start.Value == "2025-01-01".ToPrimitive();
+            }
+
+            {
+                var item = new Test01() { };
+
+                bool result3 = "2025-01-01".ToPrimitive() == item.Start;
+                bool result = item.Start == "2025-01-01".ToPrimitive();
+            }
         }
 
 

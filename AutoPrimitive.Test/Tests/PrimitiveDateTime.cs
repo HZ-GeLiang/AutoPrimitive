@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace AutoPrimitive.Test
+namespace AutoPrimitive.Test.Tests
 {
     public class Test_Date
     {

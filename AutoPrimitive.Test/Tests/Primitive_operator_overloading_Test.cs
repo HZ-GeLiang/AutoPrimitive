@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test.Tests
 {
     [TestClass]
     public class Primitive_operator_overloading_Test
@@ -46,7 +46,7 @@
             {
                 string a = "12.456";
                 string b = "0.456";
-                string c_str = (((decimal)(a.ToPrimitive())) - ((decimal)(b.ToPrimitive()))).ToPrimitive();
+                string c_str = ((decimal)a.ToPrimitive() - (decimal)b.ToPrimitive()).ToPrimitive();
                 Assert.AreEqual(c_str, "12.000");
             }
 
@@ -55,7 +55,7 @@
                 string b = "0.456";
                 var c = a.ToPrimitive() + b.ToPrimitive();
                 //Assert.AreEqual(c, 12.556);
-                Assert.AreEqual((object.Equals(c, 12.556)) == true, true);
+                Assert.AreEqual(object.Equals(c, 12.556) == true, true);
             }
         }
     }

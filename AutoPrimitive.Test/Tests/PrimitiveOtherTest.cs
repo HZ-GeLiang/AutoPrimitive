@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test.Tests
 {
     [TestClass]
     public class PrimitiveOtherTest

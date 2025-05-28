@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoPrimitive.Test
+namespace AutoPrimitive.Test.Tests
 {
     internal class MethodClass
     {

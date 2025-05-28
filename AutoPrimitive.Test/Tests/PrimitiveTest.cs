@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test.Tests
 {
     [TestClass]
     public class PrimitiveTest
@@ -14,21 +14,21 @@
                 //object 测试
                 decimal v1 = 123.456M;
                 var v2 = new Primitive<decimal>(123.456M);
-                Assert.AreEqual(false, object.Equals(v1, v2));
-                Assert.AreEqual(true, object.Equals(v2, v1));
+                Assert.AreEqual(false, Equals(v1, v2));
+                Assert.AreEqual(true, Equals(v2, v1));
 
                 object v2_o = 123.456M.ToPrimitive();
-                Assert.AreEqual(false, object.Equals(v1, v2_o));
-                Assert.AreEqual(true, object.Equals(v2_o, v1));
+                Assert.AreEqual(false, Equals(v1, v2_o));
+                Assert.AreEqual(true, Equals(v2_o, v1));
             }
 
-            Assert.AreEqual(123.456M, (decimal)(123.456M.ToPrimitive())); //需要类型转换
-            Assert.AreEqual(123.456f, (float)(123.456M.ToPrimitive()));
+            Assert.AreEqual(123.456M, (decimal)123.456M.ToPrimitive()); //需要类型转换
+            Assert.AreEqual(123.456f, (float)123.456M.ToPrimitive());
             Assert.AreEqual(123.456M.ToPrimitive(), 123.456f); //放前面不需要
             Assert.AreEqual(123.456M.ToPrimitive(), "123.456");
 
             //Assert.AreEqual(123.456M.ToPrimitive(), 123);
-            Assert.AreEqual((object.Equals(123.456M.ToPrimitive(), 123)) == true, true);
+            Assert.AreEqual(object.Equals(123.456M.ToPrimitive(), 123) == true, true);
             Assert.AreEqual(true, object.Equals(123.456M.ToPrimitive(), 123));
         }
 
@@ -40,22 +40,22 @@
             {
                 //object 测试
                 decimal v1 = 123.456M;
-                var v2 = new PrimitiveNullable<decimal?>(((decimal?)123.456M));
-                Assert.AreEqual(false, object.Equals(v1, v2));
-                Assert.AreEqual(true, object.Equals(v2, v1));
+                var v2 = new PrimitiveNullable<decimal?>(123.456M);
+                Assert.AreEqual(false, Equals(v1, v2));
+                Assert.AreEqual(true, Equals(v2, v1));
 
                 object v2_o = 123.456M.ToPrimitive();
-                Assert.AreEqual(false, object.Equals(v1, v2_o));
-                Assert.AreEqual(true, object.Equals(v2_o, v1));
+                Assert.AreEqual(false, Equals(v1, v2_o));
+                Assert.AreEqual(true, Equals(v2_o, v1));
             }
 
-            Assert.AreEqual(123.456M, (decimal)(((decimal?)123.456M).ToPrimitive())); //需要类型转换
-            Assert.AreEqual(123.456f, (((decimal?)123.456M).ToPrimitive()));
+            Assert.AreEqual(123.456M, (decimal)((decimal?)123.456M).ToPrimitive()); //需要类型转换
+            Assert.AreEqual(123.456f, ((decimal?)123.456M).ToPrimitive());
             Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), 123.456f); //放前面不需要
             Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), "123.456");
 
             //Assert.AreEqual(((decimal?)123.456M).ToPrimitive(), 123);
-            Assert.AreEqual((object.Equals(((decimal?)123.456M).ToPrimitive(), 123)) == true, true);
+            Assert.AreEqual(object.Equals(((decimal?)123.456M).ToPrimitive(), 123) == true, true);
             Assert.AreEqual(true, object.Equals(((decimal?)123.456M).ToPrimitive(), 123));
         }
 
@@ -69,7 +69,7 @@
             bool? a5 = null;
 
             decimal? val = null;
-            var test = (string?)((val).ToPrimitive());
+            var test = (string?)val.ToPrimitive();
 
             Assert.AreEqual(null, val.ToPrimitive());
             Assert.AreEqual(val.ToPrimitive(), null);
@@ -81,19 +81,19 @@
                 //object 测试
                 decimal? v1 = null;
                 var v2 = new PrimitiveNullable<decimal?>(val);
-                Assert.AreEqual(false, object.Equals(v1, v2));
+                Assert.AreEqual(false, Equals(v1, v2));
                 //Assert.AreEqual(true, object.Equals(v2, v1)); //没有进入到重写的Equals中.直接返回false (因为没有具体的变量, dynamic当做了object)
 
                 //写法1
-                Assert.AreEqual(true, object.Equals((decimal?)v2, v1));
+                Assert.AreEqual(true, Equals((decimal?)v2, v1));
 
                 //写法2:
                 decimal? v2_2 = new PrimitiveNullable<decimal?>(val);
-                Assert.AreEqual(true, object.Equals(v2_2, v1));
+                Assert.AreEqual(true, Equals(v2_2, v1));
             }
 
-            Assert.AreEqual(a1, (decimal?)((val).ToPrimitive())); //需要类型转换
-            Assert.AreEqual(a2, ((val).ToPrimitive()));
+            Assert.AreEqual(a1, (decimal?)val.ToPrimitive()); //需要类型转换
+            Assert.AreEqual(a2, val.ToPrimitive());
             Assert.AreEqual(val.ToPrimitive(), a2); //放前面不需要
             Assert.AreEqual(val.ToPrimitive(), a3);
 
@@ -102,14 +102,14 @@
 
             //写法1
             Assert.AreEqual((int?)val.ToPrimitive(), a4);
-            Assert.AreEqual(true, object.Equals((bool?)val.ToPrimitive(), a5));
+            Assert.AreEqual(true, Equals((bool?)val.ToPrimitive(), a5));
 
             //写法2:
             int? a4_1 = val.ToPrimitive();
             Assert.AreEqual(a4_1, a4);
 
             bool? a5_1 = val.ToPrimitive();
-            Assert.AreEqual(true, object.Equals(a5_1, a5));
+            Assert.AreEqual(true, Equals(a5_1, a5));
         }
 
         [TestMethod]

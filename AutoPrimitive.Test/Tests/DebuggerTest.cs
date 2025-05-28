@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test.Tests
 {
     /// <summary>
     /// 个人调试

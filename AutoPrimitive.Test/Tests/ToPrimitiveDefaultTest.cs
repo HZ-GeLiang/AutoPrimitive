@@ -1,4 +1,4 @@
-﻿namespace AutoPrimitive.Test
+﻿namespace AutoPrimitive.Test.Tests
 {
     [TestClass]
     public class 类型转换失败_使用默认值
@@ -14,7 +14,7 @@
 
             {
                 long val = (long)int.MaxValue + 1;
-                Int16 result = val.ToPrimitive(-1);
+                short result = val.ToPrimitive(-1);
                 Assert.AreEqual(result, Convert.ToInt16(-1));
             }
         }

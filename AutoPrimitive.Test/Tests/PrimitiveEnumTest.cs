@@ -1,6 +1,6 @@
 ﻿using AutoPrimitive.Test.enums;
 
-namespace AutoPrimitive.Test
+namespace AutoPrimitive.Test.Tests
 {
     [TestClass]
     public class PrimitiveEnumTest
@@ -21,6 +21,10 @@ namespace AutoPrimitive.Test
 
             {
                 MyDayOfWeek item = (MyDayOfWeek)(int)DayOfWeek.Friday.ToPrimitive();//太麻烦了
+
+                var equal = item == MyDayOfWeek.Friday;
+
+                Assert.AreEqual(equal, true);
                 Assert.AreEqual(item, MyDayOfWeek.Friday);
             }
 
@@ -50,13 +54,13 @@ namespace AutoPrimitive.Test
         {
             {
                 //PrimitiveEnum 之前的单元测试
-                Assert.AreEqual(true, new Nullable<int>(5) == (PrimitiveEnum)DayOfWeek.Friday);
+                Assert.AreEqual(true, new int?(5) == (PrimitiveEnum)DayOfWeek.Friday);
                 Assert.AreEqual(true, 5 == (PrimitiveEnum)DayOfWeek.Friday);
 
-                Assert.AreEqual(true, new Nullable<long>(5) == (PrimitiveEnum)DayOfWeek.Friday);
+                Assert.AreEqual(true, new long?(5) == (PrimitiveEnum)DayOfWeek.Friday);
                 Assert.AreEqual(true, 5L == (PrimitiveEnum)DayOfWeek.Friday);
 
-                Assert.AreEqual(false, new Nullable<sbyte>() == (PrimitiveEnum)DayOfWeek.Friday);
+                Assert.AreEqual(false, new sbyte?() == (PrimitiveEnum)DayOfWeek.Friday);
 
                 Assert.AreEqual(5, (PrimitiveEnum)DayOfWeek.Friday);
                 Assert.AreEqual(5, new PrimitiveEnum(DayOfWeek.Friday));
@@ -65,19 +69,19 @@ namespace AutoPrimitive.Test
                 Assert.AreEqual(5L, new PrimitiveEnum(DayOfWeek.Friday));
 
                 Assert.AreEqual(true, DayOfWeek.Friday == (PrimitiveEnum)DayOfWeek.Friday);
-                Assert.AreEqual(true, ((PrimitiveEnum)DayOfWeek.Friday) == ((PrimitiveEnum)DayOfWeek.Friday));
+                Assert.AreEqual(true, (PrimitiveEnum)DayOfWeek.Friday == (PrimitiveEnum)DayOfWeek.Friday);
 
                 Assert.AreEqual(false, DayOfWeek.Friday != (PrimitiveEnum)DayOfWeek.Friday);
-                Assert.AreEqual(false, ((PrimitiveEnum)DayOfWeek.Friday) != ((PrimitiveEnum)DayOfWeek.Friday));
+                Assert.AreEqual(false, (PrimitiveEnum)DayOfWeek.Friday != (PrimitiveEnum)DayOfWeek.Friday);
             }
 
-            Assert.AreEqual(true, new Nullable<int>(5) == DayOfWeek.Friday.ToPrimitive());
+            Assert.AreEqual(true, new int?(5) == DayOfWeek.Friday.ToPrimitive());
             Assert.AreEqual(true, 5 == DayOfWeek.Friday.ToPrimitive());
 
-            Assert.AreEqual(true, new Nullable<long>(5) == DayOfWeek.Friday.ToPrimitive());
+            Assert.AreEqual(true, new long?(5) == DayOfWeek.Friday.ToPrimitive());
             Assert.AreEqual(true, 5L == DayOfWeek.Friday.ToPrimitive());
 
-            Assert.AreEqual(false, new Nullable<sbyte>() == DayOfWeek.Friday.ToPrimitive());
+            Assert.AreEqual(false, new sbyte?() == DayOfWeek.Friday.ToPrimitive());
 
             Assert.AreEqual(5, DayOfWeek.Friday.ToPrimitive());
             Assert.AreEqual(5, new PrimitiveEnum(DayOfWeek.Friday.ToPrimitive()));
@@ -86,10 +90,10 @@ namespace AutoPrimitive.Test
             Assert.AreEqual(5L, new PrimitiveEnum(DayOfWeek.Friday));
 
             Assert.AreEqual(true, DayOfWeek.Friday == (PrimitiveEnum)DayOfWeek.Friday.ToPrimitive());
-            Assert.AreEqual(true, ((PrimitiveEnum)DayOfWeek.Friday) == (DayOfWeek.Friday).ToPrimitive());
+            Assert.AreEqual(true, (PrimitiveEnum)DayOfWeek.Friday == DayOfWeek.Friday.ToPrimitive());
 
             Assert.AreEqual(false, DayOfWeek.Friday != (PrimitiveEnum)DayOfWeek.Friday.ToPrimitive());
-            Assert.AreEqual(false, ((PrimitiveEnum)DayOfWeek.Friday) != (DayOfWeek.Friday.ToPrimitive()));
+            Assert.AreEqual(false, (PrimitiveEnum)DayOfWeek.Friday != DayOfWeek.Friday.ToPrimitive());
 
             Assert.AreEqual("Friday", DayOfWeek.Friday.ToPrimitive());
         }
