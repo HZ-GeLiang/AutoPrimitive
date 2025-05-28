@@ -552,7 +552,7 @@ namespace AutoPrimitive
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 #endif

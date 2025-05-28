@@ -27,7 +27,7 @@ namespace AutoPrimitive
             {
                 return func();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (typeof(T) == typeof(T_Target))
                 {
@@ -225,7 +225,7 @@ namespace AutoPrimitive
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 

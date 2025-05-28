@@ -21,7 +21,7 @@ namespace ConsoleApp1
             }
 
             {
-                string s = null;
+                string? s = null;
                 int? d = s.ToPrimitive();
 
             }
@@ -41,7 +41,6 @@ namespace ConsoleApp1
             {
                 string s = "a";
                 int? d = s.ToPrimitive();
-
             }
 
 

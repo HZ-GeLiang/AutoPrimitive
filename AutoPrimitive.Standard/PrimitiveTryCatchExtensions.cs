@@ -20,7 +20,7 @@ public static class PrimitiveTryCatchExtensions
         {
             return func();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return defaultValue;
         }

@@ -18,7 +18,7 @@
             {
                 return func();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (typeof(string) == typeof(T_Target))
                 {
@@ -217,7 +217,7 @@
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 #endif

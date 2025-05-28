@@ -120,8 +120,9 @@
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+
             }
 
 #endif

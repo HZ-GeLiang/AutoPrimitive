@@ -2,7 +2,8 @@
 	<PropertyGroup>
 		<!--针对 .NET Standard 1.x 目标发出警告-->
 		<!--https://learn.microsoft.com/zh-cn/dotnet/core/compatibility/sdk/9.0/netstandard-warning-->
-		<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
+		<!--<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>-->
+
 		<TargetFrameworks>
 			<!--高危漏洞的警告没有消除干净,直接不生成了-->
 			<!--netcoreapp1.0;
@@ -11,8 +12,9 @@
 			netcoreapp2.1;
 			netcoreapp2.2;-->
 
-			netstandard1.0;
-			netstandard1.3;
+			<!--netstandard1.0;
+			netstandard1.3;-->
+
 			<!--公共的方法在netstandard1.0中都包含了-->
 			<!--netstandard2.1;
 			netcoreapp3.0;

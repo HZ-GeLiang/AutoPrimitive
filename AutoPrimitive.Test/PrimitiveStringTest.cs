@@ -1,6 +1,5 @@
 ﻿namespace AutoPrimitive.Test
 {
-
     public class Test01
     {
         public DateTime? Start { get; set; }
@@ -23,9 +22,8 @@
         [TestMethod]
         public void 转可空int()
         {
-
             {
-                string s = null;
+                string? s = null;
                 int? d = s.ToPrimitive();
                 Assert.AreEqual(d, null);
             }
