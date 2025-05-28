@@ -578,10 +578,369 @@ namespace AutoPrimitive
             => primitive.Value == null ? default(FormattableString) : primitive.Value.ToFormattableString();
 #endif
 
-        //操作符/方法的重写
+
+        #region 操作符/方法的重写
+
         public static bool operator ==(PrimitiveString a, PrimitiveString b) => a.Value.Equals(b.Value);
 
         public static bool operator !=(PrimitiveString a, PrimitiveString b) => !a.Value.Equals(b.Value);
+
+        public static bool operator ==(short? a, PrimitiveString b)
+        {
+            short? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(short? a, PrimitiveString b)
+        {
+            short? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, short? b)
+        {
+            short? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, short? b)
+        {
+            short? c = a;
+            return b != c;
+        }
+
+
+
+        public static bool operator ==(ushort? a, PrimitiveString b)
+        {
+            ushort? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(ushort? a, PrimitiveString b)
+        {
+            ushort? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, ushort? b)
+        {
+            ushort? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, ushort? b)
+        {
+            ushort? c = a;
+            return b != c;
+        }
+
+
+
+        public static bool operator ==(int? a, PrimitiveString b)
+        {
+            int? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(int? a, PrimitiveString b)
+        {
+            int? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, int? b)
+        {
+            int? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, int? b)
+        {
+            int? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(uint? a, PrimitiveString b)
+        {
+            uint? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(uint? a, PrimitiveString b)
+        {
+            uint? c = b;
+            return a != c;
+        }
+
+
+        public static bool operator ==(char? a, PrimitiveString b)
+        {
+            char? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(char? a, PrimitiveString b)
+        {
+            char? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, char? b)
+        {
+            char? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, char? b)
+        {
+            char? c = a;
+            return b != c;
+        }
+
+
+
+        public static bool operator ==(float? a, PrimitiveString b)
+        {
+            float? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(float? a, PrimitiveString b)
+        {
+            float? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, float? b)
+        {
+            float? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, float? b)
+        {
+            float? c = a;
+            return b != c;
+        }
+
+
+
+        public static bool operator ==(double? a, PrimitiveString b)
+        {
+            double? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(double? a, PrimitiveString b)
+        {
+            double? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, double? b)
+        {
+            double? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, double? b)
+        {
+            double? c = a;
+            return b != c;
+        }
+
+
+
+        public static bool operator ==(long? a, PrimitiveString b)
+        {
+            long? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(long? a, PrimitiveString b)
+        {
+            long? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, long? b)
+        {
+            long? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, long? b)
+        {
+            long? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(ulong? a, PrimitiveString b)
+        {
+            ulong? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(ulong? a, PrimitiveString b)
+        {
+            ulong? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, ulong? b)
+        {
+            ulong? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, ulong? b)
+        {
+            ulong? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(decimal? a, PrimitiveString b)
+        {
+            decimal? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(decimal? a, PrimitiveString b)
+        {
+            decimal? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, decimal? b)
+        {
+            decimal? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, decimal? b)
+        {
+            decimal? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(bool? a, PrimitiveString b)
+        {
+            bool? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(bool? a, PrimitiveString b)
+        {
+            bool? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, bool? b)
+        {
+            bool? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, bool? b)
+        {
+            bool? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(sbyte? a, PrimitiveString b)
+        {
+            sbyte? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(sbyte? a, PrimitiveString b)
+        {
+            sbyte? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, sbyte? b)
+        {
+            sbyte? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, sbyte? b)
+        {
+            sbyte? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(Guid? a, PrimitiveString b)
+        {
+            Guid? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(Guid? a, PrimitiveString b)
+        {
+            Guid? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, Guid? b)
+        {
+            Guid? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, Guid? b)
+        {
+            Guid? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(PrimitiveString a, uint? b)
+        {
+            uint? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, uint? b)
+        {
+            uint? c = a;
+            return b != c;
+        }
+
+
+        public static bool operator ==(DateTime? a, PrimitiveString b)
+        {
+            DateTime? c = b;
+            return a == c;
+        }
+
+        public static bool operator !=(DateTime? a, PrimitiveString b)
+        {
+            DateTime? c = b;
+            return a != c;
+        }
+
+        public static bool operator ==(PrimitiveString a, DateTime? b)
+        {
+            DateTime? c = a;
+            return b == c;
+        }
+
+        public static bool operator !=(PrimitiveString a, DateTime? b)
+        {
+            DateTime? c = a;
+            return b != c;
+        }
+
+        #endregion
 
         public override string ToString()
         {

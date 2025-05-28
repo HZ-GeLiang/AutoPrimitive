@@ -14,8 +14,8 @@
         {
             var item = new Test01();
 
+            var result3 = "2025-01-01".ToPrimitive() == item.Start;
             var result = item.Start == "2025-01-01".ToPrimitive();
-
             var result2 = item.Start.Value == "2025-01-01".ToPrimitive();
         }
 
