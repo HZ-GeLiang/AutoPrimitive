@@ -7,7 +7,7 @@ namespace AutoPrimitive.Test
     public class PrimitiveDateOnlyTest
     {
         [TestMethod]
-        public void Test_DateOnly()
+        public void DateOnly()
         {
             var d1 = new DateOnly(2024, 1, 1);
 

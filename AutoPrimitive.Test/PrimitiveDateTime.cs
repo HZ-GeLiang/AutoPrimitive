@@ -11,7 +11,7 @@ namespace AutoPrimitive.Test
     public class PrimitiveDateTimeTest
     {
         [TestMethod]
-        public void Test_对象类型()
+        public void 对象类型()
         {
             var obj = new Test_Date();
             obj.Now = new DateTime(2024, 11, 11, 11, 11, 11, 111);
@@ -20,7 +20,7 @@ namespace AutoPrimitive.Test
         }
 
         [TestMethod]
-        public void Test_DateTime_JS时间戳_DateTime()
+        public void DateTime_JS时间戳_DateTime()
         {
             //2021年10月18日17时5分55秒0毫秒
             DateTime dt = new DateTime(2021, 10, 18, 17, 5, 55, 0);
@@ -65,7 +65,7 @@ namespace AutoPrimitive.Test
         }
 
         [TestMethod]
-        public void Test_DateTime_JS时间戳_DateTime_Nullable()
+        public void DateTime_JS时间戳_DateTime_Nullable()
         {
             //2021年10月18日17时5分55秒0毫秒
             DateTime? dt = new DateTime(2021, 10, 18, 17, 5, 55, 0);
@@ -110,7 +110,7 @@ namespace AutoPrimitive.Test
         }
 
         [TestMethod]
-        public void Test_DateTime()
+        public void DateTime()
         {
             var time = new DateTime(2024, 1, 1, 1, 1, 1, 111);
 

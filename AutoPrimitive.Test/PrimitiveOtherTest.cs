@@ -4,7 +4,7 @@
     public class PrimitiveOtherTest
     {
         [TestMethod]
-        public void Test_转换类型为自己()
+        public void 转换类型为自己()
         {
             {
                 string s = "123";

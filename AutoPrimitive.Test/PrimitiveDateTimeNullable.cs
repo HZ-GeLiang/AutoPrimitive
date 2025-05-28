@@ -6,7 +6,7 @@ namespace AutoPrimitive.Test
     public class PrimitiveDateTimeNullableTest
     {
         [TestMethod]
-        public void Test_datetime_nullable()
+        public void datetime_nullable()
         {
             {
                 DateTime? d1 = new DateTime(2024, 1, 1, 1, 1, 1, 111);

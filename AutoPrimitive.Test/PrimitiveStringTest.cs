@@ -1,10 +1,27 @@
 ﻿namespace AutoPrimitive.Test
 {
+
+    public class Test01
+    {
+        public DateTime? Start { get; set; }
+    }
+
     [TestClass]
     public class PrimitiveStringTest
     {
         [TestMethod]
-        public void Test转可空int()
+        public void 日期比较()
+        {
+            var item = new Test01();
+
+            var result = item.Start == "2025-01-01".ToPrimitive();
+
+            var result2 = item.Start.Value == "2025-01-01".ToPrimitive();
+        }
+
+
+        [TestMethod]
+        public void 转可空int()
         {
 
             {
@@ -35,7 +52,7 @@
         }
 
         [TestMethod]
-        public void Test转Bool()
+        public void 转Bool()
         {
             {
                 string s = "true";
@@ -75,7 +92,7 @@
         }
 
         [TestMethod]
-        public void Test转日期()
+        public void 转日期()
         {
             {
                 var str = "2024年1月";

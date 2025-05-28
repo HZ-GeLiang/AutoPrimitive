@@ -8,7 +8,7 @@
     {
 
         [TestMethod]
-        public void test_转换异常()
+        public void 转换异常()
         {
             var numStr = ((long)int.MaxValue + 1).ToString();
             int num = numStr.ToPrimitive(); //异常返回 default
@@ -16,7 +16,7 @@
 
 
         [TestMethod]
-        public void test_类实体赋值()
+        public void 类实体赋值()
         {
             var list = new List<UserProduct>()
             {
@@ -30,7 +30,7 @@
         }
 
         [TestMethod]
-        public void test_科学计数法()
+        public void 科学计数法()
         {
             var strNumber = "4E-06";
             var d1 = 0.000004d;

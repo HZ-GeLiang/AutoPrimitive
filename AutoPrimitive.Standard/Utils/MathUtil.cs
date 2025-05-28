@@ -12,6 +12,7 @@ namespace AutoPrimitive.Utils
         /// 支持科学计数法
         /// </summary>
         /// <param name="strNumber"></param>
+        /// <param name="ex"></param>
         /// <returns></returns>
         public static decimal ToDecimal(string strNumber, out Exception ex)
         {
@@ -295,6 +296,7 @@ namespace AutoPrimitive.Utils
         /// 支持科学计数法
         /// </summary>
         /// <param name="strNumber"></param>
+        /// <param name="ex"></param>
         /// <returns></returns>
         public static double ToDouble(string strNumber, out Exception ex)
         {

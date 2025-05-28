@@ -51,7 +51,7 @@
 
             if (obj is PrimitiveDateTime other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
@@ -79,7 +79,7 @@
 
         public bool Equals(PrimitiveDateTime other)
         {
-            if (ReferenceEquals(this, other))
+            if (this == other)
             {
                 return true;
             }

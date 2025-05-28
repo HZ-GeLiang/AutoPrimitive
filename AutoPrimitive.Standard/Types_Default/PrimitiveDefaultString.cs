@@ -265,7 +265,7 @@
 
             if (obj is PrimitiveDefaultString other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
@@ -288,7 +288,7 @@
 
         public bool Equals(PrimitiveDefaultString other)
         {
-            if (ReferenceEquals(this, other))
+            if (this == other)
             {
                 return true;
             }

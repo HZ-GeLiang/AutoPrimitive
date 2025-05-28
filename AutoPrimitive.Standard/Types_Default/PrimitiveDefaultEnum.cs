@@ -72,7 +72,7 @@
 
             if (obj is PrimitiveDefaultEnum other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
@@ -95,7 +95,7 @@
 
         public bool Equals(PrimitiveDefaultEnum other)
         {
-            if (ReferenceEquals(this, other))
+            if (this == other)
             {
                 return true;
             }

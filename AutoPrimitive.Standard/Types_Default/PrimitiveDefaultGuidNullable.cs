@@ -38,7 +38,7 @@
             }
             if (obj is PrimitiveDefaultGuid other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
@@ -47,7 +47,7 @@
             }
             else if (obj is PrimitiveDefaultGuidNullable other2)
             {
-                if (ReferenceEquals(this, other2))
+                if (this == other2)
                 {
                     return true;
                 }
@@ -90,7 +90,7 @@
 
         public bool Equals(PrimitiveDefaultGuidNullable other)
         {
-            if (ReferenceEquals(this, other))
+            if (this == other)
             {
                 return true;
             }

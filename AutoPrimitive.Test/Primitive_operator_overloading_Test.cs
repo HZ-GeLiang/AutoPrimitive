@@ -4,7 +4,7 @@
     public class Primitive_operator_overloading_Test
     {
         [TestMethod]
-        public void Test_Add操作符()
+        public void Add操作符()
         {
             {
                 double a = 12.1;

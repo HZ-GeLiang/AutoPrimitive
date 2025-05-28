@@ -7,7 +7,7 @@ namespace AutoPrimitive.Test
     {
 
         [TestMethod]
-        public void Test_枚举值的转换()
+        public void 枚举值的转换()
         {
             //DayOfWeek item = "Friday".ToPrimitive();//无法通过 implicit 来实现
 
@@ -46,7 +46,7 @@ namespace AutoPrimitive.Test
         }
 
         [TestMethod]
-        public void Test_枚举值的比较()
+        public void 枚举值的比较()
         {
             {
                 //PrimitiveEnum 之前的单元测试

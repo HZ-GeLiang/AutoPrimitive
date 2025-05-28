@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
 	<PropertyGroup>
 		<!--使用dotnet.ruleset-->
 		<!--<NoWarn>1701;1702;1591</NoWarn>
@@ -14,36 +14,6 @@
 		<DefineConstants Condition="Exists('../_gel')==true">gel</DefineConstants>
 		<DefineConstants Condition="Exists('../_timer')==true">timer</DefineConstants>
 	</PropertyGroup>
-
-	<!--性能耗时 start-->
-	<ItemGroup Condition="Exists('../_timer')==true">
-		<PackageReference Include="Fody" Version="6.8.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-
-		<PackageReference Include="MethodTimer.Fody" Version="3.2.2" />
-		<Using Include="MethodTimer" />
-		<None Remove="FodyWeavers.xml" />
-		<None Remove="FodyWeavers.xsd" />
-	</ItemGroup>
-	<!--性能耗时 end-->
-
-	<!--分析器Analyzer start-->
-	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<PackageReference Include="Meziantou.Analyzer" Version="2.0.187">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<PackageReference Include="NonIQuerableAnalyzer" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-	<!--分析器Analyzer end-->
-
-
+ 
+	
 </Project>

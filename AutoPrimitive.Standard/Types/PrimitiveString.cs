@@ -607,7 +607,7 @@ namespace AutoPrimitive
 
             if (obj is PrimitiveString other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
@@ -630,7 +630,7 @@ namespace AutoPrimitive
 
         public bool Equals(PrimitiveString other)
         {
-            if (ReferenceEquals(this, other))
+            if (this == other)
             {
                 return true;
             }

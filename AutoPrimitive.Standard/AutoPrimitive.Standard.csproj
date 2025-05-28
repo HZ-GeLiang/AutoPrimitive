@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
+		<!--针对 .NET Standard 1.x 目标发出警告-->
+		<!--https://learn.microsoft.com/zh-cn/dotnet/core/compatibility/sdk/9.0/netstandard-warning-->
+		<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
 		<TargetFrameworks>
 			<!--高危漏洞的警告没有消除干净,直接不生成了-->
 			<!--netcoreapp1.0;
@@ -81,13 +84,4 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<!--分析器Analyzer start-->
-	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<PackageReference Include="Meziantou.Analyzer" Version="2.0.152">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
-	<!--分析器Analyzer end-->
 </Project>

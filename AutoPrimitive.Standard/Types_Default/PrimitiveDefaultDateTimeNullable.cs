@@ -61,7 +61,7 @@
 
             if (obj is PrimitiveDefaultDateTimeNullable other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
@@ -89,7 +89,7 @@
 
         public bool Equals(PrimitiveDefaultDateTimeNullable other)
         {
-            if (ReferenceEquals(this, other))
+            if (this == other)
             {
                 return true;
             }

@@ -222,7 +222,7 @@ namespace AutoPrimitive
 
             if (obj is PrimitiveNullable<T> other)
             {
-                if (ReferenceEquals(this, other))
+                if (this == other)
                 {
                     return true;
                 }
