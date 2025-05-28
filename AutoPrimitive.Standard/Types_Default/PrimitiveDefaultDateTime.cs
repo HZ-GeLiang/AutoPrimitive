@@ -41,7 +41,7 @@
             //}
             if (obj == null)
             {
-                return Value == null;
+                return false;
             }
 
             if (obj is PrimitiveDefaultDateTime other)
