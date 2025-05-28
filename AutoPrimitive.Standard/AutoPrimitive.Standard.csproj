@@ -14,6 +14,7 @@
 
 			<!--netstandard1.0;
 			netstandard1.3;-->
+			netstandard1.0;
 
 			<!--公共的方法在netstandard1.0中都包含了-->
 			<!--netstandard2.1;
@@ -45,13 +46,13 @@
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<RepositoryType>github</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>0.0.10</Version>
+		<Version>0.1.0</Version>
 		<LangVersion>10</LangVersion>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="../README.md" Pack="true" PackagePath="\"/>
+		<None Include="../README.md" Pack="true" PackagePath="\" />
 		<Using Remove="System.Net.Http" />
 	</ItemGroup>
 
