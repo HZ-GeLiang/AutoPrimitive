@@ -110,6 +110,46 @@ namespace AutoPrimitive.Test.Tests
         }
 
         [TestMethod]
+        public void DateTime_JSDate对象_DateTime()
+        {
+            DateTime dt = new DateTime(2025, 08, 22, 08, 07, 32, 0);
+            {
+                DateTime d = "Fri Aug 22 2025 08:07:32 GMT+0800 (香港标准时间)".ToPrimitive();
+                Assert.AreEqual(d, dt);
+            }
+
+            {
+                DateTime d = "Fri Aug 22 2025 08:07:32 GMT+0800 (中国标准时间)".ToPrimitive();
+                Assert.AreEqual(d, dt);
+            }
+
+            {
+                DateTime d = "Fri Aug 22 2025 08:07:32 GMT+0800 ".ToPrimitive();
+                Assert.AreEqual(d, dt);
+            }
+
+            {
+                DateTime d = "Fri Aug 22 2025 08:07:32 GMT+0800".ToPrimitive();
+                Assert.AreEqual(d, dt);
+            }
+
+
+            {
+                DateTime d = "Fri Aug 22 2025 08:07:32".ToPrimitive();
+                Assert.AreEqual(d, dt);
+            }
+
+
+            {
+                DateTime d = "Fri Aug 22 2025 08:07:32 GMT+0700".ToPrimitive();
+                Assert.AreEqual(d, new DateTime(2025, 08, 22, 09, 07, 32, 0));
+            }
+
+
+        }
+
+
+        [TestMethod]
         public void DateTime()
         {
             var time = new DateTime(2024, 1, 1, 1, 1, 1, 111);

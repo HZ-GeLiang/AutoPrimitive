@@ -9,3 +9,5 @@
 /*/*/obj
 /Test/LinqExtend.EFTest/Migrations
 /*.codemark
+MyTest/.vs
+MyTest/ConsoleApp_Nfx_4_5_Std1_0/.vs

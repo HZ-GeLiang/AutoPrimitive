@@ -494,6 +494,13 @@ namespace AutoPrimitive
                         return dt;
                     }
                 }
+
+                {
+                    if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
+                    {
+                        return dt.Value;
+                    }
+                }
             }
             return default;
         }
@@ -511,6 +518,13 @@ namespace AutoPrimitive
 
                 {
                     if (DateTime.TryParse(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
                     {
                         return dt;
                     }

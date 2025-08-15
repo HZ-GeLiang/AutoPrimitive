@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace AutoPrimitive
 {
@@ -11,17 +10,17 @@ namespace AutoPrimitive
         // 统一入口方法，通过重载区分两种值类型
         public static bool Convert_JS_timestamp<T>(Primitive<T> primitive, out DateTime? dateTime) where T : struct
         {
-            return Convert_JS_timestampInternal(typeof(T), primitive.Value, out dateTime);
+            return Convert_JS_timestamp_Internal(typeof(T), primitive.Value, out dateTime);
         }
 
         public static bool Convert_JS_timestamp<T>(PrimitiveNullable<T> primitive, out DateTime? dateTime)
         {
-            return Convert_JS_timestampInternal(typeof(T), primitive.Value, out dateTime);
+            return Convert_JS_timestamp_Internal(typeof(T), primitive.Value, out dateTime);
         }
 
 
         // 核心转换逻辑（提取为内部方法，共享实现）
-        private static bool Convert_JS_timestampInternal(Type t_type, object js_timestamp, out DateTime? dateTime)
+        private static bool Convert_JS_timestamp_Internal(Type t_type, object js_timestamp, out DateTime? dateTime)
         {
             if (js_timestamp == null)
             {
@@ -74,6 +73,11 @@ namespace AutoPrimitive
                     {
                         return true;
                     }
+
+                    if (JsTimeConverter.Convert_JS_DateObject(timestamp, out dateTime))
+                    {
+                        return true;
+                    }
                 }
             }
             catch (InvalidCastException ex1)
@@ -99,12 +103,12 @@ namespace AutoPrimitive
         {
 #if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_3_OR_GREATER
 
-
             if (js_timestamp == null)
             {
                 dateTime = default;
                 return false;
             }
+
             try
             {
                 if (js_timestamp.Length == 13 || js_timestamp.Length == 14) //负数时, 长度要+1
@@ -132,6 +136,71 @@ namespace AutoPrimitive
             {
             }
 #endif
+            dateTime = default;
+            return false;
+        }
+
+
+        public const string js_data_format = "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz";
+
+        /// <summary>
+        /// JavaScript时间戳
+        /// </summary>
+        /// <param name="timeString"></param>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static bool Convert_JS_DateObject(string timeString, out DateTime? dateTime)
+        {
+            if (timeString == null)
+            {
+                dateTime = default;
+                return false;
+            }
+
+            /*
+Fri Aug 15 2025 08:07:32 GMT+0800 (香港标准时间)
+
+Wed：星期缩写（Wednesday）；
+Aug：月份缩写（August）；
+13：日期；
+2025：年份；
+15:50:32：24 小时制的时分秒；
+GMT+0800：时区偏移（东八区，比 UTC 快 8 小时）；
+(中国标准时间)：中文时区名称（通常由环境语言设置决定）。
+            */
+
+            // 第一步：移除末尾的中文时区部分（如 (香港标准时间) 或 (中国标准时间)）
+            // 使用正则表达式匹配并删除 "(任意中文内容)" 格式的后缀
+#if NETSTANDARD1_0
+            // .NET Standard 1.0不支持RegexOptions.Compiled，直接省略该参数
+            string cleanedTime = Regex.Replace(timeString, @"\s*\(.*?\)$", "");
+#else
+            string cleanedTime = Regex.Replace(timeString, @"\s*\(.*?\)$", "", RegexOptions.Compiled);
+#endif
+
+            if (string.IsNullOrWhiteSpace(cleanedTime))
+            {
+                dateTime = default;
+                return false;
+            }
+
+            if (cleanedTime.EndsWith(" "))
+            {
+                cleanedTime = cleanedTime.TrimEnd();
+            }
+
+
+            // 尝试解析
+            if (DateTimeOffset.TryParseExact(cleanedTime, js_data_format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTimeOffset result))
+            {
+                dateTime = result.LocalDateTime;
+                return true;
+                //Console.WriteLine("解析成功：");
+                //Console.WriteLine($"DateTimeOffset: {result}");
+                //Console.WriteLine($"本地时间: {result.LocalDateTime}");
+                //Console.WriteLine($"UTC时间: {result.UtcDateTime}");
+            }
+
             dateTime = default;
             return false;
         }
