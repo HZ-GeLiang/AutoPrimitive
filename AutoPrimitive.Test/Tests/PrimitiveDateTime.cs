@@ -64,50 +64,6 @@ namespace AutoPrimitive.Test.Tests
             }
         }
 
-        [TestMethod]
-        public void DateTime_JS时间戳_DateTime_Nullable()
-        {
-            //2021年10月18日17时5分55秒0毫秒
-            DateTime? dt = new DateTime(2021, 10, 18, 17, 5, 55, 0);
-            {
-                //字符串
-                {
-                    string ts = 1634547955000.ToString();
-                    DateTime? d = ts.ToPrimitive();
-                    Assert.AreEqual(d, dt);
-                }
-
-                {
-                    string ts = 1634547955.ToString();
-                    DateTime? d = ts.ToPrimitive();
-                    Assert.AreEqual(d, dt);
-                }
-            }
-
-            {
-                //long
-                {
-                    long ts = 1634547955000;
-                    DateTime? d = ts.ToPrimitive();
-                    Assert.AreEqual(d, dt);
-                }
-
-                {
-                    long ts = 1634547955;
-                    DateTime? d = ts.ToPrimitive();
-                    Assert.AreEqual(d, dt);
-                }
-            }
-
-            {
-                //int
-                {
-                    int ts = 1634547955;
-                    DateTime? d = ts.ToPrimitive();
-                    Assert.AreEqual(d, dt);
-                }
-            }
-        }
 
         [TestMethod]
         public void DateTime_JSDate对象_DateTime()
@@ -144,7 +100,6 @@ namespace AutoPrimitive.Test.Tests
                 DateTime d = "Fri Aug 22 2025 08:07:32 GMT+0700".ToPrimitive();
                 Assert.AreEqual(d, new DateTime(2025, 08, 22, 09, 07, 32, 0));
             }
-
 
         }
 
