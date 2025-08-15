@@ -61,74 +61,19 @@
         public static implicit operator DateTime(Primitive<T> primitive)
         {
             var t_type = typeof(T);
-            if (_JS_timestamp.Contains(t_type))
+            if (JsTimeConverter._JS_timestamp.Contains(t_type))
             {
                 //尝试进行js时间戳的转换
-                if (Convert_JS_timestamp(primitive, out var dt))
+                if (JsTimeConverter.Convert_JS_timestamp(primitive, out var dt))
                 {
-                    return dt;
+                    return dt.Value;
                 }
             }
 
             return Convert.ToDateTime(primitive.Value);
         }
 
-        private static Type[] _JS_timestamp = new Type[] { typeof(int), typeof(long), typeof(string) };
-        private static bool Convert_JS_timestamp(Primitive<T> primitive, out DateTime dateTime)
-        {
-#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_3_OR_GREATER
-            try
-            {
-                var t_type = typeof(T);
-                if (t_type == typeof(long))
-                {
-                    var len = primitive.Value.ToString().Length;
 
-                    if (len == 13 || len == 14)
-                    {
-                        long timestamp = (dynamic)primitive.Value;
-                        var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
-                        dateTime = dateTimeOffset.LocalDateTime;
-                        return true;
-                    }
-                    else if (len == 10 || len == 11)
-                    {
-                        long timestamp = (dynamic)primitive.Value;
-                        var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
-                        dateTime = dateTimeOffset.LocalDateTime;
-                        return true;
-                    }
-                }
-                else if (t_type == typeof(int))
-                {
-                    var len = primitive.Value.ToString().Length;
-                    if (len == 10 || len == 11)
-                    {
-                        long timestamp = (dynamic)primitive.Value;
-                        var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
-                        dateTime = dateTimeOffset.LocalDateTime;
-                        return true;
-                    }
-                }
-                else if (t_type == typeof(string))
-                {
-                    string timestamp = (dynamic)primitive.Value;
-
-                    if (PrimitiveString.Convert_JS_timestamp(timestamp, out dateTime))
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-
-#endif
-            dateTime = default;
-            return false;
-        }
 
 
         public override string ToString()
