@@ -509,6 +509,14 @@
                         return dt;
                     }
                 }
+
+                {
+                    //yyyymmdd 格式的字符串
+                    if (DateTimeConverter.TryParseYmd(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
             }
             return default;
         }
@@ -544,6 +552,14 @@
                 {
                     //yyyymmddhhmmss 格式的字符串
                     if (DateTimeConverter.TryParseYmdHms(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    //yyyymmdd 格式的字符串
+                    if (DateTimeConverter.TryParseYmd(primitive.Value, out var dt))
                     {
                         return dt;
                     }

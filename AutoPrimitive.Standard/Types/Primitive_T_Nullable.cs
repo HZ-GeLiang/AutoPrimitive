@@ -147,6 +147,14 @@ namespace AutoPrimitive
                         return dt;
                     }
                 }
+                {
+                    //yyyymmdd 格式的字符串
+                    if (DateTimeConverter.TryParseYmd(primitive, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
 
                 return Convert.ToDateTime(primitive.Value);
             }

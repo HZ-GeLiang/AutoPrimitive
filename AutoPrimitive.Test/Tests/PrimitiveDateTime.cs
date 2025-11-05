@@ -107,9 +107,20 @@ namespace AutoPrimitive.Test.Tests
         [TestMethod]
         public void DateTime_纯数字的日期_DateTime()
         {
-            DateTime dt = new DateTime(2025, 11, 03, 09, 43, 24);
-            DateTime d = "20251103094324".ToPrimitive();
-            Assert.AreEqual(d, dt);
+            {
+                //yyyymmddhhmmss
+                DateTime dt = new DateTime(2025, 11, 03, 09, 43, 24);
+                DateTime d = "20251103094324".ToPrimitive();
+                Assert.AreEqual(d, dt);
+
+            }
+
+            {
+                //yyyymmdd
+                DateTime dt = new DateTime(2025, 11, 03);
+                DateTime d = "20251103".ToPrimitive();
+                Assert.AreEqual(d, dt);
+            }
         }
 
         [TestMethod]
