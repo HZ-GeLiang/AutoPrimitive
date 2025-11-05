@@ -1,7 +1,4 @@
-﻿using AutoPrimitive.Utils;
-using System;
-
-namespace AutoPrimitive
+﻿namespace AutoPrimitive
 {
     /*
      注:字符串转枚举没法实现
@@ -482,6 +479,7 @@ namespace AutoPrimitive
             if (primitive.Value != null)
             {
                 {
+                    //JS时间戳
                     if (JsTimeConverter.Convert_JS_timestamp(primitive.Value, out var dt))
                     {
                         return dt.Value;
@@ -489,6 +487,7 @@ namespace AutoPrimitive
                 }
 
                 {
+                    //普通日期
                     if (DateTime.TryParse(primitive.Value, out var dt))
                     {
                         return dt;
@@ -496,9 +495,18 @@ namespace AutoPrimitive
                 }
 
                 {
+                    //JS日期对象
                     if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
                     {
                         return dt.Value;
+                    }
+                }
+
+                {
+                    //yyyymmddhhmmss 格式的字符串
+                    if (DateTimeConverter.TryParseYmdHms(primitive.Value, out var dt))
+                    {
+                        return dt;
                     }
                 }
             }
@@ -510,6 +518,7 @@ namespace AutoPrimitive
             if (primitive.Value != null)
             {
                 {
+                    //JS时间戳
                     if (JsTimeConverter.Convert_JS_timestamp(primitive.Value, out var dt))
                     {
                         return dt;
@@ -517,6 +526,7 @@ namespace AutoPrimitive
                 }
 
                 {
+                    //普通日期
                     if (DateTime.TryParse(primitive.Value, out var dt))
                     {
                         return dt;
@@ -524,7 +534,16 @@ namespace AutoPrimitive
                 }
 
                 {
+                    //JS日期对象
                     if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    //yyyymmddhhmmss 格式的字符串
+                    if (DateTimeConverter.TryParseYmdHms(primitive.Value, out var dt))
                     {
                         return dt;
                     }

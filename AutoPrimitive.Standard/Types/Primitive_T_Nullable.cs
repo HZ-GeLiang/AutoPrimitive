@@ -112,10 +112,40 @@ namespace AutoPrimitive
         {
             if (primitive.Value != null)
             {
-                //尝试进行js时间戳的转换
-                if (JsTimeConverter.Convert_JS_timestamp(primitive, out var dt))
+                var t_type = typeof(T);
                 {
-                    return dt.Value;
+                    //JS时间戳
+                    if (JsTimeConverter._JS_timestamp.Contains(t_type))
+                    {
+                        if (JsTimeConverter.Convert_JS_timestamp(primitive, out DateTime? dt))
+                        {
+                            return dt.Value;
+                        }
+                    }
+                }
+
+                {
+                    //普通日期
+                    if (DateTime.TryParse(primitive, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    //JS日期对象
+                    if (JsTimeConverter.Convert_JS_DateObject(primitive, out var dt))
+                    {
+                        return dt.Value;
+                    }
+                }
+
+                {
+                    //yyyymmddhhmmss 格式的字符串
+                    if (DateTimeConverter.TryParseYmdHms(primitive, out var dt))
+                    {
+                        return dt;
+                    }
                 }
 
                 return Convert.ToDateTime(primitive.Value);

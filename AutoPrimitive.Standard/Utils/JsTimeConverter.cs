@@ -39,13 +39,17 @@ namespace AutoPrimitive
                     long longValue = (long)js_timestamp; //timestamp
                     int len = longValue.ToString().Length;
 
-                    if (len == 13 || len == 14)
+                    if (len == 13 ||
+                        (len == 14 && longValue < 0) //负数时, 长度要+1
+                        )
                     {
                         var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(longValue);
                         dateTime = dateTimeOffset.LocalDateTime;
                         return true;
                     }
-                    else if (len == 10 || len == 11)
+                    else if (len == 10 ||
+                        (len == 11 && longValue < 0) //负数时, 长度要+1
+                        )
                     {
                         var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(longValue);
                         dateTime = dateTimeOffset.LocalDateTime;
@@ -58,7 +62,9 @@ namespace AutoPrimitive
                     int intValue = (int)js_timestamp; //timestamp
                     int len = intValue.ToString().Length;
 
-                    if (len == 10 || len == 11)
+                    if (len == 10 ||
+                        (len == 11 && intValue < 0) //负数时, 长度要+1
+                        )
                     {
                         var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(intValue);
                         dateTime = dateTimeOffset.LocalDateTime;
@@ -111,7 +117,9 @@ namespace AutoPrimitive
 
             try
             {
-                if (js_timestamp.Length == 13 || js_timestamp.Length == 14) //负数时, 长度要+1
+                if (js_timestamp.Length == 13 ||
+                    (js_timestamp.Length == 14 && js_timestamp.StartsWith("-")) //负数时, 长度要+1
+                    )
                 {
                     // 毫秒级时间戳：毫秒级时间戳是指自 1970 年 1 月 1 日 00:00:00 UTC 起的毫秒数。毫秒级时间戳通常是 13 位长度的数字
                     if (long.TryParse(js_timestamp, out var timestamp))
@@ -121,7 +129,9 @@ namespace AutoPrimitive
                         return true;
                     }
                 }
-                else if (js_timestamp.Length == 10 || js_timestamp.Length == 11)  //负数时, 长度要+1
+                else if (js_timestamp.Length == 10 ||
+                    (js_timestamp.Length == 11 && js_timestamp.StartsWith("-"))  //负数时, 长度要+1
+                    )
                 {
                     // 秒级时间戳是指自 1970 年 1 月 1 日 00:00:00 UTC 起的秒数。秒级时间戳通常是 10 位长度的数字
                     if (long.TryParse(js_timestamp, out var timestamp))
@@ -151,14 +161,14 @@ namespace AutoPrimitive
         /// <returns></returns>
         public static bool Convert_JS_DateObject(string timeString, out DateTime? dateTime)
         {
-            if (timeString == null)
+            if (timeString == null || timeString.Length > 100) //这里的100是随便写的, 下面的示例长度是42
             {
                 dateTime = default;
                 return false;
             }
 
             /*
-Fri Aug 15 2025 08:07:32 GMT+0800 (香港标准时间)
+Fri Aug 15 2025 08:07:32 GMT+0800 (香港标准时间)              ----长度是42
 
 Wed：星期缩写（Wednesday）；
 Aug：月份缩写（August）；

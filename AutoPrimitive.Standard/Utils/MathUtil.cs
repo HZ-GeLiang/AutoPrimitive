@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AutoPrimitive.Utils
+namespace AutoPrimitive
 {
     internal sealed class MathUtil
     {

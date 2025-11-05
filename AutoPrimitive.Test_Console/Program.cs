@@ -7,6 +7,16 @@ namespace AutoPrimitive.Test_Console
         static void Main(string[] args)
         {
 
+            string negativeTs = "-631152000000"; // 1949-10-01 的近似时间戳
+            if (long.TryParse(negativeTs, out var ts))
+            {
+                var date = DateTimeOffset.FromUnixTimeMilliseconds(ts).LocalDateTime;
+                var js_date = date.ToString("yyyy-MM-dd"); // 输出：1949-10-01（具体取决于时区）
+
+                Console.WriteLine(js_date);
+            }
+
+
             string cleanedTime = "Fri Aug 15 2025 08:07:32 GMT+0800";
             string format = "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz";
 
