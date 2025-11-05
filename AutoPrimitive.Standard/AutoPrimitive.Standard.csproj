@@ -1,64 +1,64 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<!--针对 .NET Standard 1.x 目标发出警告-->
-		<!--https://learn.microsoft.com/zh-cn/dotnet/core/compatibility/sdk/9.0/netstandard-warning-->
-		<!--<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>-->
+  <PropertyGroup>
+    <!--针对 .NET Standard 1.x 目标发出警告-->
+    <!--https://learn.microsoft.com/zh-cn/dotnet/core/compatibility/sdk/9.0/netstandard-warning-->
+    <!--<CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>-->
 
-		<TargetFrameworks>
-			<!--高危漏洞的警告没有消除干净,直接不生成了-->
-			<!--netcoreapp1.0;
+    <TargetFrameworks>
+      <!--高危漏洞的警告没有消除干净,直接不生成了-->
+      <!--netcoreapp1.0;
 			netcoreapp1.1;
 			netcoreapp2.0;
 			netcoreapp2.1;
 			netcoreapp2.2;-->
 
-			<!--netstandard1.0;
+      <!--netstandard1.0;
 			netstandard1.3;-->
-			netstandard1.0;
+      netstandard1.0;
 
-			<!--公共的方法在netstandard1.0中都包含了-->
-			<!--netstandard2.1;
+      <!--公共的方法在netstandard1.0中都包含了-->
+      <!--netstandard2.1;
 			netcoreapp3.0;
 			netcoreapp3.1;
 			net5.0;-->
 
-			<!--下面是为了 DateOnly 而存在的-->
-			net6.0;
-			net7.0;
-			net8.0;
-			net9.0;
-		</TargetFrameworks>
-		<RootNamespace>AutoPrimitive</RootNamespace>
-		<!--<NoWarn>CS1591</NoWarn>
+      <!--下面是为了 DateOnly 而存在的-->
+      net6.0;
+      net7.0;
+      net8.0;
+      net9.0;
+    </TargetFrameworks>
+    <RootNamespace>AutoPrimitive</RootNamespace>
+    <!--<NoWarn>CS1591</NoWarn>
 		<WarningLevel>4</WarningLevel>-->
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<ImplicitUsings>True</ImplicitUsings>
-		<!--<DocumentationFile>$(SolutionDir)$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>-->
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Authors>GeLiang</Authors>
-		<Company>GeLiang</Company>
-		<Copyright>Copyright (c) GeLiang</Copyright>
-		<PackageId>AutoPrimitive</PackageId>
-		<Description>Type Conversion Of Primitive Data Types</Description>
-		<PackageProjectUrl>https://github.com/HZ-GeLiang/AutoPrimitive</PackageProjectUrl>
-		<PackageTags>AutoPrimitive, Primitive, PrimitiveTypeConvert</PackageTags>
-		<PackageReleaseNotes></PackageReleaseNotes>
-		<RepositoryType>github</RepositoryType>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>0.1.1</Version>
-		<LangVersion>10</LangVersion>
-		<PackageReadmeFile>Readme.md</PackageReadmeFile>
-	</PropertyGroup>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <ImplicitUsings>True</ImplicitUsings>
+    <!--<DocumentationFile>$(SolutionDir)$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>-->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>GeLiang</Authors>
+    <Company>GeLiang</Company>
+    <Copyright>Copyright (c) GeLiang</Copyright>
+    <PackageId>AutoPrimitive</PackageId>
+    <Description>Type Conversion Of Primitive Data Types</Description>
+    <PackageProjectUrl>https://github.com/HZ-GeLiang/AutoPrimitive</PackageProjectUrl>
+    <PackageTags>AutoPrimitive, Primitive, PrimitiveTypeConvert</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <RepositoryType>github</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.1.2</Version>
+    <LangVersion>10</LangVersion>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="Readme.md" Pack="true" PackagePath="\" />
-		<Using Remove="System.Net.Http" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md" Pack="true" PackagePath="\" />
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
 
-	<!--包警告 开始-->
-	<!--高危漏洞的警告没有消除干净,直接不生成了-->
-	<!--<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.0'">
+  <!--包警告 开始-->
+  <!--高危漏洞的警告没有消除干净,直接不生成了-->
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.0'">
 		<PackageReference Include="Microsoft.NETCore.App" Version="1.0.7" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.1'">
@@ -73,19 +73,19 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
 		<PackageReference Include="Microsoft.NETCore.App" Version="2.2.1" />
 	</ItemGroup>-->
-	<!--包警告 结束-->
+  <!--包警告 结束-->
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<!--高危漏洞的警告-->
-		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <!--高危漏洞的警告-->
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
 
-	<!--高危漏洞的警告-->
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
-		<PackageReference Include="System.Net.Http">
-			<Version>4.3.4</Version>
-		</PackageReference>
-	</ItemGroup>
+  <!--高危漏洞的警告-->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.4</Version>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
