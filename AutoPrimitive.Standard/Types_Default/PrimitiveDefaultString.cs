@@ -196,7 +196,9 @@
 
             try
             {
-                if (js_timestamp.Length == 13 || js_timestamp.Length == 14) //负数时, 长度要+1
+                if (js_timestamp.Length == 13 ||
+                   (js_timestamp.Length == 14 && js_timestamp.StartsWith("-")) //负数时, 长度要+1
+                   )
                 {
                     // 毫秒级时间戳：毫秒级时间戳是指自 1970 年 1 月 1 日 00:00:00 UTC 起的毫秒数。毫秒级时间戳通常是 13 位长度的数字
                     if (long.TryParse(js_timestamp, out var timestamp))
@@ -206,7 +208,9 @@
                         return true;
                     }
                 }
-                else if (js_timestamp.Length == 10 || js_timestamp.Length == 11)  //负数时, 长度要+1
+                else if (js_timestamp.Length == 10 ||
+                        (js_timestamp.Length == 11 && js_timestamp.StartsWith("-"))  //负数时, 长度要+1
+                        )
                 {
                     // 秒级时间戳是指自 1970 年 1 月 1 日 00:00:00 UTC 起的秒数。秒级时间戳通常是 10 位长度的数字
                     if (long.TryParse(js_timestamp, out var timestamp))

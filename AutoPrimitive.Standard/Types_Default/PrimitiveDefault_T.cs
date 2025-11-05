@@ -104,16 +104,21 @@
                 var t_type = typeof(T);
                 if (t_type == typeof(long))
                 {
-                    var len = PrimitiveDefault.Value.ToString().Length;
+                    var value_str = PrimitiveDefault.Value.ToString();
+                    var len = value_str.Length;
 
-                    if (len == 13 || len == 14)
+                    if (len == 13 ||
+                        (len == 14 && value_str.StartsWith("-"))  //负数时, 长度要+1
+                        )
                     {
                         long timestamp = (dynamic)PrimitiveDefault.Value;
                         var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
                         dateTime = dateTimeOffset.LocalDateTime;
                         return true;
                     }
-                    else if (len == 10 || len == 11)
+                    else if (len == 10 ||
+                            (len == 11 && value_str.StartsWith("-"))  //负数时, 长度要+1
+                            )
                     {
                         long timestamp = (dynamic)PrimitiveDefault.Value;
                         var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
@@ -123,8 +128,11 @@
                 }
                 else if (t_type == typeof(int))
                 {
-                    var len = PrimitiveDefault.Value.ToString().Length;
-                    if (len == 10 || len == 11)
+                    var value_str = PrimitiveDefault.Value.ToString();
+                    var len = value_str.Length;
+                    if (len == 10 ||
+                       (len == 11 && value_str.StartsWith("-"))  //负数时, 长度要+1
+                        )
                     {
                         long timestamp = (dynamic)PrimitiveDefault.Value;
                         var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
