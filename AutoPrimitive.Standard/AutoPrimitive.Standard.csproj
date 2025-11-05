@@ -46,7 +46,7 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <RepositoryType>github</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <LangVersion>10</LangVersion>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
   </PropertyGroup>
