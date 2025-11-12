@@ -63,17 +63,6 @@
             var t_type = typeof(T);
 
             {
-                //JS时间戳
-                if (JsTimeConverter._JS_timestamp.Contains(t_type))
-                {
-                    if (JsTimeConverter.Convert_JS_timestamp(primitive, out DateTime? dt))
-                    {
-                        return dt.Value;
-                    }
-                }
-            }
-
-            {
                 //普通日期
                 if (DateTime.TryParse(primitive, out var dt))
                 {
@@ -82,10 +71,13 @@
             }
 
             {
-                //JS日期对象
-                if (JsTimeConverter.Convert_JS_DateObject(primitive, out var dt))
+                //JS时间戳
+                if (JsTimeConverter._JS_timestamp.Contains(t_type))
                 {
-                    return dt.Value;
+                    if (JsTimeConverter.Convert_JS_timestamp(primitive, out DateTime? dt))
+                    {
+                        return dt.Value;
+                    }
                 }
             }
 
@@ -102,6 +94,14 @@
                 if (DateTimeConverter.TryParseYmd(primitive, out var dt))
                 {
                     return dt;
+                }
+            }
+
+            {
+                //JS日期对象
+                if (JsTimeConverter.Convert_JS_DateObject(primitive, out var dt))
+                {
+                    return dt.Value;
                 }
             }
 

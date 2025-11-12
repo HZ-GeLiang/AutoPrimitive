@@ -113,6 +113,15 @@ namespace AutoPrimitive
             if (primitive.Value != null)
             {
                 var t_type = typeof(T);
+
+                {
+                    //普通日期
+                    if (DateTime.TryParse(primitive, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
                 {
                     //JS时间戳
                     if (JsTimeConverter._JS_timestamp.Contains(t_type))
@@ -125,8 +134,16 @@ namespace AutoPrimitive
                 }
 
                 {
-                    //普通日期
-                    if (DateTime.TryParse(primitive, out var dt))
+                    //yyyymmddhhmmss 格式的字符串
+                    if (DateTimeConverter.TryParseYmdHms(primitive, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    //yyyymmdd 格式的字符串
+                    if (DateTimeConverter.TryParseYmd(primitive, out var dt))
                     {
                         return dt;
                     }
@@ -137,21 +154,6 @@ namespace AutoPrimitive
                     if (JsTimeConverter.Convert_JS_DateObject(primitive, out var dt))
                     {
                         return dt.Value;
-                    }
-                }
-
-                {
-                    //yyyymmddhhmmss 格式的字符串
-                    if (DateTimeConverter.TryParseYmdHms(primitive, out var dt))
-                    {
-                        return dt;
-                    }
-                }
-                {
-                    //yyyymmdd 格式的字符串
-                    if (DateTimeConverter.TryParseYmd(primitive, out var dt))
-                    {
-                        return dt;
                     }
                 }
 

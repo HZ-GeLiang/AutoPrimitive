@@ -479,15 +479,7 @@
             if (primitive.Value != null)
             {
                 {
-                    //JS时间戳
-                    if (JsTimeConverter.Convert_JS_timestamp(primitive.Value, out var dt))
-                    {
-                        return dt.Value;
-                    }
-                }
-
-                {
-                    //普通日期
+                    //普通日期, 可以识别成日期的字符串值.
                     if (DateTime.TryParse(primitive.Value, out var dt))
                     {
                         return dt;
@@ -495,15 +487,15 @@
                 }
 
                 {
-                    //JS日期对象
-                    if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
+                    //JS时间戳, 长度=10,11,13,14
+                    if (JsTimeConverter.Convert_JS_timestamp(primitive.Value, out var dt))
                     {
                         return dt.Value;
                     }
                 }
 
                 {
-                    //yyyymmddhhmmss 格式的字符串
+                    //yyyymmddhhmmss 格式的字符串 , 长度=14
                     if (DateTimeConverter.TryParseYmdHms(primitive.Value, out var dt))
                     {
                         return dt;
@@ -511,10 +503,18 @@
                 }
 
                 {
-                    //yyyymmdd 格式的字符串
+                    //yyyymmdd 格式的字符串,长度=8
                     if (DateTimeConverter.TryParseYmd(primitive.Value, out var dt))
                     {
                         return dt;
+                    }
+                }
+
+                {
+                    //JS日期对象, 长度24起步,  类似 Fri Aug 15 2025 08:07:32 GMT+0800 (香港标准时间)
+                    if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
+                    {
+                        return dt.Value;
                     }
                 }
             }
@@ -526,14 +526,6 @@
             if (primitive.Value != null)
             {
                 {
-                    //JS时间戳
-                    if (JsTimeConverter.Convert_JS_timestamp(primitive.Value, out var dt))
-                    {
-                        return dt;
-                    }
-                }
-
-                {
                     //普通日期
                     if (DateTime.TryParse(primitive.Value, out var dt))
                     {
@@ -542,8 +534,8 @@
                 }
 
                 {
-                    //JS日期对象
-                    if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
+                    //JS时间戳
+                    if (JsTimeConverter.Convert_JS_timestamp(primitive.Value, out var dt))
                     {
                         return dt;
                     }
@@ -560,6 +552,14 @@
                 {
                     //yyyymmdd 格式的字符串
                     if (DateTimeConverter.TryParseYmd(primitive.Value, out var dt))
+                    {
+                        return dt;
+                    }
+                }
+
+                {
+                    //JS日期对象
+                    if (JsTimeConverter.Convert_JS_DateObject(primitive.Value, out var dt))
                     {
                         return dt;
                     }
