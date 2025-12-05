@@ -12,33 +12,40 @@ namespace AutoPrimitive.Test.Tests
             //DayOfWeek item = "Friday".ToPrimitive();//无法通过 implicit 来实现
 
             {
-
                 int value = (int)DayOfWeek.Monday;
-                var week = value.ToPrimitive<DayOfWeek>();
+                var week = value.ToPrimitive<DayOfWeek>(); //var 为dynamic?  不优雅
                 Assert.AreEqual(DayOfWeek.Monday, week);
             }
 
-
             {
                 MyDayOfWeek item = (MyDayOfWeek)(int)DayOfWeek.Friday.ToPrimitive();//太麻烦了
-
                 var equal = item == MyDayOfWeek.Friday;
-
                 Assert.AreEqual(equal, true);
                 Assert.AreEqual(item, MyDayOfWeek.Friday);
             }
 
             {
-                DayOfWeek item = "Friday".ToPrimitive<DayOfWeek>();
-                Assert.AreEqual(DayOfWeek.Friday, item.ToPrimitive());
-            }
-            {
-                DayOfWeek item = 5.ToPrimitive<DayOfWeek>();
+                DayOfWeek item = "Friday".ToPrimitive<DayOfWeek>(); //只能这样写
                 Assert.AreEqual(DayOfWeek.Friday, item.ToPrimitive());
             }
 
             {
-                MyDayOfWeek item = DayOfWeek.Friday.ToPrimitive<MyDayOfWeek>();
+                DayOfWeek item = 5.ToPrimitive<DayOfWeek>();  //只能这样写
+                Assert.AreEqual(DayOfWeek.Friday, item.ToPrimitive());
+            }
+
+            {
+                //是否转换成功
+                DayOfWeek obj_enum1 = 3.ToPrimitive<DayOfWeek>();
+                Assert.AreEqual(Enum.IsDefined<DayOfWeek>(obj_enum1), true);
+
+                DayOfWeek obj_enum2 = 33.ToPrimitive<DayOfWeek>();
+                Assert.AreEqual(Enum.IsDefined<DayOfWeek>(obj_enum2), false);
+
+            }
+
+            {
+                MyDayOfWeek item = DayOfWeek.Friday.ToPrimitive<MyDayOfWeek>();  //转换为另一个枚举对象
                 Assert.AreEqual(item, MyDayOfWeek.Friday);
             }
 
