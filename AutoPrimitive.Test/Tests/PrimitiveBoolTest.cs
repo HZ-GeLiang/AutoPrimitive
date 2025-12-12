@@ -26,5 +26,14 @@
             Assert.AreEqual(0L, val_false.ToPrimitive());
             Assert.AreEqual("False", val_false.ToPrimitive());
         }
+
+        [TestMethod]
+        public void js值转Bool类型()
+        {
+            bool bool1 = "true".ToPrimitive();
+            bool bool2 = "false".ToPrimitive();
+            Assert.AreEqual(bool1, true);
+            Assert.AreEqual(bool2, false);
+        }
     }
 }
