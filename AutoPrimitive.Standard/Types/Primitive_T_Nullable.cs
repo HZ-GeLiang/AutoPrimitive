@@ -157,7 +157,6 @@ namespace AutoPrimitive
                     }
                 }
 
-
                 return Convert.ToDateTime(primitive.Value);
             }
 
@@ -177,7 +176,6 @@ namespace AutoPrimitive
             }
             return default(DateTime?);
         }
-
 
         //操作符/方法的重写
         public static bool operator ==(PrimitiveNullable<T> a, PrimitiveNullable<T> b) => a.Value.Equals(b.Value);

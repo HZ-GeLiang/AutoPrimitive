@@ -107,7 +107,6 @@ public static class PrimitiveExtensions
     //        typeof(long) , typeof(ulong)
     //    };
 
-
     //Enum
 
     public static dynamic ToPrimitive(this Enum enumItem)
@@ -207,5 +206,6 @@ public static class PrimitiveExtensions
     public static dynamic ToPrimitive(this DateOnly obj) => new PrimitiveDateOnly(obj);
     public static dynamic ToPrimitive(this DateOnly obj, string format) => new PrimitiveDateOnly(obj, format);
 #endif
+
     #endregion
 }

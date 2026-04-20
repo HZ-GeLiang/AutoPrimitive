@@ -18,7 +18,6 @@ namespace AutoPrimitive
             return Convert_JS_timestamp_Internal(typeof(T), primitive.Value, out dateTime);
         }
 
-
         // 核心转换逻辑（提取为内部方法，共享实现）
         private static bool Convert_JS_timestamp_Internal(Type t_type, object js_timestamp, out DateTime? dateTime)
         {
@@ -28,11 +27,9 @@ namespace AutoPrimitive
                 return false;
             }
 
-
 #if NETCOREAPP1_0_OR_GREATER || NETSTANDARD1_3_OR_GREATER
             try
             {
-
                 // 处理long类型
                 if (t_type == typeof(long))
                 {
@@ -150,7 +147,6 @@ namespace AutoPrimitive
             return false;
         }
 
-
         public const string js_data_format = "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz";
 
         /// <summary>
@@ -199,7 +195,6 @@ GMT+0800：时区偏移（东八区，比 UTC 快 8 小时）；
                 cleanedTime = cleanedTime.TrimEnd();
             }
 
-
             // 尝试解析
             if (DateTimeOffset.TryParseExact(cleanedTime, js_data_format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTimeOffset result))
             {
@@ -214,6 +209,5 @@ GMT+0800：时区偏移（东八区，比 UTC 快 8 小时）；
             dateTime = default;
             return false;
         }
-
     }
 }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoPrimitive
+﻿namespace AutoPrimitive
 {
 #if DEBUG
+
     public sealed class DateTimeConverter//单元测试
 #else
     internal sealed class DateTimeConverter
 #endif
     {
-
         /// <summary>
         /// 将 yyyymmddhhmmss 格式字符串转换为 DateTime 对象
         /// </summary>
@@ -43,7 +39,6 @@ namespace AutoPrimitive
                 out dateTime
             );
         }
-
 
         /// <summary>
         /// 将 yyyymmdd 格式字符串转换为 DateTime 对象

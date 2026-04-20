@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoPrimitive
+﻿namespace AutoPrimitive
 {
     internal sealed class MathUtil
     {
@@ -313,6 +309,7 @@ namespace AutoPrimitive
             //    return truncatedNum;
             //}
             //return double.Parse(strNumber);
+
             #endregion
 
             ex = null;
@@ -1006,6 +1003,7 @@ namespace AutoPrimitive
                 return result;
             }
         }
+
         #endregion
     }
 }

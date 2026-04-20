@@ -61,7 +61,6 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
 
@@ -104,7 +103,6 @@
             return default;
         }
 
-
         public static implicit operator double(PrimitiveString primitive)
         {
             if (primitive.Value != null)
@@ -125,12 +123,10 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
 
             return default;
-
         }
 
         public static implicit operator long(PrimitiveString primitive)
@@ -153,7 +149,6 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
 
@@ -192,12 +187,10 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
             return default;
         }
-
 
         public static implicit operator bool(PrimitiveString primitive)
         {
@@ -205,7 +198,6 @@
                 bool.TryParse(primitive.Value, out var result1) && result1 == true ||
                 int.TryParse(primitive.Value, out var result2) && result2 != 0;
         }
-
 
         public static implicit operator byte(PrimitiveString primitive)
         {
@@ -288,7 +280,6 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
 
@@ -352,7 +343,6 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
 
@@ -379,7 +369,6 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
 
@@ -418,11 +407,8 @@
                 }
                 catch (Exception)
                 {
-
                 }
             }
-
-
 
             return default(decimal?);
         }
@@ -568,7 +554,6 @@
             return default(DateTime?);
         }
 
-
 #if NET6_0_OR_GREATER
         public static implicit operator DateOnly(PrimitiveString primitive) => DateOnly.TryParse(primitive.Value, out var result) ? result : default;
         public static implicit operator TimeOnly(PrimitiveString primitive) => TimeOnly.TryParse(primitive.Value, out var result) ? result : default;
@@ -586,7 +571,6 @@
         public static implicit operator FormattableString(PrimitiveString primitive)
             => primitive.Value == null ? default(FormattableString) : primitive.Value.ToFormattableString();
 #endif
-
 
         #region 操作符/方法的重写
 
@@ -620,8 +604,6 @@
             return b != c;
         }
 
-
-
         public static bool operator ==(ushort a, PrimitiveString b)
         {
             ushort c = b;
@@ -645,8 +627,6 @@
             ushort c = a;
             return b != c;
         }
-
-
 
         public static bool operator ==(int a, PrimitiveString b)
         {
@@ -672,7 +652,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(uint a, PrimitiveString b)
         {
             uint c = b;
@@ -684,7 +663,6 @@
             uint c = b;
             return a != c;
         }
-
 
         public static bool operator ==(char a, PrimitiveString b)
         {
@@ -710,8 +688,6 @@
             return b != c;
         }
 
-
-
         public static bool operator ==(float a, PrimitiveString b)
         {
             float c = b;
@@ -735,8 +711,6 @@
             float c = a;
             return b != c;
         }
-
-
 
         public static bool operator ==(double a, PrimitiveString b)
         {
@@ -762,8 +736,6 @@
             return b != c;
         }
 
-
-
         public static bool operator ==(long a, PrimitiveString b)
         {
             long c = b;
@@ -787,7 +759,6 @@
             long c = a;
             return b != c;
         }
-
 
         public static bool operator ==(ulong a, PrimitiveString b)
         {
@@ -813,7 +784,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(decimal a, PrimitiveString b)
         {
             decimal c = b;
@@ -837,7 +807,6 @@
             decimal c = a;
             return b != c;
         }
-
 
         public static bool operator ==(bool a, PrimitiveString b)
         {
@@ -863,7 +832,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(sbyte a, PrimitiveString b)
         {
             sbyte c = b;
@@ -887,7 +855,6 @@
             sbyte c = a;
             return b != c;
         }
-
 
         public static bool operator ==(Guid a, PrimitiveString b)
         {
@@ -913,7 +880,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(PrimitiveString a, uint b)
         {
             uint c = a;
@@ -925,7 +891,6 @@
             uint c = a;
             return b != c;
         }
-
 
         public static bool operator ==(DateTime a, PrimitiveString b)
         {
@@ -950,8 +915,6 @@
             DateTime c = a;
             return b != c;
         }
-
-
 
         //可空
 
@@ -979,8 +942,6 @@
             return b != c;
         }
 
-
-
         public static bool operator ==(ushort? a, PrimitiveString b)
         {
             ushort? c = b;
@@ -1004,8 +965,6 @@
             ushort? c = a;
             return b != c;
         }
-
-
 
         public static bool operator ==(int? a, PrimitiveString b)
         {
@@ -1031,7 +990,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(uint? a, PrimitiveString b)
         {
             uint? c = b;
@@ -1043,7 +1001,6 @@
             uint? c = b;
             return a != c;
         }
-
 
         public static bool operator ==(char? a, PrimitiveString b)
         {
@@ -1069,8 +1026,6 @@
             return b != c;
         }
 
-
-
         public static bool operator ==(float? a, PrimitiveString b)
         {
             float? c = b;
@@ -1094,8 +1049,6 @@
             float? c = a;
             return b != c;
         }
-
-
 
         public static bool operator ==(double? a, PrimitiveString b)
         {
@@ -1121,8 +1074,6 @@
             return b != c;
         }
 
-
-
         public static bool operator ==(long? a, PrimitiveString b)
         {
             long? c = b;
@@ -1146,7 +1097,6 @@
             long? c = a;
             return b != c;
         }
-
 
         public static bool operator ==(ulong? a, PrimitiveString b)
         {
@@ -1172,7 +1122,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(decimal? a, PrimitiveString b)
         {
             decimal? c = b;
@@ -1196,7 +1145,6 @@
             decimal? c = a;
             return b != c;
         }
-
 
         public static bool operator ==(bool? a, PrimitiveString b)
         {
@@ -1222,7 +1170,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(sbyte? a, PrimitiveString b)
         {
             sbyte? c = b;
@@ -1246,7 +1193,6 @@
             sbyte? c = a;
             return b != c;
         }
-
 
         public static bool operator ==(Guid? a, PrimitiveString b)
         {
@@ -1272,7 +1218,6 @@
             return b != c;
         }
 
-
         public static bool operator ==(PrimitiveString a, uint? b)
         {
             uint? c = a;
@@ -1284,7 +1229,6 @@
             uint? c = a;
             return b != c;
         }
-
 
         public static bool operator ==(DateTime? a, PrimitiveString b)
         {
