@@ -24,7 +24,7 @@ dotnet build AutoPrimitive.Standard/AutoPrimitive.Standard.csproj
 dotnet build AutoPrimitive.sln
 ```
 
-注意：当前主库目标框架包含 `net9.0`，如果本机 SDK 低于 .NET 9，完整 solution 或主库多目标构建可能失败。只改文档时无需强行构建；改库代码时请说明本机 SDK 版本和实际跑过的命令。
+注意：当前主库目标框架包含 `net8.0`，如果本机 SDK 低于 .NET 9，完整 solution 或主库多目标构建可能失败。只改文档时无需强行构建；改库代码时请说明本机 SDK 版本和实际跑过的命令。
 
 ## 目标框架与条件编译
 
@@ -34,7 +34,6 @@ dotnet build AutoPrimitive.sln
 - `net6.0`
 - `net7.0`
 - `net8.0`
-- `net9.0`
 
 请特别注意：
 
