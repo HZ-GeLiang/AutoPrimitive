@@ -1,5 +1,4 @@
-﻿
-#if NETSTANDARD1_3_OR_GREATER || NET6_0_OR_GREATER
+﻿#if NETSTANDARD1_3_OR_GREATER || NET6_0_OR_GREATER
 using System.Runtime.CompilerServices;
 
 namespace AutoPrimitive;
