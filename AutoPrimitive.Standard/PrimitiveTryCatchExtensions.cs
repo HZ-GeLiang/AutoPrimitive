@@ -1,4 +1,8 @@
-﻿namespace AutoPrimitive;
+﻿#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
+namespace AutoPrimitive;
 
 /// <summary>
 /// 基本类型（Primitive Type）的各种类型转换
@@ -57,6 +61,21 @@ public static class PrimitiveTryCatchExtensions
 
     public static dynamic ToPrimitive(this sbyte obj, object defaultValue) => new PrimitiveDefault<sbyte>(obj, defaultValue);
 
+    //大数值类型默认值变体
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+    public static dynamic ToPrimitive(this BigInteger obj, object defaultValue) => new PrimitiveDefaultNumber<BigInteger>(obj, defaultValue);
+#endif
+
+#if NET5_0_OR_GREATER
+    public static dynamic ToPrimitive(this Half obj, object defaultValue) => new PrimitiveDefaultNumber<Half>(obj, defaultValue);
+#endif
+
+#if NET7_0_OR_GREATER
+    public static dynamic ToPrimitive(this Int128 obj, object defaultValue) => new PrimitiveDefaultNumber<Int128>(obj, defaultValue);
+
+    public static dynamic ToPrimitive(this UInt128 obj, object defaultValue) => new PrimitiveDefaultNumber<UInt128>(obj, defaultValue);
+#endif
+
     #endregion
 
     //public static dynamic ToPrimitive(this Guid obj, object defaultValue) => new PrimitiveDefaultGuid(obj, null, defaultValue);
@@ -92,6 +111,21 @@ public static class PrimitiveTryCatchExtensions
     public static dynamic ToPrimitive(this byte? obj, object defaultValue) => new PrimitiveDefaultNullable<byte?>(obj, defaultValue);
 
     public static dynamic ToPrimitive(this sbyte? obj, object defaultValue) => new PrimitiveDefaultNullable<sbyte?>(obj, defaultValue);
+
+    //大数值类型可空默认值变体
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+    public static dynamic ToPrimitive(this BigInteger? obj, object defaultValue) => new PrimitiveDefaultNumberNullable<BigInteger?>(obj, defaultValue);
+#endif
+
+#if NET5_0_OR_GREATER
+    public static dynamic ToPrimitive(this Half? obj, object defaultValue) => new PrimitiveDefaultNumberNullable<Half?>(obj, defaultValue);
+#endif
+
+#if NET7_0_OR_GREATER
+    public static dynamic ToPrimitive(this Int128? obj, object defaultValue) => new PrimitiveDefaultNumberNullable<Int128?>(obj, defaultValue);
+
+    public static dynamic ToPrimitive(this UInt128? obj, object defaultValue) => new PrimitiveDefaultNumberNullable<UInt128?>(obj, defaultValue);
+#endif
 
     #endregion
 

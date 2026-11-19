@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
 namespace AutoPrimitive;
 
 /*
@@ -47,6 +51,21 @@ public static class PrimitiveExtensions
 
     public static dynamic ToPrimitive(this sbyte obj) => new Primitive<sbyte>(obj);
 
+    //大数值类型: BigInteger/Half/Int128/UInt128 (非 IConvertible, 由 PrimitiveNumber 包装反向转换)
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+    public static dynamic ToPrimitive(this BigInteger obj) => new PrimitiveNumber<BigInteger>(obj);
+#endif
+
+#if NET5_0_OR_GREATER
+    public static dynamic ToPrimitive(this Half obj) => new PrimitiveNumber<Half>(obj);
+#endif
+
+#if NET7_0_OR_GREATER
+    public static dynamic ToPrimitive(this Int128 obj) => new PrimitiveNumber<Int128>(obj);
+
+    public static dynamic ToPrimitive(this UInt128 obj) => new PrimitiveNumber<UInt128>(obj);
+#endif
+
     #endregion
 
     public static dynamic ToPrimitive(this Guid obj) => new PrimitiveGuid(obj, null);
@@ -82,6 +101,21 @@ public static class PrimitiveExtensions
     public static dynamic ToPrimitive(this byte? obj) => new PrimitiveNullable<byte?>(obj);
 
     public static dynamic ToPrimitive(this sbyte? obj) => new PrimitiveNullable<sbyte?>(obj);
+
+    //大数值类型可空版本
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+    public static dynamic ToPrimitive(this BigInteger? obj) => new PrimitiveNumberNullable<BigInteger?>(obj);
+#endif
+
+#if NET5_0_OR_GREATER
+    public static dynamic ToPrimitive(this Half? obj) => new PrimitiveNumberNullable<Half?>(obj);
+#endif
+
+#if NET7_0_OR_GREATER
+    public static dynamic ToPrimitive(this Int128? obj) => new PrimitiveNumberNullable<Int128?>(obj);
+
+    public static dynamic ToPrimitive(this UInt128? obj) => new PrimitiveNumberNullable<UInt128?>(obj);
+#endif
 
     #endregion
 
