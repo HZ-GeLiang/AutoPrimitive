@@ -1,4 +1,8 @@
-﻿namespace AutoPrimitive
+﻿#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
+namespace AutoPrimitive
 {
     /*
      注:字符串转枚举没法实现
@@ -183,6 +187,41 @@
                 return DateTime.Parse(PrimitiveDefault.Value);
             }, PrimitiveDefault.Default);
         }
+
+        //TimeSpan
+        public static implicit operator TimeSpan(PrimitiveDefaultString PrimitiveDefault) => h<TimeSpan>(() => TimeSpan.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator TimeSpan?(PrimitiveDefaultString PrimitiveDefault) => h<TimeSpan?>(() => TimeSpan.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        //DateTimeOffset
+        public static implicit operator DateTimeOffset(PrimitiveDefaultString PrimitiveDefault) => h<DateTimeOffset>(() => DateTimeOffset.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator DateTimeOffset?(PrimitiveDefaultString PrimitiveDefault) => h<DateTimeOffset?>(() => DateTimeOffset.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        //BigInteger 任意精度整数, netstandard1.0 不提供该类型
+        public static implicit operator BigInteger(PrimitiveDefaultString PrimitiveDefault) => h<BigInteger>(() => BigInteger.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator BigInteger?(PrimitiveDefaultString PrimitiveDefault) => h<BigInteger?>(() => BigInteger.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET5_0_OR_GREATER
+        //Half 半精度浮点, netstandard1.0 不提供该类型
+        public static implicit operator Half(PrimitiveDefaultString PrimitiveDefault) => h<Half>(() => Half.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator Half?(PrimitiveDefaultString PrimitiveDefault) => h<Half?>(() => Half.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET7_0_OR_GREATER
+        //Int128/UInt128 128位整数, 非 CLS 兼容, net6.0 及以下不提供
+        public static implicit operator Int128(PrimitiveDefaultString PrimitiveDefault) => h<Int128>(() => Int128.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator Int128?(PrimitiveDefaultString PrimitiveDefault) => h<Int128?>(() => Int128.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator UInt128(PrimitiveDefaultString PrimitiveDefault) => h<UInt128>(() => UInt128.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator UInt128?(PrimitiveDefaultString PrimitiveDefault) => h<UInt128?>(() => UInt128.Parse(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
 
         /// <summary>
         /// JavaScript时间戳

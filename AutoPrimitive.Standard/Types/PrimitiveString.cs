@@ -1,4 +1,8 @@
-﻿namespace AutoPrimitive
+﻿#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
+namespace AutoPrimitive
 {
     /*
      注:字符串转枚举没法实现
@@ -553,6 +557,161 @@
             }
             return default(DateTime?);
         }
+
+        //TimeSpan
+        public static implicit operator TimeSpan(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (TimeSpan.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator TimeSpan?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (TimeSpan.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(TimeSpan?);
+        }
+
+        //DateTimeOffset
+        public static implicit operator DateTimeOffset(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (DateTimeOffset.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator DateTimeOffset?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (DateTimeOffset.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(DateTimeOffset?);
+        }
+
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        //BigInteger 任意精度整数, netstandard1.0 不提供该类型
+        public static implicit operator BigInteger(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (BigInteger.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator BigInteger?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (BigInteger.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(BigInteger?);
+        }
+#endif
+
+#if NET5_0_OR_GREATER
+        //Half 半精度浮点, netstandard1.0 不提供该类型
+        public static implicit operator Half(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (Half.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator Half?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (Half.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(Half?);
+        }
+#endif
+
+#if NET7_0_OR_GREATER
+        //Int128/UInt128 128位整数, 非 CLS 兼容, net6.0 及以下不提供
+        public static implicit operator Int128(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (Int128.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator Int128?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (Int128.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(Int128?);
+        }
+
+        public static implicit operator UInt128(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (UInt128.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default;
+        }
+
+        public static implicit operator UInt128?(PrimitiveString primitive)
+        {
+            if (primitive.Value != null)
+            {
+                if (UInt128.TryParse(primitive.Value, out var result))
+                {
+                    return result;
+                }
+            }
+            return default(UInt128?);
+        }
+#endif
 
 #if NET6_0_OR_GREATER
         public static implicit operator DateOnly(PrimitiveString primitive) => DateOnly.TryParse(primitive.Value, out var result) ? result : default;
