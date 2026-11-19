@@ -146,7 +146,7 @@ namespace AutoPrimitive
                 try
                 {
                     var result = MathUtil.ToInt64(primitive.Value, out var ex);
-                    if (ex != null)
+                    if (ex == null)
                     {
                         return result;
                     }
@@ -184,7 +184,7 @@ namespace AutoPrimitive
                 try
                 {
                     var result = MathUtil.ToDecimal(primitive.Value, out var ex);
-                    if (ex != null)
+                    if (ex == null)
                     {
                         return result;
                     }
@@ -340,7 +340,7 @@ namespace AutoPrimitive
                 try
                 {
                     var result = MathUtil.ToDouble(primitive.Value, out var ex);
-                    if (ex != null)
+                    if (ex == null)
                     {
                         return result;
                     }
@@ -366,7 +366,7 @@ namespace AutoPrimitive
                 try
                 {
                     var result = MathUtil.ToInt64(primitive.Value, out var ex);
-                    if (ex != null)
+                    if (ex == null)
                     {
                         return result;
                     }
@@ -404,7 +404,7 @@ namespace AutoPrimitive
                 try
                 {
                     var result = MathUtil.ToDecimal(primitive.Value, out var ex);
-                    if (ex != null)
+                    if (ex == null)
                     {
                         return result;
                     }
