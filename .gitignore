@@ -13,3 +13,4 @@ MyTest/.vs
 MyTest/ConsoleApp_Nfx_4_5_Std1_0/.vs
 .idea
 .DS_Store
+/BenchmarkDotNet.Artifacts/
