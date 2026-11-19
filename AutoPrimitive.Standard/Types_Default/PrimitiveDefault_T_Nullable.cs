@@ -1,5 +1,9 @@
 ﻿using System.Reflection;
 
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
 namespace AutoPrimitive
 {
     /// <summary>
@@ -70,6 +74,21 @@ namespace AutoPrimitive
 
         public static implicit operator decimal(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<decimal>(() => PrimitiveDefault.Value == null ? default : Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
+        //新增大数值/半精度/128位整数
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        public static implicit operator BigInteger(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<BigInteger>(() => PrimitiveDefault.Value == null ? default : (BigInteger)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET5_0_OR_GREATER
+        public static implicit operator Half(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<Half>(() => PrimitiveDefault.Value == null ? default : (Half)Convert.ToDouble(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET7_0_OR_GREATER
+        public static implicit operator Int128(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<Int128>(() => PrimitiveDefault.Value == null ? default : (Int128)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator UInt128(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<UInt128>(() => PrimitiveDefault.Value == null ? default : (UInt128)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
         //其他类型
         public static implicit operator bool(PrimitiveDefaultNullable<T> PrimitiveDefault)
         {
@@ -114,6 +133,21 @@ namespace AutoPrimitive
         public static implicit operator ulong?(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<ulong?>(() => PrimitiveDefault.Value == null ? default(ulong?) : Convert.ToUInt64(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         public static implicit operator decimal?(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<decimal?>(() => PrimitiveDefault.Value == null ? default(decimal?) : Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        //新增大数值/半精度/128位整数(可空)
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        public static implicit operator BigInteger?(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<BigInteger?>(() => PrimitiveDefault.Value == null ? default(BigInteger?) : (BigInteger)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET5_0_OR_GREATER
+        public static implicit operator Half?(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<Half?>(() => PrimitiveDefault.Value == null ? default(Half?) : (Half)Convert.ToDouble(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET7_0_OR_GREATER
+        public static implicit operator Int128?(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<Int128?>(() => PrimitiveDefault.Value == null ? default(Int128?) : (Int128)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator UInt128?(PrimitiveDefaultNullable<T> PrimitiveDefault) => h<UInt128?>(() => PrimitiveDefault.Value == null ? default(UInt128?) : (UInt128)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
 
         //其他类型
         public static implicit operator bool?(PrimitiveDefaultNullable<T> PrimitiveDefault)

@@ -1,4 +1,8 @@
-﻿namespace AutoPrimitive
+﻿#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
+namespace AutoPrimitive
 {
     public readonly struct PrimitiveDefault<T> where T : struct
     {
@@ -56,6 +60,21 @@
         public static implicit operator ulong(PrimitiveDefault<T> PrimitiveDefault) => h<ulong>(() => Convert.ToUInt64(PrimitiveDefault.Value), PrimitiveDefault.Default);
 
         public static implicit operator decimal(PrimitiveDefault<T> PrimitiveDefault) => h<decimal>(() => Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        //新增大数值/半精度/128位整数
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        public static implicit operator BigInteger(PrimitiveDefault<T> PrimitiveDefault) => h<BigInteger>(() => (BigInteger)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET5_0_OR_GREATER
+        public static implicit operator Half(PrimitiveDefault<T> PrimitiveDefault) => h<Half>(() => (Half)Convert.ToDouble(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
+
+#if NET7_0_OR_GREATER
+        public static implicit operator Int128(PrimitiveDefault<T> PrimitiveDefault) => h<Int128>(() => (Int128)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+
+        public static implicit operator UInt128(PrimitiveDefault<T> PrimitiveDefault) => h<UInt128>(() => (UInt128)Convert.ToDecimal(PrimitiveDefault.Value), PrimitiveDefault.Default);
+#endif
 
         //其他类型
         public static implicit operator bool(PrimitiveDefault<T> PrimitiveDefault)

@@ -1,4 +1,8 @@
-﻿namespace AutoPrimitive
+﻿#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
+namespace AutoPrimitive
 {
     public readonly struct Primitive<T> where T : struct
     {
@@ -35,6 +39,21 @@
         public static implicit operator ulong(Primitive<T> primitive) => Convert.ToUInt64(primitive.Value);
 
         public static implicit operator decimal(Primitive<T> primitive) => Convert.ToDecimal(primitive.Value);
+
+        //新增大数值/半精度/128位整数(经 decimal/double 中转, 窄化截断规则与现有数值运算符一致)
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        public static implicit operator BigInteger(Primitive<T> primitive) => (BigInteger)Convert.ToDecimal(primitive.Value);
+#endif
+
+#if NET5_0_OR_GREATER
+        public static implicit operator Half(Primitive<T> primitive) => (Half)Convert.ToDouble(primitive.Value);
+#endif
+
+#if NET7_0_OR_GREATER
+        public static implicit operator Int128(Primitive<T> primitive) => (Int128)Convert.ToDecimal(primitive.Value);
+
+        public static implicit operator UInt128(Primitive<T> primitive) => (UInt128)Convert.ToDecimal(primitive.Value);
+#endif
 
         //其他类型: bool、byte、sbyte
         public static implicit operator bool(Primitive<T> primitive)

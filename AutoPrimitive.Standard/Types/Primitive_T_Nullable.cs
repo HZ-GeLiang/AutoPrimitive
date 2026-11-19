@@ -1,5 +1,9 @@
 ﻿using System.Reflection;
 
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+using System.Numerics;
+#endif
+
 namespace AutoPrimitive
 {
     /// <summary>
@@ -48,6 +52,21 @@ namespace AutoPrimitive
 
         public static implicit operator decimal(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : Convert.ToDecimal(primitive.Value);
 
+        //新增大数值/半精度/128位整数
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        public static implicit operator BigInteger(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : (BigInteger)Convert.ToDecimal(primitive.Value);
+#endif
+
+#if NET5_0_OR_GREATER
+        public static implicit operator Half(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : (Half)Convert.ToDouble(primitive.Value);
+#endif
+
+#if NET7_0_OR_GREATER
+        public static implicit operator Int128(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : (Int128)Convert.ToDecimal(primitive.Value);
+
+        public static implicit operator UInt128(PrimitiveNullable<T> primitive) => primitive.Value == null ? default : (UInt128)Convert.ToDecimal(primitive.Value);
+#endif
+
         //其他类型
         public static implicit operator bool(PrimitiveNullable<T> primitive) =>
             primitive.Value != null ||
@@ -79,6 +98,21 @@ namespace AutoPrimitive
         public static implicit operator ulong?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(ulong?) : Convert.ToUInt64(primitive.Value);
 
         public static implicit operator decimal?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(decimal?) : Convert.ToDecimal(primitive.Value);
+
+        //新增大数值/半精度/128位整数(可空)
+#if NETSTANDARD1_1_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+        public static implicit operator BigInteger?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(BigInteger?) : (BigInteger)Convert.ToDecimal(primitive.Value);
+#endif
+
+#if NET5_0_OR_GREATER
+        public static implicit operator Half?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(Half?) : (Half)Convert.ToDouble(primitive.Value);
+#endif
+
+#if NET7_0_OR_GREATER
+        public static implicit operator Int128?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(Int128?) : (Int128)Convert.ToDecimal(primitive.Value);
+
+        public static implicit operator UInt128?(PrimitiveNullable<T> primitive) => primitive.Value == null ? default(UInt128?) : (UInt128)Convert.ToDecimal(primitive.Value);
+#endif
 
         //其他类型
         public static implicit operator bool?(PrimitiveNullable<T> primitive)
